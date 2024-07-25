@@ -1,0 +1,23 @@
+name: Render Slides (PDF)
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  pull_request:
+    branches:
+      - "main"
+      - "master"
+
+jobs:
+  slides:
+    name: "Test Slides"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v3
+      - run: typst compile slides.typ slides.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slides
+          path: slides.pdf

@@ -1,0 +1,21 @@
+name: Release Slides (PDF)
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  slides-release:
+    name: "Release Slides"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v3
+      - run: typst compile slides.typ slides.pdf
+      - name: "Release"
+        uses: ncipollo/release-action@v1
+        id: release
+        with:
+          artifacts: ./slides.pdf
