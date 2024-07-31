@@ -12,7 +12,7 @@
 1. Análise de Algoritmos;
 1. Algoritmos de Busca e Ordenação;
 1. Recursividade;
-1. Algortimos Gulosos; e
+1. Algoritmos Gulosos; e
 1. Problemas P, NP-Completo, e NP-Difícil.
 
 ## Dependências
