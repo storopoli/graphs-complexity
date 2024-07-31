@@ -1,0 +1,6 @@
+run = "just c"
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "just c"]

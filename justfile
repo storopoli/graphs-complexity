@@ -14,3 +14,8 @@ build:
 watch:
     @echo "Watching slides"
     typst w slides.typ
+
+# Compile and Run the C code
+c:
+    @echo "Compiling and Running the C code"
+    @echo "TODO!"
