@@ -37,7 +37,111 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
 #outline()
 
+= Por que estudar Teoria dos Grafos e Complexidade Computacional?;
+
+#align(horizon + center)[#image("images/algorithm_analysis_meme.jpg", width: 50%)]
+
+== Teoria Computação
+
+#align(horizon)[
+  A *teoria da computação* é subcampo da ciência da computação e matemática
+  que busca determinar quais problemas podem ser computados
+  em um dado modelo de computação.
+
+  A *computação* pode ser definida como o cálculo de uma função por meio de
+  um algoritmo.
+]
+
+== #link("https://en.wikipedia.org/wiki/Alan_Turing")[Turing] vs. #link("https://en.wikipedia.org/wiki/Alonzo_Church")[Church]
+
+#align(horizon + center)[
+  #figure(
+    grid(
+      columns: 2,
+      gutter: 2mm,
+      image("images/turing.jpg", width: 60%),
+      image("images/church.jpg", width: 60%),
+    ),
+    caption: "Alan Turing e Alonzo Church"
+  )<turing-church>
+]
+
+#pagebreak()
+
+#align(horizon)[
+  - Turing propôs a *máquina de Turing* como modelo de computação.
+  - Alonzo Church propôs o *cálculo lambda* como modelo de computação.
+  - Ambos os modelos são matematicamente *equivalentes*.
+]
+
+== Algoritmo
+
+#align(horizon)[
+  *Algoritmo* é uma sequência finita de ações executáveis que visam obter
+  uma solução para um determinado tipo de problema.
+]
+
+== Teoria dos Grafos
+
+#align(horizon)[
+  Por que estudar Grafos?
+
+  #v(1em)
+
+  #align(center)[
+    _Quase_ tudo que você faz em computação pode ser modelado
+    como um *problema de grafos*.
+  ]
+]
+
+== Complexidade Computacional
+
+#align(horizon)[
+  *Complexidade Computacional* é um campo da ciência da computação que
+  estuda a quantidade de recursos necessários para resolver um problema
+  computacional#footnote[
+    um problema decidível.
+  ].
+]
+
+#pagebreak()
+
+#align(horizon)[
+  Usamos a notação $O$ para descrever a complexidade de um algoritmo.
+  - $O(1)$ (complexidade *constante*):
+    - Acessar uma array
+    - Inserir um nó em uma lista encadeada
+    - Inserção e remoção em uma fila
+  - $O(log n)$ (complexidade *logarítmica*):
+    - Busca binária
+    - Inserção e remoção em uma árvore binária de busca
+
+  #pagebreak()
+
+  - $O(n)$ (complexidade *linear*):
+    - Percorrer um array
+    - Percorrer uma lista encadeada
+    - Comparar duas strings
+  - $O(n log n)$ (complexidade *log-linear*):
+    - Algoritmo de ordenação _Quick Sort_
+    - Algoritmo de ordenação _Merge Sort_
+
+  #pagebreak()
+
+  - $(O(n^2))$ (complexidade *quadrática*):
+    - Percorrer uma matriz
+    - Algoritmo de ordenação _Bubble Sort_
+    - Algoritmo de ordenação _Insertion Sort_
+  - $(O(n^3))$ (complexidade *cúbica*):
+    - Multiplicação de matrizes (abordagem ingênua)
+  - $(O(n!))$ (complexidade *fatorial*):
+    - Solução do problema do caixeiro-viajante
+    - Gerar todas as permutações de uma lista
+]
+
 = Grafos
+
+#align(horizon + center)[#image("images/graph_isomorphism_meme.jpg", width: 50%)]
 
 == O que são Grafos?
 
@@ -220,13 +324,6 @@ resolvida por Euler em 1736.
   O teorema foi provado em 1976 por Kenneth Appel e Wolfgang Haken#footnote[
     um dos primeiros teoremas provados auxiliado por computadores.
   ].
-]
-
-== Por que estudar Grafos?
-
-#align(horizon)[
-  _Quase_ tudo que você faz em computação pode ser modelado
-  como um *problema de grafos*.
 ]
 
 == Subgrafos

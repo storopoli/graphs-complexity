@@ -3,8 +3,13 @@
 [![CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 [![Run on Repl.it](https://repl.it/badge/github/storopoli/grafos-complexidade)](https://repl.it/github/storopoli/grafos-complexidade)
 
+<div class="figure" style="text-align: center">
+<img src="images/algorithm_analysis_meme.jpg" alt="Algorithm meme" width="500" />
+</div>
+
 ## Conteúdo
 
+1. Por que estudar Teoria dos Grafos e Complexidade Computacional?;
 1. Grafos, Caminhos e Ciclos;
 1. Árvores;
 1. Emparelhamentos, planaridade e coloração;
