@@ -15,7 +15,12 @@ watch:
     @echo "Watching slides"
     typst w slides.typ
 
-# Compile and Run the C code
-c:
-    @echo "Compiling and Running the C code"
-    @echo "TODO!"
+# Compile the C code in "code/"
+compile:
+    #!/usr/bin/env bash
+    echo "Compiling all *.c code to output"
+    rm -r ./output;mkdir ./output
+    for FILE in $(ls ./code/)
+    do
+    cc ./code/$FILE -o ./output/$FILE.out
+    done
