@@ -167,7 +167,7 @@ Grafos são estruturas matemáticas que modelam *relações entre objetos*.
       ```
   ),
     caption: "Grafo"
-  ) <grafo>
+  ) <graph>
 ]
 
 == Formalmente
@@ -178,7 +178,7 @@ Grafos são *pares ordenados* $G = (V, E)$ onde:
 - $E$ é um conjunto finito de *arestas* (também chamadas de arcos)
   representado por um par de vértices $(u, v)$
 
-A @grafo, por exemplo:
+A @graph, por exemplo:
 
 #text(size: 14pt)[
   $ V = \{a, b, c, d, e, f\} $
@@ -209,7 +209,7 @@ Grafos podem ser *direcionados* ou *_não_-direcionados*.
       ```
   ),
     caption: "Grafo Direcionado"
-  ) <grafo-direcionado>
+  ) <directed-graph>
 ]
 
 == Grafos Ponderados
@@ -239,7 +239,7 @@ possuem valores associados às arestas.
       ```
   ),
     caption: "Grafo Ponderado"
-  ) <grafo-ponderado>
+  ) <weighted-graph>
 ]
 
 == Exemplos de Grafos
@@ -264,7 +264,7 @@ resolvida por Euler em 1736.
   #figure(
     image("images/konigsberg_briges.png", width: 35%),
     caption: "As 7 pontes de Königsberg"
-  ) <pontes-konigsberg>
+  ) <konigsberg-brigdes>
 ]
 
 == #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[As 7 pontes de Königsberg]
@@ -290,7 +290,7 @@ resolvida por Euler em 1736.
       ```
   ),
     caption: "Grafo das 7 pontes de Königsberg"
-  ) <grafo-pontes-konigsberg>
+  ) <graph-konigsberg-brigdes>
 ]
 
 == Solução das 7 pontes
