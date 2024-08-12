@@ -37,7 +37,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
 #outline()
 
-= Por que estudar Teoria dos Grafos e Complexidade Computacional?;
+= Por que estudar Teoria dos Grafos e Complexidade Computacional?
 
 #align(horizon + center)[#image("images/algorithm_analysis_meme.jpg", width: 50%)]
 
