@@ -663,3 +663,194 @@ retornando à cidade de origem.
   - Encontrar um caminho Euleriano em C
   - Encontrar um ciclo Hamiltoniano em C
 ]
+
+=  Árvores
+
+#align(horizon + center)[#image("images/trees_meme.jpg", width: 50%)]
+
+== O que são Árvores?
+
+Árvores são grafos *acíclicos* e *conectados*.
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        a -- {b, c};
+        b -- d;
+        c -- {e, f};
+      }
+      ```,
+      width: 50%
+  ),
+    caption: "Árvore"
+  ) <tree>
+]
+
+#pagebreak()
+
+#align(horizon)[
+  - *Raiz*: o vértice sem arestas entrantes.
+    Todas as árvores têm (apenas) um vértice raiz.
+  - *Folha*: vértice sem arestas saindo.
+  - *Nível*: distância da raiz.
+  - *Altura*: nível máximo.
+  - *Pai*: vértice(s) com menor nível (mais próximo da raiz).
+  - *Filho*: vértice(s) maior nível (mais distante da raiz).
+  - *Ancestral*: vértice(s) com menor nível.
+  - *Descendente*: vértice(s) com maior nível.
+]
+
+== Subárvores
+
+Subárvores são árvores que são subconjuntos de uma árvore.
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        a
+        b
+        c[color=red,fontcolor=red]
+        e[color=red,fontcolor=red];
+        f[color=red,fontcolor=red];
+        a -- {b, c};
+        b -- d;
+        c -- {e, f}[color=red];
+      }
+      ```,
+      width: 45%
+  ),
+    caption: "Subárvore"
+  ) <subtree>
+]
+
+== Tipos de Árvores
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        a -- b
+        b -- c;
+      }
+      ```
+  ),
+    caption: "Árvore Caminho"
+  ) <tree-path>
+]
+
+#pagebreak()
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        layout=circo;
+        a -- {b, c, d, e , f, g};
+      }
+      ```,
+      width: 66%
+  ),
+    caption: "Árvore Estrela"
+  ) <tree-path>
+]
+
+#pagebreak()
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      // taken from https://stackoverflow.com/a/23430742
+      digraph G {
+        nodesep=0.2;
+        ranksep=0.5;
+
+        {node[style=invis,label=""]; cx_d;}
+
+        {node[style=invis, label="", width=.1]; ocx_f; ocx_b;}
+
+        {rank=same; b; f; cx_d}
+        {rank=same; a; c; ocx_b}
+        {rank=same; e; g; ocx_f}
+
+        d -> b;
+        d -> f;
+        b -> a;
+        b -> c;
+
+        f -> e;
+        f -> g;
+
+        {
+          edge[style=invis];
+
+          // Distantiate nodes
+          d -> cx_d;
+          b -> cx_d -> f;
+
+          // Force ordering between children
+          f -> ocx_f;
+          e -> ocx_f -> g;
+          b -> ocx_b;
+          a -> ocx_b -> c;
+        }
+      }
+      ```,
+      width: 50%
+  ),
+    caption: "Árvore Binária"
+  ) <tree-binary>
+]
+
+== Árvores Balanceadas
+
+Uma árvore é *balanceada* se a diferença de altura entre
+as subárvores esquerda e direita é no máximo 1.
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        a -- {b, c};
+        b -- d;
+        c -- {e, f};
+      }
+      ```,
+      width: 45%
+  ),
+    caption: "Árvore Balanceada"
+  ) <balanced-tree>
+]
+
+#pagebreak()
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      graph G {
+        a -- {b, c};
+        c -- {d, e};
+        d -- f;
+      }
+      ```,
+      width: 40%
+  ),
+    caption: "Árvore Desbalanceada"
+  ) <unbalanced-tree>
+]
+
+== Parte Prática (C ou pseudocódigo)
+
+#align(horizon)[
+  - Detectar se um grafo é uma árvore
+    (ou seja, se é acíclico e conectado)
+  - Detectar qual é o vértice raiz de uma árvore
+]

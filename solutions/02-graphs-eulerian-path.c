@@ -85,8 +85,16 @@ void find_path(int graph[N][N]) {
   printf("\n");
 }
 
+/** Main function */
 int main() {
-  // Test case 1
+  /* Test case 1
+
+       0 --- 1
+       |    | \
+       |    2--3
+       4
+
+  */
   int graph1[N][N] = {{0, 1, 0, 0, 1},
                       {1, 0, 1, 1, 0},
                       {0, 1, 0, 1, 0},
@@ -96,7 +104,13 @@ int main() {
   printf("Test Case 1:\n");
   find_path(graph1);
 
-  // Test case 2
+  /* Test case 2
+
+     0 -- 1 -- 2
+    /|  / \  | \
+   3--4      5
+
+  */
   int graph2[N][N] = {{0, 1, 0, 1, 1},
                       {1, 0, 1, 0, 1},
                       {0, 1, 0, 1, 1},
@@ -106,7 +120,13 @@ int main() {
   printf("Test Case 2:\n");
   find_path(graph2);
 
-  // Test case 3
+  /* Test case 3
+
+     0 --- 1
+    /|\     |\
+   2  4---5  3
+
+  */
   int graph3[N][N] = {{0, 1, 0, 0, 1},
                       {1, 0, 1, 1, 1},
                       {0, 1, 0, 1, 0},
