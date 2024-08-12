@@ -326,6 +326,19 @@ resolvida por Euler em 1736.
   ].
 ]
 
+== Aplicações dos Grafos
+
+- Itinerários de companhias aéreas:
+  Calcular o fluxo máximo em um grafo direcionado.
+- Software de roteamento (GPS):
+  Calcular o menor caminho entre dois pontos.
+- Solucionar um sudoku:
+  Resolver um problema de coloração de grafos.
+- Algoritmos de busca online:
+  Determinar centralidades de vértices com base em temas.
+- Redes sociais:
+  encontrar a maior comunidade de amigos.
+
 == Subgrafos
 
 Um *subgrafo* de um grafo $G$ é outro grafo formado a partir de
