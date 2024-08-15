@@ -128,13 +128,13 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
   #pagebreak()
 
-  - $(O(n^2))$ (complexidade *quadrática*):
+  - $O(n^2)$ (complexidade *quadrática*):
     - Percorrer uma matriz
     - Algoritmo de ordenação _Bubble Sort_
     - Algoritmo de ordenação _Insertion Sort_
-  - $(O(n^3))$ (complexidade *cúbica*):
+  - $O(n^3)$ (complexidade *cúbica*):
     - Multiplicação de matrizes (abordagem ingênua)
-  - $(O(n!))$ (complexidade *fatorial*):
+  - $O(n!)$ (complexidade *fatorial*):
     - Solução do problema do caixeiro-viajante
     - Gerar todas as permutações de uma lista
 ]
