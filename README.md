@@ -12,7 +12,6 @@
 1. Por que estudar Teoria dos Grafos e Complexidade Computacional?;
 1. Grafos, Caminhos e Ciclos;
 1. Árvores;
-1. Emparelhamentos, planaridade e coloração;
 1. Complexidade Computacional;
 1. Análise de Algoritmos;
 1. Algoritmos de Busca e Ordenação;

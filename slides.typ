@@ -854,3 +854,304 @@ as subárvores esquerda e direita é no máximo 1.
     (ou seja, se é acíclico e conectado)
   - Detectar qual é o vértice raiz de uma árvore
 ]
+
+= Interlúdio: Funções Polinomiais e Exponenciais
+
+#align(horizon + center)[#image("images/polynomials_meme.jpg", width: 50%)]
+
+== Funções Polinomiais
+
+#align(horizon)[
+  Uma função é polinomial se ela pode ser expressa na forma
+
+  $ O(a_n dot n^k + a_(n-1) dot n^(k-1) + ... + a_1 dot n + a_0) $
+
+  onde:
+
+  - $n$ é o tamanho da entrada
+  - $k$ é uma constante
+  - $a_n, a_{n-1}, ..., a_1, a_0$ são coeficientes constantes
+]
+
+== Exemplos
+
+#align(horizon)[
+  - $n$
+  - $n^2 + 3n + 2$
+  - $4n^4 + n^3 + 2n^2 + 7$
+  - $n^(100) + 500n^(50) + 3000$
+]
+
+== Notação $O$
+
+#text(size: 15pt)[
+  #align(horizon)[
+    A notação $O$ é usada para descrever a complexidade de um algoritmo.
+
+    Por exemplo, na função $n^3 + n^2 + 5n + 100$,
+    a maior constante $k = 3$ assimptoticamente#footnote[
+      a medida que algo tende ao infinito, ou seja $lim -> oo$.
+    ]
+    dominará o tempo de computação, então a complexidade é $O(n^3)$.
+
+    Também em notação $O$, desconhecemos os coeficientes constantes.
+    Por exemplo, $O(3n^2)$ é simplificado para $O(n^2)$ e
+    $50 O(1)$ é simplificado para $O(1)$.
+  ]
+]
+
+== Tipos de Complexidade Polinomial
+
+#align(horizon)[
+  - Constante: $O(1)$
+  - Logarítmica: $O(log n)$
+  - Linear: $O(n)$
+  - Log-linear#footnote[também chamada de linearítimica.]: $O(n log n)$
+  - Quadrática: $O(n^2)$
+  - Cúbica: $O(n^3)$
+  - Polinomial: $O(n^k)$
+]
+
+== Funções Exponenciais
+
+#align(horizon)[
+  Uma função é exponencial se ela pode ser reduzida usando notação $O$ para
+
+  $ O(n^k) $
+
+  onde $k$ é uma constante positiva.
+
+  Por exemplo, $O(2^n)$ é uma complexidade exponencial#footnote[
+    note que $n$ não é constante.
+  ].
+]
+
+== Tipos de Complexidade Exponencial
+
+#align(horizon)[
+  - Exponencial: $2^n$
+  - Fatorial: $n!$
+  - Superexponencial: $n^n$
+  - Duplamente exponencial: $2^(2^n)$
+]
+
+= Complexidade Computacional
+
+#align(horizon + center)[#image("images/big_o_meme.jpg", width: 45%)]
+
+== Definição
+
+#align(horizon)[
+  Complexidadiade computacional de um algoritmo é o *número de operações
+  computacionais (tais como operaçõe aritméticas, comparações, e acessos a memória)
+  requerido para sua execução*.
+
+  #v(1em)
+
+  Este número claramente depende do tamanho e da natureza dos inputs.
+]
+
+== Complexidade Limitada
+
+#align(horizon)[
+  Se a complexidade de um algoritmo é limitada por uma função $f(n)$,
+  onde $f$ é uma função polinomial de $n$ (tamanho do input),
+  então o algoritmo é dito ter complexidade *polinomial*.
+
+  #v(1em)
+
+  Algoritmos com complexidade polinomial pertencem a classe $cal(P)$
+]
+
+== Classe $cal(P)$
+
+#align(horizon)[
+  Um *problema de decisão* é um problema que tem como resposta *sim* ou *não*.
+  Tal problema pertence a classe $cal(P)$ se existe um algoritmo que solucione
+  qualquer instância do problema em *complexidade polinomial*.
+]
+
+== Classe $cal(N P)$
+
+#align(horizon)[
+  Um prolema de decisão pertence a classe $cal(N P)$ se existe um *algoritmo
+  em tempo polinomial que _verifique_ a solução de um problema*.
+
+  #v(1em)
+
+  É trivial estabelecer que $cal(P) subset.eq cal(N P)$.
+]
+
+== Exemplos de Problemas $cal(P)$ e $cal(N P)$
+
+#align(horizon)[
+  - Classe $cal(P)$:
+    - Algoritmos de ordenação
+    - Algortimos de busca
+
+  - Classe $cal(N P)$:
+    - Problema da fatoração de inteiros em primos
+    - Problema do caixeiro-viajante
+]
+
+== $cal(P)$ vs $cal(N P)$
+
+#text(size: 9.8pt)[
+  #table(
+    columns: 3,
+    align: left + horizon,
+    table.header(
+      [], [*$cal(P)$*], [*$cal(N P)$*],
+    ),
+    [*Solvabilidade*], [Solucionável eficientemente em tempo polinomial.], [Verificação eficiente, mas a solução pode não ser encontrada eficientemente.],
+    [*Complexidade de Tempo*], [Algoritmos de tempo polinomial são conhecidos.], [Algoritmos de verificação eficiente são conhecidos, mas algoritmos eficientes para a solução não são garantidos.],
+    [*Natureza das Soluções*], [As soluções podem ser encontradas eficientemente.], [As soluções, uma vez propostas, podem ser verificadas eficientemente.],
+    [*Relação Conhecida*], [$cal(P)$ é um subconjunto de $cal(N P)$.], [Não se sabe se $cal(N P)$ é um subconjunto próprio de $cal(P)$ ou se são iguais.],
+  )
+]
+
+== $cal(P)$ vs $cal(N P)$
+
+#align(horizon + center)[#image("images/p_vs_np.png")]
+
+== $cal(N P)$-completos
+
+#align(horizon)[
+  Um problema $cal(N P)$-completo é um problema $cal(N P)$ que é *tão difícil quanto
+  qualquer outro problema em $cal(N P)$*.
+  Se um problema $cal(N P)$-completo puder ser resolvido em tempo polinomial,
+  então todos os problemas em $cal(N P)$-completo também podem.
+]
+
+== Satistifabilidade Booleana (SAT)
+
+#align(horizon)[
+  O problema de satisfatibilidade booleana (SAT) busca determinar se uma *fórmula
+  proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
+  ("solução") de valores de verdade para suas variáveis.
+
+  $ (a and b and c) or (d and e and f) or (g and h and i) or (j and k and l) $
+
+  onde $a, b, c, d, e, f, g, h, i, j, k, l$ são variáveis booleanas,
+  e $and$ (`AND`) e $or$ (`OR`) são operadores booleanos.
+
+  #pagebreak()
+
+  #v(1em)
+
+  Embora seja fácil verificar se uma determinada atribuição torna a fórmula verdadeira,
+  não se conhece um método essencialmente mais rápido para encontrar uma
+  atribuição satisfatória além de testar todas as atribuições sucessivamente.
+
+  #v(1em)
+
+  #link("https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem")[Cook e Levin provaram]
+  que todo problema de fácil verificação pode ser resolvido tão rapidamente
+  quanto o SAT, que, por isso, é NP-completo.
+]
+
+== $cal(N P)$-difíceis
+
+#align(horizon)[
+  Um problema $cal(N P)$-difícil é um problema para o qual *não se conhece um
+  algoritmo eficiente para resolvê-lo*.
+  No entanto, se um algoritmo eficiente para um problema $cal(N P)$-difícil
+  for encontrado, então todos os problemas em $cal(N P)$ podem ser resolvidos
+  eficientemente.
+]
+
+== $cal(P)$ vs $cal(N P)$-completo e $cal(N P)$-difícil
+
+#align(horizon + center)[#image("images/P_np_np-complete_np-hard.svg")]
+
+== $cal(P)$ vs $cal(N P)$-completo e $cal(N P)$-difícil
+
+#align(horizon)[
+  - $cal(N P)$-completo:
+    - Problema do Caixeiro Viajante na forma de decisão: "Existe um caminho de custo menor ou igual a X?"
+
+  - $cal(N P)$-difícil:
+    - Problema do Caixeiro Viajante na forma de otimização: "Qual é o caminho de custo mínimo?"
+]
+
+== Parte Prática (C)
+
+#align(horizon)[
+  *Problema `Subset Sum`*: dado um conjunto de inteiros e um valor $s$,
+  encontrar se existe um subconjunto cuja soma seja igual a $s$.
+
+  #pagebreak()
+
+  #text(size: 12pt)[
+    ```
+    função subset_sum(conjunto, alvo):
+        n = tamanho(conjunto)
+        para cada sc em todos_subconjuntos(conjunto):
+            se soma(subconjunto) == alvo:
+                retornar verdadeiro
+        retornar falso
+
+    função todos_subconjuntos(conjunto):
+        subconjuntos = []
+        para i de 0 até 2^n - 1:
+            subconjunto = []
+            para j de 0 até n-1:
+                se i AND (1 << j) != 0:
+                    adicionar conjunto[j] a subconjunto
+            adicionar subconjunto a subconjuntos
+        retornar subconjuntos
+    ```
+  ]
+
+  #pagebreak()
+
+  #text(size: 12pt)[
+    O pseudocódigo verifica se um determinado elemento deve ser incluído no
+    subconjunto atual.
+
+    - Representação Binária de Subconjuntos:
+      A ideia por trás desse código é que cada subconjunto de um conjunto pode
+      ser representado usando uma sequência binária.
+      Por exemplo, para um conjunto `{a, b}`,
+      os subconjuntos podem ser representados da seguinte forma:
+
+       - `00` (subconjunto vazio, ou seja, `{}`)
+       - `01` (subconjunto `{b}`)
+       - `10` (subconjunto `{a}`)
+       - `11` (subconjunto `{a, b}`)
+
+    #pagebreak()
+
+    - Verificando a Presença de Elementos:
+      A linha se `i AND (1 << j) != 0` é usada para verificar se o `j`-ésimo
+      elemento deve estar no subconjunto atual.
+
+      - `(1 << j)`: Este operador desloca o número `1` para a esquerda por `j` posições,
+         resultando em uma máscara binária onde apenas o `j`-ésimo bit é `1`.
+         Por exemplo, se `j = 2`, o resultado será 10 (em binário), ou 4 (em decimal).
+
+      - `i AND (1 << j)`: Esta operação bit a bit verifica se o `j`-ésimo bit de
+        `i` está ativado (ou seja, se é `1`).
+         Se sim, isso significa que o `j`-ésimo elemento do conjunto deve estar
+         no subconjunto atual.
+
+      - `!= 0`: Isso confirma que o resultado da operação `AND` não é zero, ou seja,
+         o bit específico está ativado e o elemento deve ser incluído no subconjunto.
+
+    #pagebreak()
+
+    A linha `se i AND (1 << j) != 0` verifica se o `j`-ésimo elemento do conjunto
+    deve ser incluído no subconjunto atual, com base na representação binária de `i`.
+    Isso é uma técnica comum para gerar todos os subconjuntos de um conjunto em
+    programação combinatória.
+  ]
+
+
+  #pagebreak()
+
+  - Implementar o algoritmo que resolve o problema de `*Subset Sum*` e discutir:
+
+    - Qual a complexidade da verificação da solução? Constante, linear, logarítmica, quadrática?
+
+    - O algoritmo de solucao e polinomial ou exponenial? E qual categoria de complexidade ele pertence?
+]
