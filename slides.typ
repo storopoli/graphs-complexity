@@ -676,10 +676,10 @@ retornando à cidade de origem.
   #figure(
     raw-render(
       ```dot
-      graph G {
-        a -- {b, c};
-        b -- d;
-        c -- {e, f};
+      digraph G {
+        a -> {b, c};
+        b -> d;
+        c -> {e, f};
       }
       ```,
       width: 50%
@@ -710,15 +710,15 @@ Subárvores são árvores que são subconjuntos de uma árvore.
   #figure(
     raw-render(
       ```dot
-      graph G {
+      digraph G {
         a
         b
         c[color=red,fontcolor=red]
         e[color=red,fontcolor=red];
         f[color=red,fontcolor=red];
-        a -- {b, c};
-        b -- d;
-        c -- {e, f}[color=red];
+        a -> {b, c};
+        b -> d;
+        c -> {e, f}[color=red];
       }
       ```,
       width: 45%
@@ -733,9 +733,9 @@ Subárvores são árvores que são subconjuntos de uma árvore.
   #figure(
     raw-render(
       ```dot
-      graph G {
-        a -- b
-        b -- c;
+      digraph G {
+        a -> b
+        b -> c;
       }
       ```
   ),
@@ -817,10 +817,10 @@ as subárvores esquerda e direita é no máximo 1.
   #figure(
     raw-render(
       ```dot
-      graph G {
-        a -- {b, c};
-        b -- d;
-        c -- {e, f};
+      digraph G {
+        a -> {b, c};
+        b -> d;
+        c -> {e, f};
       }
       ```,
       width: 45%
@@ -835,10 +835,10 @@ as subárvores esquerda e direita é no máximo 1.
   #figure(
     raw-render(
       ```dot
-      graph G {
-        a -- {b, c};
-        c -- {d, e};
-        d -- f;
+      digraph G {
+        a -> {b, c};
+        c -> {d, e};
+        d -> f;
       }
       ```,
       width: 40%
@@ -917,9 +917,9 @@ as subárvores esquerda e direita é no máximo 1.
 #align(horizon)[
   Uma função é exponencial se ela pode ser reduzida usando notação $O$ para
 
-  $ O(n^k) $
+  $ O(n^m) $
 
-  onde $k$ é uma constante positiva.
+  onde $m$ *_não_* é uma constante positiva.
 
   Por exemplo, $O(2^n)$ é uma complexidade exponencial#footnote[
     note que $n$ não é constante.
