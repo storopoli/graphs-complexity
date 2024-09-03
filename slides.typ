@@ -1076,84 +1076,30 @@ as subárvores esquerda e direita é no máximo 1.
 
 == Parte Prática (C)
 
-#align(horizon)[
-  *Problema _Subset Sum_*: dado um conjunto de inteiros e um valor $s$,
-  encontrar se existe um subconjunto cuja soma seja igual a $s$.
+#text(size: 14pt)[
+  #align(horizon)[
+    #link("https://en.wikipedia.org/wiki/Knapsack_problem")[*Problema da Mochila (_Knapsack Problem_)*]
 
-  #pagebreak()
+    Você é um aventureiro e encontrou uma caverna cheia de tesouros.
+    No entanto, sua mochila tem uma capacidade limitada
+    e você precisa decidir quais itens levar para maximizar o valor total,
+    sem exceder a capacidade da mochila.
 
-  #text(size: 12pt)[
-    ```
-    função subset_sum(conjunto, alvo):
-        n = tamanho(conjunto)
-        para cada sc em todos_subconjuntos(conjunto):
-            se soma(subconjunto) == alvo:
-                retornar verdadeiro
-        retornar falso
+    Você tem uma lista de `n` itens, onde cada item `i` tem:
 
-    função todos_subconjuntos(conjunto):
-        subconjuntos = []
-        para i de 0 até 2^n - 1:
-            subconjunto = []
-            para j de 0 até n-1:
-                se i AND (1 << j) != 0:
-                    adicionar conjunto[j] a subconjunto
-            adicionar subconjunto a subconjuntos
-        retornar subconjuntos
-    ```
-  ]
+    - *Valor*: $v[i]$ (em ouro)
+    - *Peso*: $w[i]$ (em quilogramas)
 
-  #pagebreak()
-
-  #text(size: 12pt)[
-    O pseudocódigo verifica se um determinado elemento deve ser incluído no
-    subconjunto atual.
-
-    - Representação Binária de Subconjuntos:
-      A ideia por trás desse código é que cada subconjunto de um conjunto pode
-      ser representado usando uma sequência binária.
-      Por exemplo, para um conjunto `{a, b}`,
-      os subconjuntos podem ser representados da seguinte forma:
-
-       - `00` (subconjunto vazio, ou seja, `{}`)
-       - `01` (subconjunto `{b}`)
-       - `10` (subconjunto `{a}`)
-       - `11` (subconjunto `{a, b}`)
+    A capacidade da sua mochila é $W$ (em quilogramas).
 
     #pagebreak()
 
-    - Verificando a Presença de Elementos:
-      A linha se `i AND (1 << j) != 0` é usada para verificar se o `j`-ésimo
-      elemento deve estar no subconjunto atual.
+    - Escrever um algoritmo que determine o subconjunto de itens que
+      maximiza o valor total na mochila sem exceder o peso total $W$.
 
-      - `(1 << j)`: Este operador desloca o número `1` para a esquerda por `j` posições,
-         resultando em uma máscara binária onde apenas o `j`-ésimo bit é `1`.
-         Por exemplo, se `j = 2`, o resultado será 10 (em binário), ou 4 (em decimal).
-
-      - `i AND (1 << j)`: Esta operação bit a bit verifica se o `j`-ésimo bit de
-        `i` está ativado (ou seja, se é `1`).
-         Se sim, isso significa que o `j`-ésimo elemento do conjunto deve estar
-         no subconjunto atual.
-
-      - `!= 0`: Isso confirma que o resultado da operação `AND` não é zero, ou seja,
-         o bit específico está ativado e o elemento deve ser incluído no subconjunto.
-
-    #pagebreak()
-
-    A linha `se i AND (1 << j) != 0` verifica se o `j`-ésimo elemento do conjunto
-    deve ser incluído no subconjunto atual, com base na representação binária de `i`.
-    Isso é uma técnica comum para gerar todos os subconjuntos de um conjunto em
-    programação combinatória.
+    - Escrever um algoritmo que dado um certo input de itens e capacidade,
+      determine se é possível colocar todos os itens na mochila.
   ]
-
-
-  #pagebreak()
-
-  - Implementar o algoritmo que resolve o problema de *_Subset Sum_* e discutir:
-
-    - Qual a complexidade da verificação da solução? Constante, linear, logarítmica, quadrática?
-
-    - O algoritmo de solucao e polinomial ou exponenial? E qual categoria de complexidade ele pertence?
 ]
 
 = Identificando a Complexidade de Algoritmos
