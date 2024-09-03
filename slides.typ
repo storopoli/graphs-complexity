@@ -1149,7 +1149,7 @@ as subárvores esquerda e direita é no máximo 1.
 
   #pagebreak()
 
-  - Implementar o algoritmo que resolve o problema de `*Subset Sum*` e discutir:
+  - Implementar o algoritmo que resolve o problema de *`Subset Sum`* e discutir:
 
     - Qual a complexidade da verificação da solução? Constante, linear, logarítmica, quadrática?
 
