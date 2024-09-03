@@ -109,7 +109,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #align(horizon)[
   Usamos a notação $O$ para descrever a complexidade de um algoritmo.
   - $O(1)$ (complexidade *constante*):
-    - Acessar uma array
+    - Acessar uma _array_
     - Inserir um nó em uma lista encadeada
     - Inserção e remoção em uma fila
   - $O(log n)$ (complexidade *logarítmica*):
@@ -119,7 +119,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
   #pagebreak()
 
   - $O(n)$ (complexidade *linear*):
-    - Percorrer um array
+    - Percorrer um _array_
     - Percorrer uma lista encadeada
     - Comparar duas strings
   - $O(n log n)$ (complexidade *log-linear*):
@@ -1077,7 +1077,7 @@ as subárvores esquerda e direita é no máximo 1.
 == Parte Prática (C)
 
 #align(horizon)[
-  *Problema `Subset Sum`*: dado um conjunto de inteiros e um valor $s$,
+  *Problema _Subset Sum_*: dado um conjunto de inteiros e um valor $s$,
   encontrar se existe um subconjunto cuja soma seja igual a $s$.
 
   #pagebreak()
@@ -1149,7 +1149,7 @@ as subárvores esquerda e direita é no máximo 1.
 
   #pagebreak()
 
-  - Implementar o algoritmo que resolve o problema de *`Subset Sum`* e discutir:
+  - Implementar o algoritmo que resolve o problema de *_Subset Sum_* e discutir:
 
     - Qual a complexidade da verificação da solução? Constante, linear, logarítmica, quadrática?
 
