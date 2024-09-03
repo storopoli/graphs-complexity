@@ -109,7 +109,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #align(horizon)[
   Usamos a notação $O$ para descrever a complexidade de um algoritmo.
   - $O(1)$ (complexidade *constante*):
-    - Acessar uma array
+    - Acessar uma _array_
     - Inserir um nó em uma lista encadeada
     - Inserção e remoção em uma fila
   - $O(log n)$ (complexidade *logarítmica*):
@@ -119,7 +119,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
   #pagebreak()
 
   - $O(n)$ (complexidade *linear*):
-    - Percorrer um array
+    - Percorrer um _array_
     - Percorrer uma lista encadeada
     - Comparar duas strings
   - $O(n log n)$ (complexidade *log-linear*):
@@ -1076,82 +1076,280 @@ as subárvores esquerda e direita é no máximo 1.
 
 == Parte Prática (C)
 
+#text(size: 14pt)[
+  #align(horizon)[
+    #link("https://en.wikipedia.org/wiki/Knapsack_problem")[*Problema da Mochila (_Knapsack Problem_)*]
+
+    Você é um aventureiro e encontrou uma caverna cheia de tesouros.
+    No entanto, sua mochila tem uma capacidade limitada
+    e você precisa decidir quais itens levar para maximizar o valor total,
+    sem exceder a capacidade da mochila.
+
+    Você tem uma lista de `n` itens, onde cada item `i` tem:
+
+    - *Valor*: $v[i]$ (em ouro)
+    - *Peso*: $w[i]$ (em quilogramas)
+
+    A capacidade da sua mochila é $W$ (em quilogramas).
+
+    #pagebreak()
+
+    - Escrever um algoritmo que determine o subconjunto de itens que
+      maximiza o valor total na mochila sem exceder o peso total $W$.
+
+    - Escrever um algoritmo que dado um certo input de itens e capacidade,
+      determine se é possível colocar todos os itens na mochila.
+  ]
+]
+
+= Identificando a Complexidade de Algoritmos
+
+#align(horizon + center)[#image("images/recursion_joker_debugging_meme.jpg", width: 80%)]
+
+== Introdução
+
 #align(horizon)[
-  *Problema `Subset Sum`*: dado um conjunto de inteiros e um valor $s$,
-  encontrar se existe um subconjunto cuja soma seja igual a $s$.
+  A análise de complexidade é fundamental para avaliar a *eficiência de algoritmos*.
+  Ela nos ajuda a prever o comportamento de um algoritmo à medida que a entrada
+  aumenta, o que é crucial para a *otimização* e escolha do *algoritmo certo*
+  para uma aplicação específica.
+]
+
+== Notação Big-O
+
+#align(horizon)[
+  A notação Big-O ($O$) é usada para descrever o *pior caso do tempo de execução
+  de um algoritmo* em função do *tamanho de entrada $n$*.
+]
+
+== Passos para Determinar a Complexidade
+
+#align(horizon)[
+  1. *Identifique as operações dominantes*: Concentre-se nas operações que são executadas
+     repetidamente, como _loops_, recursões e chamadas de funções.
 
   #pagebreak()
 
-  #text(size: 12pt)[
-    ```
-    função subset_sum(conjunto, alvo):
-        n = tamanho(conjunto)
-        para cada sc em todos_subconjuntos(conjunto):
-            se soma(subconjunto) == alvo:
-                retornar verdadeiro
-        retornar falso
+  2. *Estime o número de vezes que essas operações são executadas*: Analise a profundidade e
+     o número de iterações dos _loops_ e recursões.
 
-    função todos_subconjuntos(conjunto):
-        subconjuntos = []
-        para i de 0 até 2^n - 1:
-            subconjunto = []
-            para j de 0 até n-1:
-                se i AND (1 << j) != 0:
-                    adicionar conjunto[j] a subconjunto
-            adicionar subconjunto a subconjuntos
-        retornar subconjuntos
+  #pagebreak()
+
+  3. *Ignore constantes e termos não dominantes*: Na notação Big-O, ignoramos constantes
+     multiplicativas e termos de ordem inferior.
+
+  #pagebreak()
+
+  4. *Escolha a notação Big-O apropriada*: Use o resultado das etapas anteriores para identificar
+     a complexidade Big-O correta.
+]
+
+#pagebreak()
+
+#align(horizon + center)[#image("images/recursion_world_burn_meme.jpeg", width: 80%)]
+
+== Estruturas de Controle
+
+- *Estruturas Sequenciais*: complexidade constante $O(1)$
+- *Estruturas Condicionais*: complexidade constante $O(1)$
+- *_Loops_*: complexidade linear $O(n)$
+- *_Loop_ Aninhado*: complexidade quadrática $O(n^2)$
+- *Recursão*:
+  - *Linear*: complexidade linear $O(n)$
+  - *Divisória*: complexidade logarítmica $O(log n)$
+  - *Binária*: complexidade $O(n log n)$
+  - *Exponencial*: complexidade exponencial $O(2^n)$
+
+== Estruturas Sequenciais
+
+#align(horizon)[
+  Estruturas de controle que não envolvem _loops_ ou
+  recursão têm complexidade constante $O(1)$.
+
+  ```c
+  int x = 5;
+  int y = 10;
+  int z = x + y;  // O(1)
+  ```
+]
+
+== Estruturas Condicionais
+
+#align(horizon)[
+  Condicionais simples, como `if`-`else`, não afetam a complexidade,
+  mas a execução de blocos internos deve ser considerada.
+
+  ```c
+  if (x > y) {
+      z = x - y;  // O(1)
+  } else {
+      z = y - x;  // O(1)
+  }
+  // Complexidade total: O(1)
+  ```
+]
+
+== _Loops_
+
+#align(horizon)[
+  A complexidade de um _loop_ depende do número de iterações:
+
+  - *_Loop_ Simples*:
+
+    ```c
+    for (int i = 0; i < n; i++) {
+        // operação de O(1)
+    }
+    // Complexidade total: O(n)
+    ```
+
+  #pagebreak()
+
+  - *_Loop_ Aninhado*:
+
+
+    ```c
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // operação de O(1)
+        }
+    }
+    // complexidade total: O(n^2)
+    ```
+
+  #pagebreak()
+
+  - *_Loop_ com incremento multiplicativo*:
+
+    ```c
+    for (int i = 1; i < n; i *= 2) {
+        // operação de O(1)
+    }
+    // Complexidade total: O(log n)
+    ```
+]
+
+== Recursão
+
+#align(horizon + center)[#image("images/recursion_joker_stackoverflow_meme.jpeg", width: 80%)]
+
+#pagebreak()
+
+#align(horizon)[
+  A complexidade de algoritmos recursivos depende do número de chamadas recursivas
+  e do tamanho da entrada em cada chamada.
+
+  - *Recursão Linear*:
+
+    ```c
+    void recursao_linear(int n) {
+        if (n == 0) return;
+        // operação de O(1)
+        recursao_linear(n-1);
+    }
+    // Complexidade total: O(n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Divisória*:
+
+    ```c
+    void recursao_divisoria(int n) {
+        if (n == 0) return;
+        // operação de O(1)
+        recursao_divisoria(n/2);
+    }
+    // Complexidade total: O(log n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Binária (como _Merge Sort_)*:
+
+    ```c
+    void merge_sort(int arr[], int n) {
+        if (n < 2) return;
+        int mid = n / 2;
+        merge_sort(arr, mid);
+        merge_sort(arr + mid, n - mid);
+        merge(arr, mid, n - mid);  // O(n)
+    }
+    // Complexidade total: O(n log n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Exponencial*:
+    ```c
+    int fibonacci(int n) {
+        if (n <= 1) return n;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+    // Complexidade total: O(2^n)
+    ```
+]
+
+== Exemplo Prático - Busca Linear
+
+#align(horizon)[
+  ```c
+  int busca_linear(int arr[], int n, int x) {
+      for (int i = 0; i < n; i++) {
+          if (arr[i] == x) return i;
+      }
+      return -1;
+  }
+  // Complexidade total: O(n)
+  ```
+]
+
+== Exemplo Prático - Busca Binária
+
+#align(horizon)[
+  ```c
+  int busca_binaria(int arr[], int n, int x) {
+      int inicio = 0, fim = n - 1;
+      while (inicio <= fim) {
+          int meio = (inicio + fim) / 2;
+          if (arr[meio] == x) return meio;
+          if (arr[meio] < x) inicio = meio + 1;
+          else fim = meio - 1;
+      }
+      return -1;
+  }
+  // Complexidade total: O(log n)
+  ```
+]
+
+== Exemplo Prático - _Bubble Sort_
+
+#text(size: 14pt)[
+  #align(horizon)[
+    ```c
+    void bubble_sort(int arr[], int n) {
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    // troca de elementos
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+    // Complexidade total: O(n^2)
     ```
   ]
+]
 
-  #pagebreak()
+== Parte Prática (C ou pseudocódigo)
 
-  #text(size: 12pt)[
-    O pseudocódigo verifica se um determinado elemento deve ser incluído no
-    subconjunto atual.
+#align(horizon)[
 
-    - Representação Binária de Subconjuntos:
-      A ideia por trás desse código é que cada subconjunto de um conjunto pode
-      ser representado usando uma sequência binária.
-      Por exemplo, para um conjunto `{a, b}`,
-      os subconjuntos podem ser representados da seguinte forma:
+- Implementar e determinar a complexidade de um algoritmo que conta o
+  número de ocorrências de um elemento em uma matriz.
 
-       - `00` (subconjunto vazio, ou seja, `{}`)
-       - `01` (subconjunto `{b}`)
-       - `10` (subconjunto `{a}`)
-       - `11` (subconjunto `{a, b}`)
-
-    #pagebreak()
-
-    - Verificando a Presença de Elementos:
-      A linha se `i AND (1 << j) != 0` é usada para verificar se o `j`-ésimo
-      elemento deve estar no subconjunto atual.
-
-      - `(1 << j)`: Este operador desloca o número `1` para a esquerda por `j` posições,
-         resultando em uma máscara binária onde apenas o `j`-ésimo bit é `1`.
-         Por exemplo, se `j = 2`, o resultado será 10 (em binário), ou 4 (em decimal).
-
-      - `i AND (1 << j)`: Esta operação bit a bit verifica se o `j`-ésimo bit de
-        `i` está ativado (ou seja, se é `1`).
-         Se sim, isso significa que o `j`-ésimo elemento do conjunto deve estar
-         no subconjunto atual.
-
-      - `!= 0`: Isso confirma que o resultado da operação `AND` não é zero, ou seja,
-         o bit específico está ativado e o elemento deve ser incluído no subconjunto.
-
-    #pagebreak()
-
-    A linha `se i AND (1 << j) != 0` verifica se o `j`-ésimo elemento do conjunto
-    deve ser incluído no subconjunto atual, com base na representação binária de `i`.
-    Isso é uma técnica comum para gerar todos os subconjuntos de um conjunto em
-    programação combinatória.
-  ]
-
-
-  #pagebreak()
-
-  - Implementar o algoritmo que resolve o problema de *`Subset Sum`* e discutir:
-
-    - Qual a complexidade da verificação da solução? Constante, linear, logarítmica, quadrática?
-
-    - O algoritmo de solucao e polinomial ou exponenial? E qual categoria de complexidade ele pertence?
+- Descobrir uma maneira de reduzir a complexidade do cálculo de Fibonacci.
 ]
