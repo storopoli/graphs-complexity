@@ -1155,3 +1155,245 @@ as subárvores esquerda e direita é no máximo 1.
 
     - O algoritmo de solucao e polinomial ou exponenial? E qual categoria de complexidade ele pertence?
 ]
+
+= Identificando a Complexidade de Algoritmos
+
+== Introdução
+
+#align(horizon)[
+  A análise de complexidade é fundamental para avaliar a *eficiência de algoritmos*.
+  Ela nos ajuda a prever o comportamento de um algoritmo à medida que a entrada
+  aumenta, o que é crucial para a *otimização* e escolha do *algoritmo certo*
+  para uma aplicação específica.
+]
+
+== Notação Big-O
+
+#align(horizon)[
+  A notação Big-O ($O$) é usada para descrever o *pior caso do tempo de execução
+  de um algoritmo* em função do *tamanho de entrada $n$*.
+]
+
+== Passos para Determinar a Complexidade
+
+#align(horizon)[
+  1. *Identifique as operações dominantes*: Concentre-se nas operações que são executadas
+     repetidamente, como _loops_, recursões e chamadas de funções.
+
+  #pagebreak()
+
+  2. *Estime o número de vezes que essas operações são executadas*: Analise a profundidade e
+     o número de iterações dos _loops_ e recursões.
+
+  #pagebreak()
+
+  3. *Ignore constantes e termos não dominantes*: Na notação Big-O, ignoramos constantes
+     multiplicativas e termos de ordem inferior.
+
+  #pagebreak()
+
+  4. *Escolha a notação Big-O apropriada*: Use o resultado das etapas anteriores para identificar
+     a complexidade Big-O correta.
+]
+
+== Estruturas de Controle
+
+- *Estruturas Sequenciais*: complexidade constante $O(1)$
+- *Estruturas Condicionais*: complexidade constante $O(1)$
+- *_Loops_*: complexidade linear $O(n)$
+- *_Loop_ Aninhado*: complexidade quadrática $O(n^2)$
+- *Recursão*:
+  - *Linear*: complexidade linear $O(n)$
+  - *Divisória*: complexidade logarítmica $O(log n)$
+  - *Binária*: complexidade $O(n log n)$
+  - *Exponencial*: complexidade exponencial $O(2^n)$
+
+== Estruturas Sequenciais
+
+#align(horizon)[
+  Estruturas de controle que não envolvem _loops_ ou
+  recursão têm complexidade constante $O(1)$.
+
+  ```c
+  int x = 5;
+  int y = 10;
+  int z = x + y;  // O(1)
+  ```
+]
+
+== Estruturas Condicionais
+
+#align(horizon)[
+  Condicionais simples, como `if`-`else`, não afetam a complexidade,
+  mas a execução de blocos internos deve ser considerada.
+
+  ```c
+  if (x > y) {
+      z = x - y;  // O(1)
+  } else {
+      z = y - x;  // O(1)
+  }
+  // Complexidade total: O(1)
+  ```
+]
+
+== _Loops_
+
+#align(horizon)[
+  A complexidade de um _loop_ depende do número de iterações:
+
+  - *_Loop_ Simples*:
+
+    ```c
+    for (int i = 0; i < n; i++) {
+        // operação de O(1)
+    }
+    // Complexidade total: O(n)
+    ```
+
+  #pagebreak()
+
+  - *_Loop_ Aninhado*:
+
+
+    ```c
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // operação de O(1)
+        }
+    }
+    // complexidade total: O(n^2)
+    ```
+
+  #pagebreak()
+
+  - *_Loop_ com incremento multiplicativo*:
+
+    ```c
+    for (int i = 1; i < n; i *= 2) {
+        // operação de O(1)
+    }
+    // Complexidade total: O(log n)
+    ```
+]
+
+== Recursão
+
+#align(horizon)[
+  A complexidade de algoritmos recursivos depende do número de chamadas recursivas
+  e do tamanho da entrada em cada chamada.
+
+  - *Recursão Linear*:
+
+    ```c
+    void recursao_linear(int n) {
+        if (n == 0) return;
+        // operação de O(1)
+        recursao_linear(n-1);
+    }
+    // Complexidade total: O(n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Divisória*:
+
+    ```c
+    void recursao_divisoria(int n) {
+        if (n == 0) return;
+        // operação de O(1)
+        recursao_divisoria(n/2);
+    }
+    // Complexidade total: O(log n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Binária (como _Merge Sort_)*:
+
+    ```c
+    void merge_sort(int arr[], int n) {
+        if (n < 2) return;
+        int mid = n / 2;
+        merge_sort(arr, mid);
+        merge_sort(arr + mid, n - mid);
+        merge(arr, mid, n - mid);  // O(n)
+    }
+    // Complexidade total: O(n log n)
+    ```
+
+  #pagebreak()
+
+  - *Recursão Exponencial*:
+    ```c
+    int fibonacci(int n) {
+        if (n <= 1) return n;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+    // Complexidade total: O(2^n)
+    ```
+]
+
+== Exemplo Prático - Busca Linear
+
+#align(horizon)[
+  ```c
+  int busca_linear(int arr[], int n, int x) {
+      for (int i = 0; i < n; i++) {
+          if (arr[i] == x) return i;
+      }
+      return -1;
+  }
+  // Complexidade total: O(n)
+  ```
+]
+
+== Exemplo Prático - Busca Binária
+
+#align(horizon)[
+  ```c
+  int busca_binaria(int arr[], int n, int x) {
+      int inicio = 0, fim = n - 1;
+      while (inicio <= fim) {
+          int meio = (inicio + fim) / 2;
+          if (arr[meio] == x) return meio;
+          if (arr[meio] < x) inicio = meio + 1;
+          else fim = meio - 1;
+      }
+      return -1;
+  }
+  // Complexidade total: O(log n)
+  ```
+]
+
+== Exemplo Prático - _Bubble Sort_
+
+#text(size: 14pt)[
+  #align(horizon)[
+    ```c
+    void bubble_sort(int arr[], int n) {
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    // troca de elementos
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+    // Complexidade total: O(n^2)
+    ```
+  ]
+]
+
+== Parte Prática (C ou pseudocódigo)
+
+#align(horizon)[
+
+- Implementar e determinar a complexidade de um algoritmo que conta o
+  número de ocorrências de um elemento em uma matriz.
+
+- Descobrir uma maneira de reduzir a complexidade do cálculo de Fibonacci.
+]
