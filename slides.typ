@@ -1104,6 +1104,8 @@ as subárvores esquerda e direita é no máximo 1.
 
 = Identificando a Complexidade de Algoritmos
 
+#align(horizon + center)[#image("images/recursion_joker_debugging_meme.jpg", width: 80%)]
+
 == Introdução
 
 #align(horizon)[
@@ -1141,6 +1143,10 @@ as subárvores esquerda e direita é no máximo 1.
   4. *Escolha a notação Big-O apropriada*: Use o resultado das etapas anteriores para identificar
      a complexidade Big-O correta.
 ]
+
+#pagebreak()
+
+#align(horizon + center)[#image("images/recursion_world_burn_meme.jpeg", width: 80%)]
 
 == Estruturas de Controle
 
@@ -1224,6 +1230,10 @@ as subárvores esquerda e direita é no máximo 1.
 ]
 
 == Recursão
+
+#align(horizon + center)[#image("images/recursion_joker_stackoverflow_meme.jpeg", width: 80%)]
+
+#pagebreak()
 
 #align(horizon)[
   A complexidade de algoritmos recursivos depende do número de chamadas recursivas
