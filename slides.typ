@@ -974,7 +974,7 @@ as subárvores esquerda e direita é no máximo 1.
 == Classe $cal(N P)$
 
 #align(horizon)[
-  Um prolema de decisão pertence a classe $cal(N P)$ se existe um *algoritmo
+  Um problema de decisão pertence a classe $cal(N P)$ se existe um *algoritmo
   em tempo polinomial que _verifique_ a solução de um problema*.
 
   #v(1em)
