@@ -1,2 +1,6 @@
 # Typst
 *.pdf
+
+# C++
+*.out
+*.exe

@@ -1,0 +1,18 @@
+{
+	"name": "Graphs and Algorithmic Complexity",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/guiyomh/features/just:0": {},
+		"ghcr.io/michidk/devcontainers-features/typst:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"vadimcn.vscode-lldb",
+				"nvarner.typst-lsp",
+				"myriad-dreamin.tinymist"
+			]
+		}
+	}
+}
