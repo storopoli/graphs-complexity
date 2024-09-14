@@ -13,9 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: typst-community/setup-typst@v3
-      - run: typst compile slides.typ slides.pdf
+      - run: typst compile slides/slides.typ slides/slides.pdf
+      - run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
       - name: "Release"
         uses: ncipollo/release-action@v1
         id: release
         with:
-          artifacts: ./slides.pdf
+          artifacts: "./slides/*.pdf"

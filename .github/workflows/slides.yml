@@ -16,8 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: typst-community/setup-typst@v3
-      - run: typst compile slides.typ slides.pdf
+      - run: typst compile slides/slides.typ slides/slides.pdf
+      - run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
       - uses: actions/upload-artifact@v4
         with:
           name: slides
-          path: slides.pdf
+          path: slides/slides.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slides-pt
+          path: slides/slides-pt.pdf

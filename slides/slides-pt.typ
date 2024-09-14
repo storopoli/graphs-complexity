@@ -1347,9 +1347,8 @@ as subárvores esquerda e direita é no máximo 1.
 == Parte Prática (C ou pseudocódigo)
 
 #align(horizon)[
+  - Implementar e determinar a complexidade de um algoritmo que conta o
+    número de ocorrências de um elemento em uma matriz.
 
-- Implementar e determinar a complexidade de um algoritmo que conta o
-  número de ocorrências de um elemento em uma matriz.
-
-- Descobrir uma maneira de reduzir a complexidade do cálculo de Fibonacci.
+  - Descobrir uma maneira de reduzir a complexidade do cálculo de Fibonacci.
 ]
