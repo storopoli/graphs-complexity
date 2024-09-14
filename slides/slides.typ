@@ -1329,7 +1329,7 @@ the left and right subtrees is at most 1.
         for (int i = 0; i < n-1; i++) {
             for (int j = 0; j < n-i-1; j++) {
                 if (arr[j] > arr[j+1]) {
-                    // troca de elementos
+                    // swap elements
                     int temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
@@ -1349,4 +1349,338 @@ the left and right subtrees is at most 1.
     the number of occurrences of an element in a matrix.
 
   - Find a way to reduce the complexity of calculating Fibonacci.
+]
+
+= Interlude: Analyzing Algorithm Complexity using C Code
+
+#align(horizon + center)[#image("images/programming_meme.jpg", width: 50%)]
+
+#pagebreak()
+
+#align(horizon)[
+  #text(size: 12pt)[
+
+    Reversing an array:
+    // Total complexity: O(n)
+    ```c
+    void reverse_array(int arr[], int n) {
+        int start = 0, end = n - 1;
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    ```
+
+    #pagebreak()
+
+    Checking if a string is a
+    #link("https://en.wikipedia.org/wiki/Palindrome")[palindrome]:
+    // Total complexity: O(n)
+    ```c
+    bool is_palindrome(char str[]) {
+        int start = 0;
+        // strings in C are null-terminated
+        int end = strlen(str) - 1;
+        while (start < end) {
+            if (str[start] != str[end]) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+    ```
+
+    #pagebreak()
+
+    Find the maximum difference between two elements in an array
+    where the larger element comes after the smaller one:
+    // Total complexity: O(n)
+    #text(size: 11pt)[
+      ```c
+      int max_difference(int arr[], int n) {
+          int min_element = arr[0];
+          int max_diff = arr[1] - arr[0];
+
+          for (int i = 1; i < n; i++) {
+              if (arr[i] - min_element > max_diff) {
+                  max_diff = arr[i] - min_element;
+              }
+              if (arr[i] < min_element) {
+                  min_element = arr[i];
+              }
+          }
+
+          return max_diff;
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    Sorting an array using the
+    #link("https://en.wikipedia.org/wiki/Insertion_sort")[insertion sort]
+    algorithm:
+    // Total complexity: O(n^2)
+    ```c
+    void insertion_sort(int arr[], int n) {
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    ```
+
+    #pagebreak()
+
+    Find the duplicates in an array:
+    // Total complexity: O(n^2)
+    ```c
+    void find_duplicates(int arr[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[i] == arr[j]) {
+                    printf("Duplicate found: %d\n", arr[i]);
+                }
+            }
+        }
+    }
+    ```
+
+    #pagebreak()
+
+    Compute the power of a number:
+    // Total complexity: O(log n)
+    ```c
+    int power(int x, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        int half = power(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return x * half * half;
+        }
+    }
+    ```
+
+    #pagebreak()
+
+    Find the
+    #link("https://en.wikipedia.org/wiki/Greatest_common_divisor")[greatest common divisor]
+    of two numbers:
+    // Total complexity: O(log(min(a, b)))
+    ```c
+    int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+    ```
+
+    #pagebreak()
+
+    #link("https://en.wikipedia.org/wiki/Primality_test")[Prime number check]
+    (naive method):
+    // Total complexity: O(sqrt(n))
+    ```c
+    bool is_prime(int n) {
+        if (n <= 1) {
+            return false;
+        }
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    ```
+
+    #pagebreak()
+
+    Find the majority element
+    (an element that appears more than $n/2$ times) using
+    #link("https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm")[Boyer-Moore's Voting Algorithm].
+    // Total complexity: O(n)
+    #text(size: 6pt)[
+      ```c
+      int find_majority_element(int arr[], int n) {
+          int count = 0, candidate = -1;
+          // Find potential candidate
+          for (int i = 0; i < n; i++) {
+              if (count == 0) {
+                  candidate = arr[i];
+                  count = 1;
+              } else if (arr[i] == candidate) {
+                  count++;
+              } else {
+                  count--;
+              }
+          }
+          // Verify if the candidate is the majority element
+          count = 0;
+          for (int i = 0; i < n; i++) {
+              if (arr[i] == candidate) {
+                  count++;
+              }
+          }
+          if (count > n / 2) {
+              return candidate;
+          } else {
+              return -1;  // No majority element
+          }
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    Generate
+    #link("https://en.wikipedia.org/wiki/Pascal%27s_triangle")[Pascal's Triangle]:
+    // Total complexity: O(n^2)
+    #text(size: 11pt)[
+      ```c
+      void generate_pascals_triangle(int n) {
+          int arr[n][n];
+
+          for (int line = 0; line < n; line++) {
+              for (int i = 0; i <= line; i++) {
+                  if (i == 0 || i == line) {
+                      arr[line][i] = 1;
+                  } else {
+                      arr[line][i] = arr[line - 1][i - 1] + arr[line - 1][i];
+                  }
+                  printf("%d ", arr[line][i]);
+              }
+              printf("\n");
+          }
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    #link("https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm")[Kadane's algorithm]
+    to find the maximum subarray sum:
+    // Total complexity: O(n)
+    #text(size: 11pt)[
+      ```c
+      int max_subarray_sum(int arr[], int n) {
+          int max_ending_here = 0;
+          int max_so_far = INT_MIN;
+
+          for (int i = 0; i < n; i++) {
+              max_ending_here = max_ending_here + arr[i];
+              if (max_so_far < max_ending_here) {
+                  max_so_far = max_ending_here;
+              }
+              if (max_ending_here < 0) {
+                  max_ending_here = 0;
+              }
+          }
+
+          return max_so_far;
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    #link("https://en.wikipedia.org/wiki/Longest_common_subsequence")[Longest Common Subsequence (LCS)]:
+    // Total complexity: O(n * m)
+    #text(size: 10pt)[
+      ```c
+      int lcs(char *X, char *Y, int m, int n) {
+          int dp[m + 1][n + 1];
+
+          for (int i = 0; i <= m; i++) {
+              for (int j = 0; j <= n; j++) {
+                  if (i == 0 || j == 0) {
+                      dp[i][j] = 0;
+                  } else if (X[i - 1] == Y[j - 1]) {
+                      dp[i][j] = dp[i - 1][j - 1] + 1;
+                  } else {
+                      dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+                  }
+              }
+          }
+
+          return dp[m][n];
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    Given the arrival and departure times of trains at a station,
+    find the minimum number of platforms required:
+    // Total complexity: O(n log n)
+    #text(size: 8pt)[
+      ```c
+      int find_platforms(int arr[], int dep[], int n) {
+          sort(arr, arr + n);
+          sort(dep, dep + n);
+
+          int platforms = 1, result = 1;
+          int i = 1, j = 0;
+
+          while (i < n && j < n) {
+              if (arr[i] <= dep[j]) {
+                  platforms++;
+                  i++;
+              } else {
+                  platforms--;
+                  j++;
+              }
+              result = max(result, platforms);
+          }
+
+          return result;
+      }
+      ```
+    ]
+
+    #pagebreak()
+
+    This algorithm is a
+    #link("https://en.wikipedia.org/wiki/Fast_inverse_square_root")[fast way to compute the inverse square root],
+    $1 / sqrt(x)$,
+    made famous by its use in the game Quake III Arena by
+    #link("https://en.wikipedia.org/wiki/John_Carmack")[John Carmack].
+    The method uses a clever approximation and a single iteration
+    of #link("https://en.wikipedia.org/wiki/Newton%27s_method")[Newton's method] to refine it.
+    // Total complexity: O(1)
+    #text(size: 8pt)[
+      ```c
+      float Q_rsqrt(float number) {
+          long i;
+          float x2, y;
+          const float threehalfs = 1.5F;
+
+          x2 = number * 0.5F;
+          y = number;
+          i = *(long*)&y;                       // Evil bit-level hacking
+          i = 0x5f3759df - (i >> 1);            // What the fuck?
+          y = *(float*)&i;
+          y = y * (threehalfs - (x2 * y * y));  // 1st iteration of Newton's method
+          // y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed
+
+          return y;
+      }
+      ```
+    ]
+  ]
 ]
