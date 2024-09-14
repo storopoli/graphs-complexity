@@ -36,7 +36,7 @@
 
 The slides are generated using [Typst](https://typst.app) with GitHub Actions
 and can be found in the
-[`latest version`](https://github.com/storopoli/grafos-complexidade/releases/latest/download/slides.pdf).
+[`latest version`](https://github.com/storopoli/graphs-complexity/releases/latest/download/slides.pdf).
 
 ## License
 
