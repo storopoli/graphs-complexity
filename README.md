@@ -4,12 +4,18 @@
 [![Run on Repl.it](https://repl.it/badge/github/storopoli/grafos-complexidade)](https://repl.it/github/storopoli/grafos-complexidade)
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/storopoli/grafos-complexidade)
 
-<!-- markdownlint-disable MD033 -->
+> [!NOTE]
+>
+> For the Portuguese version, check out the [README-pt.md](README-pt.md).
+>
+> Para a versão em português, confira o [README-pt.md](README-pt.md).
+
+<!-- markdownlint-disable no-inline-html -->
 <div class="figure" style="text-align: center">
-  <img src="images/algorithm_analysis_meme.jpg"
+  <img src="slides/images/algorithm_analysis_meme.jpg"
    alt="Algorithm meme" width="500" />
 </div>
-<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable no-inline-html -->
 
 ## Contents
 
@@ -31,9 +37,6 @@
 The slides are generated using [Typst](https://typst.app) with GitHub Actions
 and can be found in the
 [`latest version`](https://github.com/storopoli/grafos-complexidade/releases/latest/download/slides.pdf).
-
-For the Portuguese version, check out the [README-pt.md](README-pt.md).
-Para a versão em português, confira o [README-pt.md](README-pt.md).
 
 ## License
 

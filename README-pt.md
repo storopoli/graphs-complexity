@@ -4,12 +4,18 @@
 [![Rodar no Repl.it](https://repl.it/badge/github/storopoli/grafos-complexidade)](https://repl.it/github/storopoli/grafos-complexidade)
 [![Abrir no Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/storopoli/grafos-complexidade)
 
-<!-- markdownlint-disable MD033 -->
+> [!NOTE]
+>
+> For English version, please check the [README.md](README.md) file.
+>
+> Para a versão em inglês, por favor, confira o [README.md](README.md).
+
+<!-- markdownlint-disable no-inline-html -->
 <div class="figure" style="text-align: center">
-  <img src="images/algorithm_analysis_meme.jpg"
+  <img src="slides/images/algorithm_analysis_meme.jpg"
    alt="Algorithm meme" width="500" />
 </div>
-<!-- markdownlint-enable MD033 -->
+<!-- markdownlint-enable no-inline-html -->
 
 ## Conteúdo
 
