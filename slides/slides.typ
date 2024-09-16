@@ -7,9 +7,9 @@
   title: "Graph Theory and Computational Complexity",
   subtitle: none,
   date: none,
-  authors: ("Jose Storopoli, PhD", ),
+  authors: ("Jose Storopoli, PhD",),
   layout: "medium",
-  ratio: 4/3,
+  ratio: 4 / 3,
   title-color: orange,
 )
 
@@ -39,17 +39,20 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
 = Why study Graph Theory and Computational Complexity?
 
-#align(horizon + center)[#image("images/algorithm_analysis_meme.jpg", width: 50%)]
+#align(horizon + center)[#image(
+    "images/algorithm_analysis_meme.jpg",
+    width: 50%,
+  )]
 
 == Computational Theory
 
 #align(horizon)[
-  *Computational theory* is a subfield of computer science and mathematics
-  that seeks to determine which problems can be computed
-  within a given computational model.
+  *Computational theory* is a subfield of computer science and mathematics that
+  seeks to determine which problems can be computed within a given computational
+  model.
 
-  *Computation* can be defined as the calculation of a function through
-  an algorithm.
+  *Computation* can be defined as the calculation of a function through an
+  algorithm.
 ]
 
 == #link("https://en.wikipedia.org/wiki/Alan_Turing")[Turing] vs. #link("https://en.wikipedia.org/wiki/Alonzo_Church")[Church]
@@ -62,7 +65,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
       image("images/turing.jpg", width: 60%),
       image("images/church.jpg", width: 60%),
     ),
-    caption: "Alan Turing and Alonzo Church"
+    caption: "Alan Turing and Alonzo Church",
   )<turing-church>
 ]
 
@@ -77,8 +80,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
 == Algorithm
 
 #align(horizon)[
-  An *algorithm* is a finite sequence of executable actions aimed at obtaining
-  a solution to a particular type of problem.
+  An *algorithm* is a finite sequence of executable actions aimed at obtaining a
+  solution to a particular type of problem.
 ]
 
 == Graph Theory
@@ -89,16 +92,15 @@ Blank space can be filled with vertical spaces like #v(1fr).
   #v(1em)
 
   #align(center)[
-    _Almost_ everything you do in computing can be modeled
-    as a *graph problem*.
+    _Almost_ everything you do in computing can be modeled as a *graph problem*.
   ]
 ]
 
 == Computational Complexity
 
 #align(horizon)[
-  *Computational complexity* is a field in computer science that
-  studies the amount of resources required to solve a computational problem#footnote[
+  *Computational complexity* is a field in computer science that studies the
+  amount of resources required to solve a computational problem#footnote[
     a decidable problem.
   ].
 ]
@@ -140,7 +142,10 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
 = Graphs
 
-#align(horizon + center)[#image("images/graph_isomorphism_meme.jpg", width: 50%)]
+#align(horizon + center)[#image(
+    "images/graph_isomorphism_meme.jpg",
+    width: 50%,
+  )]
 
 == What are Graphs?
 
@@ -148,24 +153,22 @@ Graphs are mathematical structures that model *relationships between objects*.
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      graph G {
-        rankdir=LR;
-        layout=dot;
-        a -- {b, c};
-        b -- {c, d};
-        c -- e;
-        d -- e;
-        e -- f;
-        {rank=same; a;};
-        {rank=same; b; c;};
-        {rank=same; d; e;};
-        {rank=same; f;};
-      }
-      ```
-  ),
-    caption: "Graph"
+    raw-render(```dot
+    graph G {
+      rankdir=LR;
+      layout=dot;
+      a -- {b, c};
+      b -- {c, d};
+      c -- e;
+      d -- e;
+      e -- f;
+      {rank=same; a;};
+      {rank=same; b; c;};
+      {rank=same; d; e;};
+      {rank=same; f;};
+    }
+    ```),
+    caption: "Graph",
   ) <graph>
 ]
 
@@ -174,8 +177,8 @@ Graphs are mathematical structures that model *relationships between objects*.
 Graphs are *ordered pairs* $G = (V, E)$ where:
 
 - $V$ is a finite set of *vertices* (also called nodes)
-- $E$ is a finite set of *edges* (also called arcs)
-  represented by a pair of vertices $(u, v)$
+- $E$ is a finite set of *edges* (also called arcs) represented by a pair of
+  vertices $(u, v)$
 
 The @graph, for example:
 
@@ -190,54 +193,49 @@ Graphs can be *directed* or *_non_-directed*.
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      digraph G {
-        rankdir=LR;
-        layout=dot;
-        a -> {b, c};
-        b -> c;
-        c -> e;
-        d -> {b, e};
-        e -> f;
-        {rank=same; a;};
-        {rank=same; b; c;};
-        {rank=same; d; e;};
-        {rank=same; f;};
-      }
-      ```
-  ),
-    caption: "Directed Graph"
+    raw-render(```dot
+    digraph G {
+      rankdir=LR;
+      layout=dot;
+      a -> {b, c};
+      b -> c;
+      c -> e;
+      d -> {b, e};
+      e -> f;
+      {rank=same; a;};
+      {rank=same; b; c;};
+      {rank=same; d; e;};
+      {rank=same; f;};
+    }
+    ```),
+    caption: "Directed Graph",
   ) <directed-graph>
 ]
 
 == Weighted Graphs
 
-Most graphs are *weighted*, meaning they
-have values associated with the edges.
+Most graphs are *weighted*, meaning they have values associated with the edges.
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      graph G {
-        rankdir=LR;
-        layout=dot;
-        a -- b [label=2];
-        a -- c [label=3];
-        b -- c [label=1];
-        b -- d [label=4];
-        c -- e [label=1];
-        d -- e [label=2];
-        e -- f [label=1];
-        {rank=same; a;};
-        {rank=same; b; c;};
-        {rank=same; d; e;};
-        {rank=same; f;};
-      }
-      ```
-  ),
-    caption: "Weighted Graph"
+    raw-render(```dot
+    graph G {
+      rankdir=LR;
+      layout=dot;
+      a -- b [label=2];
+      a -- c [label=3];
+      b -- c [label=1];
+      b -- d [label=4];
+      c -- e [label=1];
+      d -- e [label=2];
+      e -- f [label=1];
+      {rank=same; a;};
+      {rank=same; b; c;};
+      {rank=same; d; e;};
+      {rank=same; f;};
+    }
+    ```),
+    caption: "Weighted Graph",
   ) <weighted-graph>
 ]
 
@@ -252,8 +250,7 @@ have values associated with the edges.
 
 == #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[The 7 Bridges of Königsberg]
 
-The first practical application of graph theory,
-solved by Euler in 1736.
+The first practical application of graph theory, solved by Euler in 1736.
 
 #align(center)[
   *Is it possible to cross all bridges without repeating any?*
@@ -262,7 +259,7 @@ solved by Euler in 1736.
 #align(horizon + center)[
   #figure(
     image("images/konigsberg_briges.png", width: 35%),
-    caption: "The 7 Bridges of Königsberg"
+    caption: "The 7 Bridges of Königsberg",
   ) <konigsberg-brigdes>
 ]
 
@@ -270,33 +267,31 @@ solved by Euler in 1736.
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      graph G {
-        rankdir=LR;
-        splines=curved;
-        layout=neato;
-        a[pos="-1,0!"];
-        b[pos="0,1!"];
-        c[pos="0,-1!"];
-        d[pos="1,0!"];
-        a -- {b, c, d};
-        b:w -- a;
-        c:w -- a;
-        b -- d;
-        c -- d;
-      }
-      ```
-  ),
-    caption: "Graph of the 7 Bridges of Königsberg"
+    raw-render(```dot
+    graph G {
+      rankdir=LR;
+      splines=curved;
+      layout=neato;
+      a[pos="-1,0!"];
+      b[pos="0,1!"];
+      c[pos="0,-1!"];
+      d[pos="1,0!"];
+      a -- {b, c, d};
+      b:w -- a;
+      c:w -- a;
+      b -- d;
+      c -- d;
+    }
+    ```),
+    caption: "Graph of the 7 Bridges of Königsberg",
   ) <graph-konigsberg-brigdes>
 ]
 
 == Solution to the 7 Bridges
 
 #align(horizon)[
-  The solution to the Königsberg problem was provided by Euler.
-  The graph requires *two conditions* to be solved:
+  The solution to the Königsberg problem was provided by Euler. The graph requires
+  *two conditions* to be solved:
 
   - The graph must be *fully connected*
   - The graph must have exactly *0 or 2 vertices of odd degree*
@@ -305,9 +300,8 @@ solved by Euler in 1736.
 == #link("https://en.wikipedia.org/wiki/Four_color_theorem")[The Four Color Theorem]
 
 #align(horizon)[
-  *No more than four colors are needed to
-  color the regions of any map,
-  so that two adjacent regions do not share the same color.*
+  *No more than four colors are needed to color the regions of any map, so that two
+  adjacent regions do not share the same color.*
 ]
 
 #pagebreak()
@@ -315,7 +309,7 @@ solved by Euler in 1736.
 #align(horizon + center)[
   #figure(
     image("images/four_color_graph.svg", width: 50%),
-    caption: "Abstracting a map with four colors using graphs"
+    caption: "Abstracting a map with four colors using graphs",
   ) <four-color-map>
 ]
 
@@ -327,66 +321,58 @@ solved by Euler in 1736.
 
 == Graph Applications
 
-- Airline itineraries:
-  Calculate the maximum flow in a directed graph.
-- Routing software (GPS):
-  Calculate the shortest path between two points.
-- Solving a sudoku:
-  Solve a graph coloring problem.
-- Online search algorithms:
-  Determine vertex centralities based on themes.
-- Social networks:
-  find the largest friend community.
+- Airline itineraries: Calculate the maximum flow in a directed graph.
+- Routing software (GPS): Calculate the shortest path between two points.
+- Solving a sudoku: Solve a graph coloring problem.
+- Online search algorithms: Determine vertex centralities based on themes.
+- Social networks: find the largest friend community.
 
 == Subgraphs
 
-A *subgraph* of a graph $G$ is another graph formed from
-a *subset of the vertices and edges of $G$*.
-The vertex subset must include all the edges' vertices,
-but may include additional vertices.
+A *subgraph* of a graph $G$ is another graph formed from a *subset of the
+vertices and edges of $G$*. The vertex subset must include all the edges'
+vertices, but may include additional vertices.
 
 #align(horizon + center)[
   #figure(
     image("images/subgraph.svg", width: 40%),
-    caption: "Subgraph"
+    caption: "Subgraph",
   ) <subgraph>
 ]
 
 == Induced Subgraph
 
-An *induced subgraph* is a subgraph that *includes all vertices and edges*
-whose endpoints belong to the vertex subset.
+An *induced subgraph* is a subgraph that *includes all vertices and edges* whose
+endpoints belong to the vertex subset.
 
 #align(horizon + center)[
   #figure(
     image("images/induced_subgraph.svg", width: 50%),
-    caption: "Induced Subgraph"
+    caption: "Induced Subgraph",
   ) <induced-subgraph>
 ]
 
 == Isomorphism
 
 An isomorphism of the graphs $G$ and $H$ is a bijection#footnote[
-  a function that establishes a one-to-one correspondence
-  between the elements of two sets.
+  a function that establishes a one-to-one correspondence between the elements of
+  two sets.
 ]
-between the sets
-of vertices of $G$ and $H$:
+between the sets of vertices of $G$ and $H$:
 
 $ f: V(G) -> V(H) $
 
 #align(horizon + center)[
   #figure(
     image("images/graph_isomorphism.png", width: 66%),
-    caption: "Isomorphic Graphs"
+    caption: "Isomorphic Graphs",
   ) <isomorphic-graphs>
 ]
 
 == Graph Representation
 
 #align(horizon)[
-  There are several ways to represent graphs,
-  the most common are:
+  There are several ways to represent graphs, the most common are:
 
   - *Adjacency matrix*
   - *Adjacency list*
@@ -409,14 +395,11 @@ $ f: V(G) -> V(H) $
     grid(
       columns: 2,
       gutter: 2mm,
-      text[$ bold(A) = mat(
-        1, 1, 0, 0, 1, 0;
-        1, 0, 1, 0, 1, 0;
-        0, 1, 0, 1, 0, 0;
-        0, 0, 1, 0, 1, 1;
-        1, 1, 0, 1, 0, 0;
-        0, 0, 0, 1, 0, 0;
-      ) $],
+      text[$
+          bold(A) = mat(
+        1, 1, 0, 0, 1, 0;1, 0, 1, 0, 1, 0;0, 1, 0, 1, 0, 0;0, 0, 1, 0, 1, 1;1, 1, 0, 1, 0, 0;0, 0, 0, 1, 0, 0;
+      )
+        $],
       raw-render(
         ```dot
         graph G {
@@ -428,10 +411,10 @@ $ f: V(G) -> V(H) $
           4 -- {5, 6};
         }
         ```,
-        width: 80%
+        width: 80%,
       ),
     ),
-    caption: "Adjacency matrix and Graph"
+    caption: "Adjacency matrix and Graph",
   ) <adjacency-matrix>
 ]
 
@@ -452,8 +435,8 @@ $ f: V(G) -> V(H) $
 == Adjacency List
 
 #align(horizon)[
-  An *adjacency list* is a list of lists,
-  where each list $L_i$ contains the vertices adjacent to vertex $i$.
+  An *adjacency list* is a list of lists, where each list $L_i$ contains the
+  vertices adjacent to vertex $i$.
 ]
 
 #pagebreak()
@@ -484,10 +467,10 @@ $ f: V(G) -> V(H) $
           4 -- {5, 6};
         }
         ```,
-        width: 80%
+        width: 80%,
       ),
     ),
-    caption: "Adjacency list and Graph"
+    caption: "Adjacency list and Graph",
   ) <adjacency-list>
 ]
 
@@ -515,18 +498,18 @@ $ f: V(G) -> V(H) $
 
 #align(horizon)[
   #text(size: 14pt)[
-    A *path* is a sequence of vertices such that from each vertex there is
-    an edge to the next vertex.
+    A *path* is a sequence of vertices such that from each vertex there is an edge
+    to the next vertex.
 
-    A path is called *simple* if none of the vertices in the path are repeated.
-    The *length* of the path is the number of edges the path uses,
-    counting multiple edges more than once.
+    A path is called *simple* if none of the vertices in the path are repeated. The
+    *length* of the path is the number of edges the path uses, counting multiple
+    edges more than once.
 
-    The *cost* of a path in a balanced graph is the sum of the costs
-    of the edges traversed.
+    The *cost* of a path in a balanced graph is the sum of the costs of the edges
+    traversed.
 
-    Two paths are *independent* if they share no vertices,
-    except the first and last.
+    Two paths are *independent* if they share no vertices, except the first and
+    last.
   ]
 ]
 
@@ -534,68 +517,64 @@ $ f: V(G) -> V(H) $
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      graph G {
-        rankdir=LR;
-        layout=dot;
-        a -- b[color=red];
-        a -- c;
-        b -- c[color=red];
-        a -- d;
-        c -- e[color=red];
-        d -- e;
-        e -- f[color=red];
-        {rank=same; a;};
-        {rank=same; b; c;};
-        {rank=same; d; e;};
-        {rank=same; f;};
-      }
-      ```
-  ),
-    caption: "Path of Length 4"
+    raw-render(```dot
+    graph G {
+      rankdir=LR;
+      layout=dot;
+      a -- b[color=red];
+      a -- c;
+      b -- c[color=red];
+      a -- d;
+      c -- e[color=red];
+      d -- e;
+      e -- f[color=red];
+      {rank=same; a;};
+      {rank=same; b; c;};
+      {rank=same; d; e;};
+      {rank=same; f;};
+    }
+    ```),
+    caption: "Path of Length 4",
   ) <path>
 ]
 
 #pagebreak()
 
 #align(horizon)[
-  A *cycle* is a path in which the *first and last vertices coincide*,
-  but no other vertices are *repeated*.
+  A *cycle* is a path in which the *first and last vertices coincide*, but no
+  other vertices are *repeated*.
 ]
 
 #pagebreak()
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      graph G {
-        rankdir=LR;
-        layout=dot;
-        a -- b;
-        a -- c[color=red];
-        b -- c;
-        a -- d[color=red];
-        c -- e[color=red];
-        d -- e[color=red];
-        e -- f;
-        {rank=same; a;};
-        {rank=same; b; c;};
-        {rank=same; d; e;};
-        {rank=same; f;};
-      }
-      ```
-  ),
-    caption: "Cycle of Length 4"
+    raw-render(```dot
+    graph G {
+      rankdir=LR;
+      layout=dot;
+      a -- b;
+      a -- c[color=red];
+      b -- c;
+      a -- d[color=red];
+      c -- e[color=red];
+      d -- e[color=red];
+      e -- f;
+      {rank=same; a;};
+      {rank=same; b; c;};
+      {rank=same; d; e;};
+      {rank=same; f;};
+    }
+    ```),
+    caption: "Cycle of Length 4",
   ) <cycle>
 ]
 
 == Eulerian Path
 
 #align(horizon)[
-  An *Eulerian path* is a path that uses each edge exactly once.
-  If such a path exists, the graph is called traversable.
+  An *Eulerian path* is a path that uses each edge exactly once. If such a path
+  exists, the graph is called traversable.
 
   An *Eulerian cycle* is a cycle that uses each edge exactly once.
 ]
@@ -606,17 +585,20 @@ $ f: V(G) -> V(H) $
   A *Hamiltonian path* is a path that visits each vertex exactly once.
 
   A *Hamiltonian cycle*#footnote[
-    fun fact: one of the first zero-knowledge proof schemes was based
-    on finding a Hamiltonian cycle in a giant graph.
-    For more details, see #link("https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph")[Wikipedia]
-    and the #link("https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf")[original paper].
+    fun fact: one of the first zero-knowledge proof schemes was based on finding a
+    Hamiltonian cycle in a giant graph. For more details, see #link(
+      "https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph",
+    )[Wikipedia]
+    and the #link(
+      "https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf",
+    )[original paper].
   ] is a cycle that visits each vertex exactly once.
 ]
 
 == #link("https://en.wikipedia.org/wiki/Travelling_salesman_problem")[Traveling Salesman Problem]
 
-The *traveling salesman problem* (TSP) is a problem that tries to determine
-the shortest route to visit a series of cities (visiting each city only once),
+The *traveling salesman problem* (TSP) is a problem that tries to determine the
+shortest route to visit a series of cities (visiting each city only once),
 returning to the starting city.
 
 #align(horizon + center)[
@@ -640,17 +622,17 @@ returning to the starting city.
         4 -- 5[label=3];
       }
       ```,
-      width: 50%
-  ),
-    caption: "Traveling Salesman Problem"
+      width: 50%,
+    ),
+    caption: "Traveling Salesman Problem",
   ) <travelling-salesman-problem>
 ]
 
 #pagebreak()
 
 #align(horizon)[
-  Formulating it in graph terms, the TSP is a problem of finding a Hamiltonian cycle
-  such that the cost of the cycle is the smallest possible.
+  Formulating it in graph terms, the TSP is a problem of finding a Hamiltonian
+  cycle such that the cost of the cycle is the smallest possible.
 
   $ C = min_("cycle") sum_(i=1)^n c_(i, i+1) $
 ]
@@ -680,17 +662,17 @@ Trees are *acyclic* and *connected* graphs.
         c -> {e, f};
       }
       ```,
-      width: 50%
-  ),
-    caption: "Tree"
+      width: 50%,
+    ),
+    caption: "Tree",
   ) <tree>
 ]
 
 #pagebreak()
 
 #align(horizon)[
-  - *Root*: the vertex with no incoming edges.
-    All trees have (only) one root vertex.
+  - *Root*: the vertex with no incoming edges. All trees have (only) one root
+    vertex.
   - *Leaf*: vertex with no outgoing edges.
   - *Level*: distance from the root.
   - *Height*: maximum level.
@@ -719,9 +701,9 @@ Subtrees are trees that are subsets of a tree.
         c -> {e, f}[color=red];
       }
       ```,
-      width: 45%
-  ),
-    caption: "Subtree"
+      width: 45%,
+    ),
+    caption: "Subtree",
   ) <subtree>
 ]
 
@@ -729,15 +711,13 @@ Subtrees are trees that are subsets of a tree.
 
 #align(horizon + center)[
   #figure(
-    raw-render(
-      ```dot
-      digraph G {
-        a -> b
-        b -> c;
-      }
-      ```
-  ),
-    caption: "Path Tree"
+    raw-render(```dot
+    digraph G {
+      a -> b
+      b -> c;
+    }
+    ```),
+    caption: "Path Tree",
   ) <tree-path>
 ]
 
@@ -752,9 +732,9 @@ Subtrees are trees that are subsets of a tree.
         a -- {b, c, d, e , f, g};
       }
       ```,
-      width: 66%
-  ),
-    caption: "Star Tree"
+      width: 66%,
+    ),
+    caption: "Star Tree",
   ) <tree-path>
 ]
 
@@ -800,16 +780,16 @@ Subtrees are trees that are subsets of a tree.
         }
       }
       ```,
-      width: 50%
-  ),
-    caption: "Binary Tree"
+      width: 50%,
+    ),
+    caption: "Binary Tree",
   ) <tree-binary>
 ]
 
 == Balanced Trees
 
-A tree is *balanced* if the height difference between
-the left and right subtrees is at most 1.
+A tree is *balanced* if the height difference between the left and right
+subtrees is at most 1.
 
 #align(horizon + center)[
   #figure(
@@ -821,9 +801,9 @@ the left and right subtrees is at most 1.
         c -> {e, f};
       }
       ```,
-      width: 45%
-  ),
-    caption: "Balanced Tree"
+      width: 45%,
+    ),
+    caption: "Balanced Tree",
   ) <balanced-tree>
 ]
 
@@ -839,17 +819,16 @@ the left and right subtrees is at most 1.
         d -> f;
       }
       ```,
-      width: 40%
-  ),
-    caption: "Unbalanced Tree"
+      width: 40%,
+    ),
+    caption: "Unbalanced Tree",
   ) <unbalanced-tree>
 ]
 
 == Practical Section (C or pseudocode)
 
 #align(horizon)[
-  - Detect if a graph is a tree
-    (i.e., if it is acyclic and connected)
+  - Detect if a graph is a tree (i.e., if it is acyclic and connected)
   - Detect which vertex is the root of a tree
 ]
 
@@ -886,14 +865,14 @@ the left and right subtrees is at most 1.
   #align(horizon)[
     Big-O notation is used to describe the complexity of an algorithm.
 
-    For example, in the function $n^3 + n^2 + 5n + 100$,
-    the largest constant $k = 3$ will asymptotically#footnote[
+    For example, in the function $n^3 + n^2 + 5n + 100$, the largest constant $k = 3$ will
+    asymptotically#footnote[
       as something approaches infinity, i.e., $lim -> oo$.
     ]
     dominate the computation time, so the complexity is $O(n^3)$.
 
-    Also, in Big-O notation, we disregard constant coefficients.
-    For example, $O(3n^2)$ simplifies to $O(n^2)$ and
+    Also, in Big-O notation, we disregard constant coefficients. For example, $O(3n^2)$ simplifies
+    to $O(n^2)$ and
     $50 O(1)$ simplifies to $O(1)$.
   ]
 ]
@@ -941,8 +920,8 @@ the left and right subtrees is at most 1.
 
 #align(horizon)[
   The computational complexity of an algorithm is the *number of computational
-  operations (such as arithmetic operations, comparisons, and memory accesses)
-  required for its execution*.
+  operations (such as arithmetic operations, comparisons,
+  and memory accesses) required for its execution*.
 
   #v(1em)
 
@@ -952,9 +931,9 @@ the left and right subtrees is at most 1.
 == Bounded Complexity
 
 #align(horizon)[
-  If the complexity of an algorithm is bounded by a function $f(n)$,
-  where $f$ is a polynomial function of $n$ (input size),
-  then the algorithm is said to have *polynomial* complexity.
+  If the complexity of an algorithm is bounded by a function $f(n)$, where $f$ is
+  a polynomial function of $n$ (input size), then the algorithm is said to have
+  *polynomial* complexity.
 
   #v(1em)
 
@@ -964,16 +943,16 @@ the left and right subtrees is at most 1.
 == Class $cal(P)$
 
 #align(horizon)[
-  A *decision problem* is a problem that has a *yes* or *no* answer.
-  Such a problem belongs to the class $cal(P)$ if there exists an algorithm that solves
+  A *decision problem* is a problem that has a *yes* or *no* answer. Such a
+  problem belongs to the class $cal(P)$ if there exists an algorithm that solves
   any instance of the problem in *polynomial complexity*.
 ]
 
 == Class $cal(N P)$
 
 #align(horizon)[
-  A decision problem belongs to the class $cal(N P)$ if there exists a *polynomial-time
-  algorithm that _verifies_ the solution to a problem*.
+  A decision problem belongs to the class $cal(N P)$ if there exists a
+  *polynomial-time algorithm that _verifies_ the solution to a problem*.
 
   #v(1em)
 
@@ -998,13 +977,24 @@ the left and right subtrees is at most 1.
   #table(
     columns: 3,
     align: left + horizon,
-    table.header(
-      [], [*$cal(P)$*], [*$cal(N P)$*],
-    ),
-    [*Solvability*], [Solvable efficiently in polynomial time.], [Efficient verification, but the solution may not be found efficiently.],
-    [*Time Complexity*], [Polynomial-time algorithms are known.], [Efficient verification algorithms are known, but efficient solution algorithms are not guaranteed.],
-    [*Nature of Solutions*], [Solutions can be found efficiently.], [Solutions, once proposed, can be verified efficiently.],
-    [*Known Relationship*], [$cal(P)$ is a subset of $cal(N P)$.], [It is unknown whether $cal(N P)$ is a proper subset of $cal(P)$ or if they are equal.],
+    table.header([], [*$cal(P)$*], [*$cal(N P)$*]),
+    [*Solvability*],
+    [Solvable efficiently in polynomial time.],
+    [Efficient verification, but the solution may not be found efficiently.],
+
+    [*Time Complexity*],
+    [Polynomial-time algorithms are known.],
+    [Efficient verification algorithms are known, but efficient solution algorithms
+      are not guaranteed.],
+
+    [*Nature of Solutions*],
+    [Solutions can be found efficiently.],
+    [Solutions, once proposed, can be verified efficiently.],
+
+    [*Known Relationship*],
+    [$cal(P)$ is a subset of $cal(N P)$.],
+    [It is unknown whether $cal(N P)$ is a proper subset of $cal(P)$ or if they are
+      equal.],
   )
 ]
 
@@ -1015,45 +1005,45 @@ the left and right subtrees is at most 1.
 == $cal(N P)$-complete
 
 #align(horizon)[
-  A $cal(N P)$-complete problem is an $cal(N P)$ problem that is *as hard as
-  any other problem in $cal(N P)$*.
-  If a $cal(N P)$-complete problem can be solved in polynomial time,
-  then all problems in $cal(N P)$-complete can also be solved in polynomial time.
+  A $cal(N P)$-complete problem is an $cal(N P)$ problem that is *as hard as any
+  other problem in $cal(N P)$*. If a $cal(N P)$-complete problem can be solved in
+  polynomial time, then all problems in $cal(N P)$-complete can also be solved in
+  polynomial time.
 ]
 
 == Boolean Satisfiability (SAT)
 
 #align(horizon)[
-  The Boolean satisfiability problem (SAT) seeks to determine whether a *propositional
-  formula can be made true* by means of an appropriate assignment
+  The Boolean satisfiability problem (SAT) seeks to determine whether a
+  *propositional formula can be made true* by means of an appropriate assignment
   ("solution") of truth values to its variables.
 
   $ (a and b and c) or (d and e and f) or (g and h and i) or (j and k and l) $
 
-  where $a, b, c, d, e, f, g, h, i, j, k, l$ are boolean variables,
-  and $and$ (`AND`) and $or$ (`OR`) are boolean operators.
+  where $a, b, c, d, e, f, g, h, i, j, k, l$ are boolean variables, and $and$ (`AND`)
+  and $or$ (`OR`) are boolean operators.
 
   #pagebreak()
 
   #v(1em)
 
   Although it is easy to verify whether a given assignment makes the formula true,
-  there is no known faster method for finding a
-  satisfying assignment other than testing all possible assignments.
+  there is no known faster method for finding a satisfying assignment other than
+  testing all possible assignments.
 
   #v(1em)
 
   #link("https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem")[Cook and Levin proved]
-  that every problem that can be easily verified can be solved as quickly
-  as SAT, which is why it is NP-complete.
+  that every problem that can be easily verified can be solved as quickly as SAT,
+  which is why it is NP-complete.
 ]
 
 == $cal(N P)$-hard
 
 #align(horizon)[
-  An $cal(N P)$-hard problem is one for which *no efficient algorithm is known to solve it*.
-  However, if an efficient algorithm for an $cal(N P)$-hard problem
-  is found, then all problems in $cal(N P)$ can be solved efficiently.
+  An $cal(N P)$-hard problem is one for which *no efficient algorithm is known to
+  solve it*. However, if an efficient algorithm for an $cal(N P)$-hard problem is
+  found, then all problems in $cal(N P)$ can be solved efficiently.
 ]
 
 == $cal(P)$ vs $cal(N P)$-complete and $cal(N P)$-hard
@@ -1064,10 +1054,12 @@ the left and right subtrees is at most 1.
 
 #align(horizon)[
   - $cal(N P)$-complete:
-    - Traveling Salesman Problem in decision form: "Is there a cycle with a cost less than or equal to X?"
+    - Traveling Salesman Problem in decision form: "Is there a cycle with a cost less
+      than or equal to X?"
 
   - $cal(N P)$-hard:
-    - Traveling Salesman Problem in optimization form: "What is the minimum-cost cycle?"
+    - Traveling Salesman Problem in optimization form: "What is the minimum-cost
+      cycle?"
 ]
 
 == Practical Section (C)
@@ -1076,10 +1068,9 @@ the left and right subtrees is at most 1.
   #align(horizon)[
     #link("https://en.wikipedia.org/wiki/Knapsack_problem")[*Knapsack Problem*]
 
-    You are an adventurer and have found a cave full of treasures.
-    However, your backpack has limited capacity
-    and you need to decide which items to take to maximize the total value,
-    without exceeding the capacity of the backpack.
+    You are an adventurer and have found a cave full of treasures. However, your
+    backpack has limited capacity and you need to decide which items to take to
+    maximize the total value, without exceeding the capacity of the backpack.
 
     You have a list of `n` items, where each item `i` has:
 
@@ -1090,59 +1081,65 @@ the left and right subtrees is at most 1.
 
     #pagebreak()
 
-    - Write an algorithm that determines the subset of items that
-      maximizes the total value in the backpack without exceeding the total weight $W$.
+    - Write an algorithm that determines the subset of items that maximizes the total
+      value in the backpack without exceeding the total weight $W$.
 
-    - Write an algorithm that, given a certain input of items and capacity,
-      determines whether it is possible to fit all items in the backpack.
+    - Write an algorithm that, given a certain input of items and capacity, determines
+      whether it is possible to fit all items in the backpack.
   ]
 ]
 
 = Identifying Algorithm Complexity
 
-#align(horizon + center)[#image("images/recursion_joker_debugging_meme.jpg", width: 80%)]
+#align(horizon + center)[#image(
+    "images/recursion_joker_debugging_meme.jpg",
+    width: 80%,
+  )]
 
 == Introduction
 
 #align(horizon)[
   Complexity analysis is essential for evaluating the *efficiency of algorithms*.
-  It helps us predict the behavior of an algorithm as the input size
-  increases, which is crucial for *optimization* and choosing the *right algorithm*
-  for a specific application.
+  It helps us predict the behavior of an algorithm as the input size increases,
+  which is crucial for *optimization* and choosing the *right algorithm* for a
+  specific application.
 ]
 
 == Big-O Notation
 
 #align(horizon)[
-  Big-O notation ($O$) is used to describe the *worst-case runtime
-  of an algorithm* in terms of the *input size $n$*.
+  Big-O notation ($O$) is used to describe the *worst-case runtime of an
+  algorithm* in terms of the *input size $n$*.
 ]
 
 == Steps to Determine Complexity
 
 #align(horizon)[
   1. *Identify the dominant operations*: Focus on operations that are executed
-     repeatedly, such as loops, recursions, and function calls.
+    repeatedly, such as loops, recursions, and function calls.
 
   #pagebreak()
 
   2. *Estimate how many times these operations are executed*: Analyze the depth and
-     number of iterations of loops and recursions.
+    number of iterations of loops and recursions.
 
   #pagebreak()
 
   3. *Ignore non-dominant terms and constants*: In Big-O notation, we ignore constant
-     multiplicative factors and lower-order terms.
+    multiplicative factors and lower-order terms.
 
   #pagebreak()
 
-  4. *Choose the appropriate Big-O notation*: Use the result from the previous steps to identify
-     the correct Big-O complexity.
+  4. *Choose the appropriate Big-O notation*: Use the result from the previous steps
+    to identify the correct Big-O complexity.
 ]
 
 #pagebreak()
 
-#align(horizon + center)[#image("images/recursion_world_burn_meme.jpeg", width: 80%)]
+#align(horizon + center)[#image(
+    "images/recursion_world_burn_meme.jpeg",
+    width: 80%,
+  )]
 
 == Control Structures
 
@@ -1159,8 +1156,8 @@ the left and right subtrees is at most 1.
 == Sequential Structures
 
 #align(horizon)[
-  Control structures that do not involve loops or
-  recursion have constant complexity $O(1)$.
+  Control structures that do not involve loops or recursion have constant
+  complexity $O(1)$.
 
   ```c
   int x = 5;
@@ -1203,7 +1200,6 @@ the left and right subtrees is at most 1.
 
   - *Nested Loop*:
 
-
     ```c
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -1227,7 +1223,10 @@ the left and right subtrees is at most 1.
 
 == Recursion
 
-#align(horizon + center)[#image("images/recursion_joker_stackoverflow_meme.jpeg", width: 80%)]
+#align(horizon + center)[#image(
+    "images/recursion_joker_stackoverflow_meme.jpeg",
+    width: 80%,
+  )]
 
 #pagebreak()
 
@@ -1345,8 +1344,8 @@ the left and right subtrees is at most 1.
 == Practical Section (C or pseudocode)
 
 #align(horizon)[
-  - Implement and determine the complexity of an algorithm that counts
-    the number of occurrences of an element in a matrix.
+  - Implement and determine the complexity of an algorithm that counts the number of
+    occurrences of an element in a matrix.
 
   - Find a way to reduce the complexity of calculating Fibonacci.
 ]
@@ -1398,8 +1397,8 @@ the left and right subtrees is at most 1.
 
     #pagebreak()
 
-    Find the maximum difference between two elements in an array
-    where the larger element comes after the smaller one:
+    Find the maximum difference between two elements in an array where the larger
+    element comes after the smaller one:
     // Total complexity: O(n)
     #text(size: 11pt)[
       ```c
@@ -1511,9 +1510,10 @@ the left and right subtrees is at most 1.
 
     #pagebreak()
 
-    Find the majority element
-    (an element that appears more than $n/2$ times) using
-    #link("https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm")[Boyer-Moore's Voting Algorithm].
+    Find the majority element (an element that appears more than $n/2$ times) using
+    #link(
+  "https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm",
+)[Boyer-Moore's Voting Algorithm].
     // Total complexity: O(n)
     #text(size: 6pt)[
       ```c
@@ -1599,7 +1599,9 @@ the left and right subtrees is at most 1.
 
     #pagebreak()
 
-    #link("https://en.wikipedia.org/wiki/Longest_common_subsequence")[Longest Common Subsequence (LCS)]:
+    #link(
+  "https://en.wikipedia.org/wiki/Longest_common_subsequence",
+)[Longest Common Subsequence (LCS)]:
     // Total complexity: O(n * m)
     #text(size: 10pt)[
       ```c
@@ -1625,8 +1627,8 @@ the left and right subtrees is at most 1.
 
     #pagebreak()
 
-    Given the arrival and departure times of trains at a station,
-    find the minimum number of platforms required:
+    Given the arrival and departure times of trains at a station, find the minimum
+    number of platforms required:
     // Total complexity: O(n log n)
     #text(size: 8pt)[
       ```c
@@ -1656,12 +1658,13 @@ the left and right subtrees is at most 1.
     #pagebreak()
 
     This algorithm is a
-    #link("https://en.wikipedia.org/wiki/Fast_inverse_square_root")[fast way to compute the inverse square root],
-    $1 / sqrt(x)$,
-    made famous by its use in the game Quake III Arena by
-    #link("https://en.wikipedia.org/wiki/John_Carmack")[John Carmack].
-    The method uses a clever approximation and a single iteration
-    of #link("https://en.wikipedia.org/wiki/Newton%27s_method")[Newton's method] to refine it.
+    #link(
+  "https://en.wikipedia.org/wiki/Fast_inverse_square_root",
+)[fast way to compute the inverse square root],
+    $1 / sqrt(x)$, made famous by its use in the game Quake III Arena by
+    #link("https://en.wikipedia.org/wiki/John_Carmack")[John Carmack]. The method
+    uses a clever approximation and a single iteration of #link("https://en.wikipedia.org/wiki/Newton%27s_method")[Newton's method] to
+    refine it.
     // Total complexity: O(1)
     #text(size: 8pt)[
       ```c

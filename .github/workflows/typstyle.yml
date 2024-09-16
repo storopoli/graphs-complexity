@@ -1,0 +1,25 @@
+name: Format Slides
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+  pull_request:
+    branches:
+      - "main"
+      - "master"
+
+jobs:
+  typstyle:
+    name: "Check typst formatting with typstyle"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Bininstall
+        uses: cargo-bins/cargo-binstall@v1.10.5
+
+      - name: Binstall typstyle
+        run: cargo binstall --no-confirm typstyle
+
+      - name: Check formtting
+        run: typstyle -p --check format-all
