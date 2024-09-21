@@ -1632,30 +1632,31 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
     #pagebreak()
 
-    Dado os horários de chegada e partida de trens em uma estação, encontrar o
-    número mínimo de plataformas necessárias:
-    // Complexidade total: O(n log n)
+    Fundir duas _arrays_ ordeanadas:
+    // Complexidade total: O(N log N)
     #text(size: 8pt)[
       ```c
-      int find_platforms(int arr[], int dep[], int n) {
-          sort(arr, arr + n);
-          sort(dep, dep + n);
+      void merge_sorted_arrays(int A[], int B[], int m, int n, int C[]) {
+          int i = 0, j = 0, k = 0;
+          int N = m + n;  // N representa o tamanho combinado de A e B
 
-          int platforms = 1, result = 1;
-          int i = 1, j = 0;
-
-          while (i < n && j < n) {
-              if (arr[i] <= dep[j]) {
-                  platforms++;
-                  i++;
+          while (i < m && j < n) {
+              if (A[i] <= B[j]) {
+                  C[k++] = A[i++];
               } else {
-                  platforms--;
-                  j++;
+                  C[k++] = B[j++];
               }
-              result = max(result, platforms);
           }
 
-          return result;
+          // Copia os elementos restantes de A, se houver
+          while (i < m) {
+              C[k++] = A[i++];
+          }
+
+          // Copia os elementos restantes de B, se houver
+          while (j < n) {
+              C[k++] = B[j++];
+          }
       }
       ```
     ]
@@ -1691,5 +1692,348 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       }
       ```
     ]
+  ]
+]
+
+= Algoritmos de Busca
+
+#align(horizon + center)[#image(
+    "images/search_algorithms_meme.png",
+    width: 100%,
+  )]
+
+== O que é um Algoritmo de Busca?
+
+#align(horizon)[
+  Um *algoritmo de busca* é uma sequência de instruções que permite encontrar um
+  determinado elemento dentro de uma estrutura de dados. É fundamental em ciência da
+  computação, pois otimiza o acesso e a manipulação de dados.
+]
+
+== Por que Estudar Algoritmos de Busca?
+
+#align(horizon)[
+  - *Eficiência*: Algoritmos de busca eficientes economizam tempo e recursos.
+  - *Fundamentos*: São a base para algoritmos mais complexos e estruturas de dados.
+  - *Aplicações Práticas*: Usados em bancos de dados, sistemas operacionais,
+    inteligência artificial, entre outros.
+]
+
+== Tipos de Algoritmos de Busca
+
+#align(horizon)[
+  - *Busca Linear* (_Linear Search_)
+  - *Busca Binária* (_Binary Search_)
+  - *Busca em Grafos*:
+    - *Busca em Largura* (_Breadth-First Search - BFS_)
+    - *Busca em Profundidade* (_Depth-First Search - DFS_)
+]
+
+== Busca Linear
+
+=== Conceito
+
+#align(horizon)[
+  A *busca linear* é o algoritmo mais simples de busca. Ela percorre cada elemento
+  da estrutura de dados até encontrar o elemento desejado ou até o final da estrutura.
+]
+
+#pagebreak()
+
+=== Características da Busca Linear
+
+#align(horizon)[
+  - *Simples de Implementar*
+  - *_Não_ Requer Estrutura Ordenada*
+  - *Complexidade de Tempo*: $O(n)$, onde $n$ é o número de elementos.
+]
+
+#pagebreak()
+
+=== Exemplo em C
+
+#align(horizon)[
+  ```c
+  int busca_linear(int arr[], int n, int x) {
+      for (int i = 0; i < n; i++) {
+          if (arr[i] == x)
+              return i;  // Elemento encontrado na posição i
+      }
+      return -1;  // Elemento não encontrado
+  }
+  ```
+]
+
+#pagebreak()
+
+=== Análise da Complexidade
+
+#align(horizon)[
+  - *Melhor Caso*: O elemento está na primeira posição; $O(1)$.
+  - *Pior Caso*: O elemento está na última posição ou não está presente; $O(n)$.
+  - *Caso Médio*: Em média, percorre metade dos elementos; $1/2 O(n) = O(n)$.
+]
+
+== Busca Binária
+
+#align(horizon)[
+  A *busca binária* é um algoritmo eficiente para encontrar um elemento em uma lista
+  ordenada, reduzindo o espaço de busca pela metade a cada iteração.
+]
+
+#pagebreak()
+
+=== Características da Busca Binária
+
+#align(horizon)[
+  - *Requer Estrutura Ordenada*
+  - *Complexidade de Tempo*: $O(log n)$
+  - *Mais Eficiente que a Busca Linear em Grandes Conjuntos de Dados*
+]
+
+#pagebreak()
+
+=== Exemplo em C
+
+#align(horizon)[
+  #text(size: 12pt)[
+    ```c
+    int busca_binaria(int arr[], int n, int x) {
+        int inicio = 0, fim = n - 1;
+        while (inicio <= fim) {
+            int meio = inicio + (fim - inicio) / 2;
+            if (arr[meio] == x)
+            // Elemento encontrado
+                return meio;
+            if (arr[meio] < x)
+                inicio = meio + 1;
+            else
+                fim = meio - 1;
+        }
+        // Elemento não encontrado
+        return -1;
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Análise da Complexidade
+
+#align(horizon)[
+  - A cada iteração, o algoritmo reduz o espaço de busca pela metade.
+  - *Complexidade de Tempo*: $O(log n)$
+  - *Eficiência*: Muito mais rápido que a busca linear em grandes conjuntos de dados.
+]
+
+== Busca em Grafos
+
+#pagebreak()
+
+=== Tipos de Busca em Grafos
+
+#align(horizon)[
+  - *Busca em Largura* (_Breadth-First Search - BFS_)
+  - *Busca em Profundidade* (_Depth-First Search - DFS_)
+]
+
+#pagebreak()
+
+=== Aplicações
+
+#align(horizon)[
+  - *Encontrar Caminhos*: Entre dois vértices em um grafo.
+  - *Verificar Conectividade*: Se todos os vértices são alcançáveis.
+  - *Detecção de Ciclos*: Em grafos direcionados e não direcionados.
+]
+
+== Busca em Largura (BFS)
+
+#align(horizon)[
+  Busca em Largura (_Breadth-First Search_) é um algoritmo de busca em grafos que explora todos os vértices
+]
+
+#pagebreak()
+
+=== Conceito
+
+#align(horizon)[
+  A *busca em largura* explora um grafo visitando todos os vértices na mesma camada
+  de distância da origem antes de passar para a próxima camada.
+]
+
+#pagebreak()
+
+=== Características da BFS
+
+#align(horizon)[
+  - *Usa Fila (_Queue_)*
+  - *Garante o Caminho Mais Curto em Grafos Não Ponderados*
+  - *Complexidade de Tempo*: $O(V + E)$, onde $V$ é o número de vértices e $E$ é o número de arestas.
+]
+
+#pagebreak()
+
+=== Exemplo em C
+
+#align(horizon)[
+  #text(size: 9pt)[
+    ```c
+    void bfs(int grafo[][MAX], int inicio, int n) {
+        int visitado[MAX] = {0};
+        int fila[MAX], frente = 0, traseira = 0;
+
+        visitado[inicio] = 1;
+        fila[traseira++] = inicio;
+
+        while (frente < traseira) {
+            int atual = fila[frente++];
+            printf("%d ", atual);
+
+            for (int i = 0; i < n; i++) {
+                if (grafo[atual][i] && !visitado[i]) {
+                    visitado[i] = 1;
+                    fila[traseira++] = i;
+                }
+            }
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Ilustração da BFS
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph BFS {
+        rankdir=TB;
+        node [shape=circle, style=filled, color=lightgrey];
+
+        // Definição dos nós e suas labels
+        A [label="1"];
+        B [label="2"];
+        C [label="3"];
+        D [label="4"];
+        E [label="5"];
+        F [label="6"];
+        G [label="7"];
+        H [label="8"];
+
+        // Definição das arestas
+        A -> {B; C};
+        B -> {D; E};
+        C -> {F; G};
+        E -> H;
+      }
+      ```,
+      width: 35%,
+    ),
+    caption: "Ilustração da BFS em um digrafo com os vértices numerados pela ordem de visitação",
+  )
+]
+
+== Busca em Profundidade (DFS)
+
+#align(horizon)[
+  Busca em Profundidade (_Depth-First Search_) é um algoritmo de busca em grafos que explora todos os vértices
+]
+
+#pagebreak()
+
+=== Conceito
+
+#align(horizon)[
+  A *busca em profundidade* explora o grafo o mais profundo possível antes de retroceder.
+]
+
+#pagebreak()
+
+=== Características da DFS
+
+#align(horizon)[
+  - *Usa Pilha (_Stack_)* (pode ser implementada recursivamente)
+  - *Não Garante o Caminho Mais Curto*
+  - *Complexidade de Tempo*: $O(V + E)$
+]
+
+#pagebreak()
+
+=== Exemplo em C (Recursivo)
+
+#align(horizon)[
+  #text(size: 13pt)[
+    ```c
+    void dfs(int grafo[][MAX], int atual, int visitado[], int n) {
+        visitado[atual] = 1;
+        printf("%d ", atual);
+
+        for (int i = 0; i < n; i++) {
+            if (grafo[atual][i] && !visitado[i]) {
+                dfs(grafo, i, visitado, n);
+            }
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Ilustração da DFS
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph DFS {
+        rankdir=TB;
+        node [shape=circle, style=filled, color=lightgrey];
+
+        // Definição dos nós e suas labels
+        A [label="1"];
+        B [label="2"];
+        C [label="6"];
+        D [label="3"];
+        E [label="4"];
+        F [label="7"];
+        G [label="8"];
+        H [label="5"];
+
+        // Definição das arestas
+        A -> {B; C};
+        B -> {D; E};
+        C -> {F; G};
+        E -> H;
+      }
+      ```,
+      width: 35%,
+    ),
+    caption: "Ilustração da DFS em um digrafo com os vértices numerados pela ordem de visitação",
+  )
+]
+
+== Comparação entre BFS e DFS
+
+#align(horizon)[
+  #text(size: 12pt)[
+    #table(
+      columns: 2,
+      align: left + horizon,
+      table.header([*Característica*], [*BFS*], [*DFS*]),
+      [*Estrutura de Dados*], [Fila (_Queue_)],
+      [Pilha (_Stack_)], [*Uso de Memória*],
+      [Maior (guarda todos os vizinhos)], [Menor (apenas caminho atual)],
+      [*Caminho Mais Curto*], [Sim (em grafos não ponderados)],
+      [Não necessariamente], [*Completo*],
+      [Sim], [Sim],
+      [*Aplicações*], [Caminho mais curto, nível dos nós],
+      [Detecção de ciclos, ordenação topológica],
+    )
   ]
 ]
