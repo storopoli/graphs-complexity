@@ -62,8 +62,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     grid(
       columns: 2,
       gutter: 2mm,
-      image("images/turing.jpg", width: 60%),
-      image("images/church.jpg", width: 60%),
+      image("images/turing.jpg", width: 60%), image("images/church.jpg", width: 60%),
     ),
     caption: "Alan Turing and Alonzo Church",
   )<turing-church>
@@ -1627,30 +1626,31 @@ subtrees is at most 1.
 
     #pagebreak()
 
-    Given the arrival and departure times of trains at a station, find the minimum
-    number of platforms required:
-    // Total complexity: O(n log n)
+    Merge two sorted arrays:
+    // Total complexity: O(N log N)
     #text(size: 8pt)[
       ```c
-      int find_platforms(int arr[], int dep[], int n) {
-          sort(arr, arr + n);
-          sort(dep, dep + n);
+      void merge_sorted_arrays(int A[], int B[], int m, int n, int C[]) {
+          int i = 0, j = 0, k = 0;
+          int N = m + n;  // N is the combined length of A and B
 
-          int platforms = 1, result = 1;
-          int i = 1, j = 0;
-
-          while (i < n && j < n) {
-              if (arr[i] <= dep[j]) {
-                  platforms++;
-                  i++;
+          while (i < m && j < n) {
+              if (A[i] <= B[j]) {
+                  C[k++] = A[i++];
               } else {
-                  platforms--;
-                  j++;
+                  C[k++] = B[j++];
               }
-              result = max(result, platforms);
           }
 
-          return result;
+          // Copy the remaining elements of A, if any
+          while (i < m) {
+              C[k++] = A[i++];
+          }
+
+          // Copy the remaining elements of B, if any
+          while (j < n) {
+              C[k++] = B[j++];
+          }
       }
       ```
     ]

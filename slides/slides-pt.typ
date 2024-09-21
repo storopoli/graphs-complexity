@@ -62,8 +62,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     grid(
       columns: 2,
       gutter: 2mm,
-      image("images/turing.jpg", width: 60%),
-      image("images/church.jpg", width: 60%),
+      image("images/turing.jpg", width: 60%), image("images/church.jpg", width: 60%),
     ),
     caption: "Alan Turing e Alonzo Church",
   )<turing-church>
@@ -1632,30 +1631,31 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
     #pagebreak()
 
-    Dado os horários de chegada e partida de trens em uma estação, encontrar o
-    número mínimo de plataformas necessárias:
-    // Complexidade total: O(n log n)
+    Fundir duas _arrays_ ordeanadas:
+    // Complexidade total: O(N log N)
     #text(size: 8pt)[
       ```c
-      int find_platforms(int arr[], int dep[], int n) {
-          sort(arr, arr + n);
-          sort(dep, dep + n);
+      void merge_sorted_arrays(int A[], int B[], int m, int n, int C[]) {
+          int i = 0, j = 0, k = 0;
+          int N = m + n;  // N representa o tamanho combinado de A e B
 
-          int platforms = 1, result = 1;
-          int i = 1, j = 0;
-
-          while (i < n && j < n) {
-              if (arr[i] <= dep[j]) {
-                  platforms++;
-                  i++;
+          while (i < m && j < n) {
+              if (A[i] <= B[j]) {
+                  C[k++] = A[i++];
               } else {
-                  platforms--;
-                  j++;
+                  C[k++] = B[j++];
               }
-              result = max(result, platforms);
           }
 
-          return result;
+          // Copia os elementos restantes de A, se houver
+          while (i < m) {
+              C[k++] = A[i++];
+          }
+
+          // Copia os elementos restantes de B, se houver
+          while (j < n) {
+              C[k++] = B[j++];
+          }
       }
       ```
     ]
