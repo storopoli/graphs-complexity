@@ -62,7 +62,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
     grid(
       columns: 2,
       gutter: 2mm,
-      image("images/turing.jpg", width: 60%), image("images/church.jpg", width: 60%),
+      image("images/turing.jpg", width: 60%),
+      image("images/church.jpg", width: 60%),
     ),
     caption: "Alan Turing and Alonzo Church",
   )<turing-church>
@@ -1685,5 +1686,334 @@ subtrees is at most 1.
       }
       ```
     ]
+  ]
+]
+
+= Search Algorithms
+
+#align(horizon + center)[#image(
+    "images/search_algorithms_meme.png",
+    width: 100%,
+  )]
+
+== What is a Search Algorithm?
+
+#align(horizon)[
+  A *search algorithm* is a sequence of instructions that allows finding a specific element within a data structure. It is fundamental in computer science as it optimizes data access and manipulation.
+]
+
+== Why Study Search Algorithms?
+
+#align(horizon)[
+  - *Efficiency*: Efficient search algorithms save time and resources.
+  - *Foundations*: They are the basis for more complex algorithms and data structures.
+  - *Practical Applications*: Used in databases, operating systems, artificial intelligence, among others.
+]
+
+== Types of Search Algorithms
+
+#align(horizon)[
+  - *Linear Search*
+  - *Binary Search*
+  - *Graph Search Algorithms*:
+    - *Breadth-First Search (BFS)*
+    - *Depth-First Search (DFS)*
+]
+
+== Linear Search
+
+=== Concept
+
+#align(horizon)[
+  *Linear search* is the simplest search algorithm. It sequentially checks each element of the data structure until it finds the desired element or reaches the end of the structure.
+]
+
+#pagebreak()
+
+=== Characteristics of Linear Search
+
+#align(horizon)[
+  - *Simple to Implement*
+  - *Does Not Require Ordered Structure*
+  - *Time Complexity*: $O(n)$, where $n$ is the number of elements.
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  ```c
+  int linear_search(int arr[], int n, int x) {
+      for (int i = 0; i < n; i++) {
+          if (arr[i] == x)
+              return i;  // Element found at position i
+      }
+      return -1;  // Element not found
+  }
+  ```
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Best Case*: The element is at the first position; $O(1)$.
+  - *Worst Case*: The element is at the last position or not present; $O(n)$.
+  - *Average Case*: On average, it checks half of the elements; $O(n)$.
+]
+
+== Binary Search
+
+#align(horizon)[
+  *Binary search* is an efficient algorithm to find an element in an ordered list, reducing the search space by half with each iteration.
+]
+
+#pagebreak()
+
+=== Characteristics of Binary Search
+
+#align(horizon)[
+  - *Requires Ordered Structure*
+  - *Time Complexity*: $O(log n)$
+  - *More Efficient than Linear Search in Large Data Sets*
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    int binary_search(int arr[], int n, int x) {
+        int start = 0, end = n - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (arr[mid] == x)
+                return mid;  // Element found
+            if (arr[mid] < x)
+                start = mid + 1;
+            else
+                end = mid - 1;
+        }
+        return -1;  // Element not found
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - With each iteration, the algorithm halves the search space.
+  - *Time Complexity*: $O(log n)$
+  - *Efficiency*: Much faster than linear search in large data sets.
+]
+
+== Graph Search Algorithms
+
+=== Types of Graph Search Algorithms
+
+#align(horizon)[
+  - *Breadth-First Search (BFS)*
+  - *Depth-First Search (DFS)*
+]
+
+#pagebreak()
+
+=== Applications
+
+#align(horizon)[
+  - *Finding Paths*: Between two vertices in a graph.
+  - *Checking Connectivity*: Whether all vertices are reachable.
+  - *Cycle Detection*: In directed and undirected graphs.
+]
+
+== Breadth-First Search (BFS)
+
+=== Concept
+
+#align(horizon)[
+  *Breadth-first search* explores a graph by visiting all vertices at the same distance layer from the origin before moving to the next layer.
+]
+
+#pagebreak()
+
+=== Characteristics of BFS
+
+#align(horizon)[
+  - *Uses a Queue*
+  - *Guarantees the Shortest Path in Unweighted Graphs*
+  - *Time Complexity*: $O(V + E)$, where $V$ is the number of vertices and $E$ is the number of edges.
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 9pt)[
+    ```c
+    void bfs(int graph[][MAX], int start, int n) {
+        int visited[MAX] = {0};
+        int queue[MAX], front = 0, rear = 0;
+
+        visited[start] = 1;
+        queue[rear++] = start;
+
+        while (front < rear) {
+            int current = queue[front++];
+            printf("%d ", current);
+
+            for (int i = 0; i < n; i++) {
+                if (graph[current][i] && !visited[i]) {
+                    visited[i] = 1;
+                    queue[rear++] = i;
+                }
+            }
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Illustration of BFS
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph BFS {
+        rankdir=TB;
+        node [shape=circle, style=filled, color=lightgrey];
+
+        // Nodes with numbered labels
+        A [label="A\n(1)"];
+        B [label="B\n(2)"];
+        C [label="C\n(3)"];
+        D [label="D\n(4)"];
+        E [label="E\n(5)"];
+        F [label="F\n(6)"];
+        G [label="G\n(7)"];
+        H [label="H\n(8)"];
+
+        // Edges
+        A -> B;
+        A -> C;
+        B -> D;
+        B -> E;
+        C -> F;
+        C -> G;
+        E -> H;
+      }
+      ```,
+      width: 37%,
+    ),
+    caption: "Illustration of BFS with vertices numbered by visitation order",
+  )
+]
+
+== Depth-First Search (DFS)
+
+=== Concept
+
+#align(horizon)[
+  *Depth-first search* explores as far as possible along each branch before backtracking.
+]
+
+#pagebreak()
+
+=== Characteristics of DFS
+
+#align(horizon)[
+  - *Uses a Stack* (can be implemented recursively)
+  - *Does Not Guarantee the Shortest Path*
+  - *Time Complexity*: $O(V + E)$
+]
+
+#pagebreak()
+
+=== Example in C (Recursive)
+
+#align(horizon)[
+  #text(size: 15pt)[
+    ```c
+    void dfs(int graph[][MAX], int current, int visited[], int n) {
+        visited[current] = 1;
+        printf("%d ", current);
+
+        for (int i = 0; i < n; i++) {
+            if (graph[current][i] && !visited[i]) {
+                dfs(graph, i, visited, n);
+            }
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Illustration of DFS
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph DFS {
+        rankdir=TB;
+        node [shape=circle, style=filled, color=lightgrey];
+
+        // Nodes with numbered labels
+        A [label="A\n(1)"];
+        B [label="B\n(2)"];
+        D [label="D\n(3)"];
+        E [label="E\n(4)"];
+        H [label="H\n(5)"];
+        C [label="C\n(6)"];
+        F [label="F\n(7)"];
+        G [label="G\n(8)"];
+
+        // Edges
+        A -> B;
+        A -> C;
+        B -> D;
+        B -> E;
+        E -> H;
+        C -> F;
+        C -> G;
+      }
+      ```,
+      width: 37%,
+    ),
+    caption: "Illustration of DFS with vertices numbered by visitation order",
+  )
+]
+
+== Comparison between BFS and DFS
+
+#align(horizon)[
+  #text(size: 12pt)[
+    #table(
+      columns: 3,
+      align: left + horizon,
+      table.header([*Characteristic*], [*BFS*], [*DFS*]),
+      [*Data Structure*], [Queue], [Stack],
+      [*Memory Usage*],
+      [Higher (stores all neighbors)],
+      [Lower (stores only current path)],
+
+      [*Shortest Path*], [Yes (in unweighted graphs)], [Not necessarily],
+      [*Completeness*], [Yes], [Yes],
+      [*Applications*],
+      [Shortest path, node levels],
+      [Cycle detection, topological sorting],
+    )
   ]
 ]
