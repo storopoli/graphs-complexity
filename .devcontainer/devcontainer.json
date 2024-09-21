@@ -10,7 +10,6 @@
 			"extensions": [
 				"ms-vscode.cpptools",
 				"vadimcn.vscode-lldb",
-				"nvarner.typst-lsp",
 				"myriad-dreamin.tinymist"
 			]
 		}
