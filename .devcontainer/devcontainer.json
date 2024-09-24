@@ -2,7 +2,7 @@
 	"name": "Graphs and Algorithmic Complexity",
 	"image": "mcr.microsoft.com/devcontainers/base:alpine",
 
-	"postCreateCommand": "sudo apk update && sudo apk add just typst",
+	"postCreateCommand": "sudo apk update && sudo apk add just typst gdb",
 
 	"customizations": {
 		"vscode": {
