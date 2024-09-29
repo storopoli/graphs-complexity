@@ -23,11 +23,12 @@
 1. Grafos, Caminhos e Ciclos;
 1. Árvores;
 1. Complexidade Computacional;
+1. Problemas P, NP-Completo, e NP-Difícil.
 1. Análise de Algoritmos;
 1. Algoritmos de Busca e Ordenação;
 1. Recursividade;
-1. Algoritmos Gulosos; e
-1. Problemas P, NP-Completo, e NP-Difícil.
+1. Divisão e Conquista; e
+1. Algoritmos Gulosos.
 
 ## Dependências
 
