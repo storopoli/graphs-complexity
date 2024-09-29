@@ -1,5 +1,6 @@
 #import "@preview/slydst:0.1.0": *
 #import "@preview/diagraph:0.2.5": *
+#import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "en")
 
@@ -110,7 +111,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #align(horizon)[
   We use the $O$ notation to describe the complexity of an algorithm.
   - $O(1)$ (*constant* complexity):
-    - Accessing an _array_
+    - Accessing an array
     - Inserting a node in a linked list
     - Insertion and removal in a queue
   - $O(log n)$ (*logarithmic* complexity):
@@ -120,7 +121,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
   #pagebreak()
 
   - $O(n)$ (*linear* complexity):
-    - Traversing an _array_
+    - Traversing an array
     - Traversing a linked list
     - Comparing two strings
   - $O(n log n)$ (*log-linear* complexity):
@@ -1740,18 +1741,43 @@ subtrees is at most 1.
 
 #pagebreak()
 
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Linear Search],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[given a list $A$ of $n$ elements with values $A_0, dots A_(n-1)$, and target value $T$:],
+      )[
+        + *for* $i$ *in* $A$:
+          + *if* $A_i = T$:
+            + *return* $i$
+        + *return* _null_
+      ]
+    ],
+  ) <linear-search>
+]
+
+#pagebreak()
+
 === Example in C
 
 #align(horizon)[
-  ```c
-  int linear_search(int arr[], int n, int x) {
-      for (int i = 0; i < n; i++) {
-          if (arr[i] == x)
-              return i;  // Element found at position i
-      }
-      return -1;  // Element not found
-  }
-  ```
+  #text(size: 14pt)[
+    ```c
+    int linear_search(int arr[], int n, int x) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == x)
+                // Element found at position i
+                return i;
+        }
+        return -1;  // Element not found
+    }
+    ```
+  ]
 ]
 
 #pagebreak()
@@ -1761,7 +1787,7 @@ subtrees is at most 1.
 #align(horizon)[
   - *Best Case*: The element is at the first position; $O(1)$.
   - *Worst Case*: The element is at the last position or not present; $O(n)$.
-  - *Average Case*: On average, it checks half of the elements; $O(n)$.
+  - *Average Case*: On average, it checks half of the elements; $1/2 O(n) = O(n)$.
 ]
 
 == Binary Search
@@ -1778,6 +1804,34 @@ subtrees is at most 1.
   - *Requires Ordered Structure*
   - *Time Complexity*: $O(log n)$
   - *More Efficient than Linear Search in Large Data Sets*
+]
+
+#pagebreak()
+
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Binary Search],
+    text(size: 9pt)[
+      #pseudocode-list(
+        title: smallcaps[given an _ordered_ list $A$ of $n$ elements with values $A_0, dots A_(n-1)$, and target value $T$:],
+      )[
+        + $L := 0$; $R := n-1$.
+        + *while* $L <= R$:
+          + $m := floor((L+R) / 2)$
+          + *if* $A_m < T$:
+            + $L := m+1$
+          + *else if* $A_m > T$:
+            + $R := m-1$
+          + *else*:
+            + *return* $m$
+        + *return* _null_
+      ]
+    ],
+  ) <binary-search>
 ]
 
 #pagebreak()
@@ -1849,6 +1903,37 @@ subtrees is at most 1.
   - *Uses a Queue*
   - *Guarantees the Shortest Path in Unweighted Graphs*
   - *Time Complexity*: $O(V + E)$, where $V$ is the number of vertices and $E$ is the number of edges.
+]
+
+#pagebreak()
+
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Breadth-first Search],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[given a graph $G$, a _root_ vertex, and target value $T$:],
+      )[
+        + $Q =: "queue"$
+        + _root_.explored $= "true"$
+        + $Q$.enqueue(_root_)
+        + *while* $!Q$.empty():
+          + $v := Q$.dequeue()
+          + *if* $v = T$
+            + *return* $v$
+        + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.explored:
+            + $w$.explored
+            + $w$.parent $:= v$
+            + $Q$.enqueue($w$)
+        + *return* _null_
+      ]
+    ],
+  ) <breadth-first-search>
 ]
 
 #pagebreak()
@@ -1935,6 +2020,31 @@ subtrees is at most 1.
   - *Uses a Stack* (can be implemented recursively)
   - *Does Not Guarantee the Shortest Path*
   - *Time Complexity*: $O(V + E)$
+]
+
+#pagebreak()
+
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Depth-first Search],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[given a graph $G$, a vertex $v$, and target value $T$:],
+      )[
+        + $v$.discovered
+        + *if* $v = T$
+          + *return* $v$
+        + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.discovered:
+            + DFS($G$, $w$)
+        + *return* _null_
+      ]
+    ],
+  ) <depth-first-search>
 ]
 
 #pagebreak()

@@ -1,5 +1,6 @@
 #import "@preview/slydst:0.1.0": *
 #import "@preview/diagraph:0.2.5": *
+#import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "pt")
 
@@ -1750,18 +1751,43 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #pagebreak()
 
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca Linear],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[dado uma lista $A$ de $n$ elementos com valores $A_0, dots A_(n-1)$, e valor-alvo $T$:],
+      )[
+        + *for* $i$ *in* $A$:
+          + *if* $A_i = T$:
+            + *return* $i$
+        + *return* _null_
+      ]
+    ],
+  ) <linear-search>
+]
+
+#pagebreak()
+
 === Exemplo em C
 
 #align(horizon)[
-  ```c
-  int busca_linear(int arr[], int n, int x) {
-      for (int i = 0; i < n; i++) {
-          if (arr[i] == x)
-              return i;  // Elemento encontrado na posição i
-      }
-      return -1;  // Elemento não encontrado
-  }
-  ```
+  #text(size: 14pt)[
+    ```c
+    int busca_linear(int arr[], int n, int x) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == x)
+                // Elemento encontrado na posição i
+                return i;
+        }
+        return -1;  // Elemento não encontrado
+    }
+    ```
+  ]
 ]
 
 #pagebreak()
@@ -1789,6 +1815,34 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Requer Estrutura Ordenada*
   - *Complexidade de Tempo*: $O(log n)$
   - *Mais Eficiente que a Busca Linear em Grandes Conjuntos de Dados*
+]
+
+#pagebreak()
+
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca Binária],
+    text(size: 9pt)[
+      #pseudocode-list(
+        title: smallcaps[dado uma lista _ordenada_ $A$ de $n$ elementos com valores $A_0, dots A_(n-1)$, e valor-alvo $T$:],
+      )[
+        + $L := 0$; $R := n-1$.
+        + *while* $L <= R$:
+          + $m := floor((L+R) / 2)$
+          + *if* $A_m < T$:
+            + $L := m+1$
+          + *else if* $A_m > T$:
+            + $R := m-1$
+          + *else*:
+            + *return* $m$
+        + *return* _null_
+      ]
+    ],
+  ) <binary-search>
 ]
 
 #pagebreak()
@@ -1871,6 +1925,37 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Usa Fila (_Queue_)*
   - *Garante o Caminho Mais Curto em Grafos Não Ponderados*
   - *Complexidade de Tempo*: $O(V + E)$, onde $V$ é o número de vértices e $E$ é o número de arestas.
+]
+
+#pagebreak()
+
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca em Largura],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[dado um grafo $G$, um vértice raiz _root_, e valor-alvo $T$:],
+      )[
+        + $Q =: "queue"$
+        + _root_.explored $= "true"$
+        + $Q$.enqueue(_root_)
+        + *while* $!Q$.empty():
+          + $v := Q$.dequeue()
+          + *if* $v = T$
+            + *return* $v$
+        + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.explored:
+            + $w$.explored
+            + $w$.parent $:= v$
+            + $Q$.enqueue($w$)
+        + *return* _null_
+      ]
+    ],
+  ) <breadth-first-search>
 ]
 
 #pagebreak()
@@ -1960,6 +2045,31 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Usa Pilha (_Stack_)* (pode ser implementada recursivamente)
   - *Não Garante o Caminho Mais Curto*
   - *Complexidade de Tempo*: $O(V + E)$
+]
+
+#pagebreak()
+
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca em Profundidade],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[dado um grafo $G$, um vértice $v$, e valor-alvo $T$:],
+      )[
+        + $v$.discovered
+        + *if* $v = T$
+          + *return* $v$
+        + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.discovered:
+            + DFS($G$, $w$)
+        + *return* _null_
+      ]
+    ],
+  ) <depth-first-search>
 ]
 
 #pagebreak()
