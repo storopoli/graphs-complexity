@@ -1868,6 +1868,29 @@ subtrees is at most 1.
   - *Efficiency*: Much faster than linear search in large data sets.
 ]
 
+#pagebreak()
+
+=== What if we $k > 1$ pivots?
+
+#align(horizon)[
+  #text(size: 14pt)[
+    At each step:
+
+    - Divides the array into $k+1$ partitions
+    - Search space reduces to $n / (k+1)$
+    - Comparisons increase from $1$ to $k$
+
+    Total comparisons:
+
+    - Total steps: $log_(k+1) n$
+    - Total comparisons: $k dot.c log_(k+1) n$
+
+    Complexity:
+
+    - $O (k dot.c (log n) / (log(k+1))) = O(log n)$
+  ]
+]
+
 == Graph Search Algorithms
 
 === Types of Graph Search Algorithms

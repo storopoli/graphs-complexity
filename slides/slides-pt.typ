@@ -1881,6 +1881,29 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Eficiência*: Muito mais rápido que a busca linear em grandes conjuntos de dados.
 ]
 
+#pagebreak()
+
+=== E se tivermos $k > 1$ pivôs?
+
+#align(horizon)[
+  #text(size: 14pt)[
+    Em cada passo:
+
+    - Divide a _array_ em $k+1$ partições
+    - O espaço de busca é reduzido para $n / (k+1)$
+    - As comparações aumentam de $1$ para $k$
+
+    Total de comparações:
+
+    - Total de iterações: $log_(k+1) n$
+    - Total de comparações: $k dot.c log_(k+1) n$
+
+    Complexidade:
+
+    - $O (k dot.c (log n) / (log(k+1))) = O(log n)$
+  ]
+]
+
 == Busca em Grafos
 
 #pagebreak()
@@ -2265,14 +2288,16 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 == Recursão vs Iteração
 
 #align(horizon)[
-  - *Recursão*:
-    - Usa chamadas de função para repetir o código.
-    - Pode ser menos eficiente devido ao overhead de chamadas de função.
-    - Mais intuitiva para problemas que são naturalmente recursivos.
-  - *Iteração*:
-    - Usa estruturas de repetição como loops (`for`, `while`).
-    - Geralmente mais eficiente em termos de uso de memória e tempo.
-    - Pode ser menos intuitiva para certos problemas.
+  #text(size: 15pt)[
+    - *Recursão*:
+      - Usa chamadas de função para repetir o código.
+      - Pode ser menos eficiente devido ao overhead de chamadas de função.
+      - Mais intuitiva para problemas que são naturalmente recursivos.
+    - *Iteração*:
+      - Usa estruturas de repetição como loops (`for`, `while`).
+      - Geralmente mais eficiente em termos de uso de memória e tempo.
+      - Pode ser menos intuitiva para certos problemas.
+  ]
 
   #pagebreak()
 
@@ -2304,7 +2329,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     ```
 ]
 
-== Cuidado com a Recursão Excessiva
+== Cautela com Recursão Excessiva
 
 #align(horizon)[
   - *Estouros de Pilha*:
