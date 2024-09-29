@@ -7,7 +7,20 @@
  * @return 1 if there is a subset that sums to the target, 0 otherwise
  */
 int subset_sum(int set[], int n, int target) {
-  // FIXME: Implement the subset sum algorithm
+  // Iterate through all possible subsets
+  for (int i = 0; i < (1 << n); i++) {
+    int sum = 0;
+    for (int j = 0; j < n; j++) {
+      // Verify if the j-th element is in the subset
+      if (i & (1 << j)) {
+        sum += set[j];
+      }
+    }
+    // If the subset sums to the target, return 1
+    if (sum == target) {
+      return 1;
+    }
+  }
   return 0;
 }
 

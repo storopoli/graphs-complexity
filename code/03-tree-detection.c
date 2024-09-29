@@ -13,7 +13,13 @@
 int search_cycle(int graph[N][N], int v, int *visited, int parent) {
   visited[v] = 1;
   for (int i = 0; i < N; ++i) {
-    // FIXME: Implement the function
+    if (graph[v][i]) {
+      if (!visited[i]) {
+        if (search_cycle(graph, i, visited, v)) return 1;
+      } else if (i != parent) {  // cycle detected
+        return 1;
+      }
+    }
   }
   return 0;
 }
@@ -40,10 +46,11 @@ int is_tree(int graph[N][N]) {
 
   // Perform depth-first search from vertex 0 to check if all vertices
   // are reachable (connected)
-  // FIXME: Implement the function
+  has_cycle = search_cycle(graph, 0, visited, -1);
+  if (has_cycle) return 0;
 
   // Check if all vertices have been visited
-  // FIXME: Implement the function
+  if (!all_visited(visited)) return 0;
 
   // Return true if no cycle is found and all
   return 1;

@@ -19,7 +19,23 @@ int max(int a, int b) { return (a > b) ? a : b; }
  * @return The maximum value that can be obtained with the given capacity.
  */
 int knapsack(int W, int weights[], int values[], int n) {
-  // FIXME: Implement the knapsack algorithm
+  // Base case: no items left or no capacity left
+  if (n == 0 || W == 0) {
+    return 0;
+  }
+
+  // If the weight of the nth item is more than the remaining capacity, it
+  // cannot be included
+  if (weights[n - 1] > W) {
+    return knapsack(W, weights, values, n - 1);
+  } else {
+    // Return the maximum of two cases:
+    // 1. nth item included
+    // 2. nth item not included
+    return max(
+        values[n - 1] + knapsack(W - weights[n - 1], weights, values, n - 1),
+        knapsack(W, weights, values, n - 1));
+  }
 }
 
 /**

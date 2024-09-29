@@ -1,5 +1,6 @@
 #import "@preview/slydst:0.1.0": *
 #import "@preview/diagraph:0.2.5": *
+#import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "pt")
 
@@ -1750,18 +1751,43 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #pagebreak()
 
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca Linear],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[dado uma lista $A$ de $n$ elementos com valores $A_0, dots A_(n-1)$, e valor-alvo $T$:],
+      )[
+        + *for* $i$ *in* $A$:
+          + *if* $A_i = T$:
+            + *return* $i$
+        + *return* _null_
+      ]
+    ],
+  ) <linear-search>
+]
+
+#pagebreak()
+
 === Exemplo em C
 
 #align(horizon)[
-  ```c
-  int busca_linear(int arr[], int n, int x) {
-      for (int i = 0; i < n; i++) {
-          if (arr[i] == x)
-              return i;  // Elemento encontrado na posição i
-      }
-      return -1;  // Elemento não encontrado
-  }
-  ```
+  #text(size: 14pt)[
+    ```c
+    int busca_linear(int arr[], int n, int x) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == x)
+                // Elemento encontrado na posição i
+                return i;
+        }
+        return -1;  // Elemento não encontrado
+    }
+    ```
+  ]
 ]
 
 #pagebreak()
@@ -1789,6 +1815,34 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Requer Estrutura Ordenada*
   - *Complexidade de Tempo*: $O(log n)$
   - *Mais Eficiente que a Busca Linear em Grandes Conjuntos de Dados*
+]
+
+#pagebreak()
+
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca Binária],
+    text(size: 9pt)[
+      #pseudocode-list(
+        title: smallcaps[dado uma lista _ordenada_ $A$ de $n$ elementos com valores $A_0, dots A_(n-1)$, e valor-alvo $T$:],
+      )[
+        + $L := 0$; $R := n-1$.
+        + *while* $L <= R$:
+          + $m := floor((L+R) / 2)$
+          + *if* $A_m < T$:
+            + $L := m+1$
+          + *else if* $A_m > T$:
+            + $R := m-1$
+          + *else*:
+            + *return* $m$
+        + *return* _null_
+      ]
+    ],
+  ) <binary-search>
 ]
 
 #pagebreak()
@@ -1871,6 +1925,37 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Usa Fila (_Queue_)*
   - *Garante o Caminho Mais Curto em Grafos Não Ponderados*
   - *Complexidade de Tempo*: $O(V + E)$, onde $V$ é o número de vértices e $E$ é o número de arestas.
+]
+
+#pagebreak()
+
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca em Largura],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[dado um grafo $G$, um vértice raiz _root_, e valor-alvo $T$:],
+      )[
+        + $Q =: "queue"$
+        + _root_.explored $= "true"$
+        + $Q$.enqueue(_root_)
+        + *while* $!Q$.empty():
+          + $v := Q$.dequeue()
+          + *if* $v = T$
+            + *return* $v$
+        + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.explored:
+            + $w$.explored
+            + $w$.parent $:= v$
+            + $Q$.enqueue($w$)
+        + *return* _null_
+      ]
+    ],
+  ) <breadth-first-search>
 ]
 
 #pagebreak()
@@ -1964,6 +2049,31 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #pagebreak()
 
+=== Pseudoalgoritmo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Busca em Profundidade],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[dado um grafo $G$, um vértice $v$, e valor-alvo $T$:],
+      )[
+        + $v$.discovered
+        + *if* $v = T$
+          + *return* $v$
+        + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.discovered:
+            + DFS($G$, $w$)
+        + *return* _null_
+      ]
+    ],
+  ) <depth-first-search>
+]
+
+#pagebreak()
+
 === Exemplo em C (Recursivo)
 
 #align(horizon)[
@@ -2036,4 +2146,204 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       [Detecção de ciclos, ordenação topológica],
     )
   ]
+]
+
+= Divisão e Conquista
+
+#align(horizon + center)[
+  #image(
+    "images/divide_and_conquer_meme.png",
+    width: 50%,
+  )
+]
+
+== O que é Divisão e Conquista?
+
+#align(horizon)[
+  *Divisão e Conquista* é um paradigma de projeto de algoritmos que consiste
+  em dividir um problema em subproblemas menores,
+  resolver esses subproblemas de forma recursiva
+  e então combinar as soluções para obter a solução final.
+]
+
+== Como Funciona?
+
+#align(horizon)[
+  1. *Dividir*: O problema é dividido em subproblemas menores que
+    são instâncias do mesmo tipo do problema original.
+
+  2. *Conquistar*: Os subproblemas são resolvidos recursivamente.
+    Se forem suficientemente pequenos, são resolvidos diretamente.
+
+  3. *Combinar*: As soluções dos subproblemas são combinadas para
+    resolver o problema original.
+]
+
+== Exemplos Clássicos
+
+#align(horizon)[
+  - *_Merge Sort_*: Um algoritmo de ordenação que divide o _array_ ao meio,
+    ordena cada metade e então combina as duas metades ordenadas.
+
+  - *_Quick Sort_*: Um algoritmo que seleciona um pivô,
+    divide o _array_ em _subarrays_ menores e maiores que o pivô,
+    e então ordena recursivamente os _subarrays_.
+
+  - *Busca Binária*: Um método de busca que
+    divide o espaço de busca pela metade a cada iteração.
+]
+
+== Teorema mestre
+
+#align(horizon)[
+  Na análise de algoritmos,
+  o #link("https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)")[*teorema mestre*]
+  para recorrências de divisão e conquista fornece
+  uma análise assintótica (usando a notação Big-O)
+  para *relações de recorrência* que ocorrem na análise de
+  muitos algoritmos de divisão e conquista.
+
+  #pagebreak()
+
+  Considere um problema que pode ser resolvido usando um algoritmo recursivo
+  como o algoritmo a seguir:
+
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Exemplo de Recursão],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Procedimento $p$(entrada $x$ de tamanho$n$)],
+      )[
+        + *if* $n < "alguma constante" k$:
+          + resolver $x$ diretamente, sem recursão
+        + *else*:
+          + criar a subproblemas de $x$, cada um com tamanho $n/b$
+          + chamar o procedimento $p$ recursivamente em cada subproblema
+          + combinar os resultados dos subproblemas
+      ]
+    ],
+  ) <master-theorem>
+
+  #pagebreak()
+
+  - A árvore de chamadas tem um nó para cada chamada recursiva.
+  - Os nós-folha são os casos base da recursão:
+    subproblemas de tamanho menor que $k$ que não se resolve recursivamente.
+  - Cada nó realiza uma quanidade de trabalho que corresponde ao tamanho do
+    subproblema $m$ dada por $p(m)$.
+  - A quantidade total de trabalho realizado pelo algoritmo completo é
+    a soma do trabalho realizado por todos os nós na árvore.
+
+  #pagebreak()
+
+  #align(horizon + center)[
+    #image(
+      "images/master_theorem_intuition.png",
+      width: 100%,
+    )
+  ]
+]
+
+== Análise de Complexidade
+
+#align(horizon)[
+  A complexidade de algoritmos de divisão e conquista pode ser
+  expressa pela *recorrência de Mestre*:
+
+  $ T(n) = a T(n / b) + f(n) $
+
+  #pagebreak()
+
+  Onde:
+
+  - $T(n)$: Tempo de execução do algoritmo em uma entrada $n$.
+  - $a$: Número de subproblemas.
+  - $b$: Fator pelo qual o tamanho do problema é dividido.
+  - $f(n)$: Custo de dividir e combinar os subproblemas.
+
+  #pagebreak()
+
+  A solução dessa recorrência depende da relação entre $f(n)$ e $n^(log_b a)$.
+
+  - *Caso 1*: Se $f(n) = O(n^(log_b a - epsilon))$ para algum $epsilon > 0$,
+    então $T(n) = O(n^(log_b a))$.
+
+  - *Caso 2*: Se $f(n) = O(n^(log_b a) log^k n)$ para algum $k >= 0$,
+    então $T(n) = O(n^(log_b a) log^(k+1) n)$.
+
+  - *Caso 3*: Se $f(n) = O(n^(log_b a + epsilon))$ para algum $epsilon > 0$
+    e se $a f(n/b) <= c f(n)$ para algum $c < 1$,
+    então $T(n) = O(f(n))$.
+]
+
+== Exemplo: _Merge Sort_
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *_Merge Sort_* divide o problema em 2 subproblemas de tamanho $n/2$:
+
+    $ T(n) = 2 T(n / 2) + O(n) $
+
+    - Aqui, $a = 2$, $b = 2$, $f(n) = O(n)$.
+
+    - Calculamos $n^(log_b a) = n^(log_2 2) = n^1$.
+
+    - Como $f(n) = O(n^(log_b a))$, estamos no *Caso 2* do Teorema Mestre.
+
+    - Portanto, $T(n) = O(n log n)$.
+  ]
+]
+
+== Exemplo: _Quick Sort_ (Pior Caso)
+
+#align(horizon)[
+  - No pior caso, o *_Quick Sort_* divide o problema em
+    um subproblema de tamanho $n-1$ e outro de tamanho 0:
+
+  $ T(n) = T(n - 1) + O(n) $
+
+  - Essa recorrência resolve para $T(n) = O(n^2)$.
+
+  - No melhor caso (partições equilibradas), a complexidade é $O(n log n)$.
+]
+
+== Aplicações de Divisão e Conquista
+
+#align(horizon)[
+  - *Multiplicação de Inteiros Grandes*
+    (#link("https://en.wikipedia.org/wiki/Karatsuba_algorithm")[Algoritmo de Karatsuba])
+  - *Transformada Rápida de Fourier*:
+    (#link("https://en.wikipedia.org/wiki/Fast_Fourier_transform")[FFT])
+  - *Multiplicação de Matrizes*
+    (#link("https://en.wikipedia.org/wiki/Strassen_algorithm")[Algoritmo de Strassen])
+  - *Problemas de Geometria Computacional*:
+    (#link("https://en.wikipedia.org/wiki/Convex_hull")[Fecho Convexo], etc.)
+]
+
+== Vantagens e Desvantagens
+
+#align(horizon)[
+  #text(size: 14pt)[
+    *Vantagens*:
+
+    - Pode reduzir a complexidade de problemas complexos.
+    - Utiliza a recursividade, facilitando a implementação de algoritmos complexos.
+
+    *Desvantagens*:
+
+    - Pode ter sobrecarga de tempo e espaço devido às chamadas recursivas.
+    - Nem todos os problemas são naturalmente divisíveis em subproblemas menores.
+  ]
+]
+
+== Parte Prática (C ou pseudocódigo)
+
+#align(horizon)[
+  - *Problema*: Implemente um algoritmo que eleva um número $x$
+    a uma potência $n$ utilizando o paradigma de divisão e conquista,
+    otimizando para $O(log n)$.
+
+  - *Dica*: Utilize a propriedade que $x^n = (x^(n/2))^2$ para $n$ par.
 ]

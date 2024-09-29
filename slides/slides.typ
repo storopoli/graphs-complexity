@@ -1,5 +1,6 @@
 #import "@preview/slydst:0.1.0": *
 #import "@preview/diagraph:0.2.5": *
+#import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "en")
 
@@ -110,7 +111,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #align(horizon)[
   We use the $O$ notation to describe the complexity of an algorithm.
   - $O(1)$ (*constant* complexity):
-    - Accessing an _array_
+    - Accessing an array
     - Inserting a node in a linked list
     - Insertion and removal in a queue
   - $O(log n)$ (*logarithmic* complexity):
@@ -120,7 +121,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
   #pagebreak()
 
   - $O(n)$ (*linear* complexity):
-    - Traversing an _array_
+    - Traversing an array
     - Traversing a linked list
     - Comparing two strings
   - $O(n log n)$ (*log-linear* complexity):
@@ -1740,18 +1741,43 @@ subtrees is at most 1.
 
 #pagebreak()
 
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Linear Search],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[given a list $A$ of $n$ elements with values $A_0, dots A_(n-1)$, and target value $T$:],
+      )[
+        + *for* $i$ *in* $A$:
+          + *if* $A_i = T$:
+            + *return* $i$
+        + *return* _null_
+      ]
+    ],
+  ) <linear-search>
+]
+
+#pagebreak()
+
 === Example in C
 
 #align(horizon)[
-  ```c
-  int linear_search(int arr[], int n, int x) {
-      for (int i = 0; i < n; i++) {
-          if (arr[i] == x)
-              return i;  // Element found at position i
-      }
-      return -1;  // Element not found
-  }
-  ```
+  #text(size: 14pt)[
+    ```c
+    int linear_search(int arr[], int n, int x) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == x)
+                // Element found at position i
+                return i;
+        }
+        return -1;  // Element not found
+    }
+    ```
+  ]
 ]
 
 #pagebreak()
@@ -1761,7 +1787,7 @@ subtrees is at most 1.
 #align(horizon)[
   - *Best Case*: The element is at the first position; $O(1)$.
   - *Worst Case*: The element is at the last position or not present; $O(n)$.
-  - *Average Case*: On average, it checks half of the elements; $O(n)$.
+  - *Average Case*: On average, it checks half of the elements; $1/2 O(n) = O(n)$.
 ]
 
 == Binary Search
@@ -1778,6 +1804,34 @@ subtrees is at most 1.
   - *Requires Ordered Structure*
   - *Time Complexity*: $O(log n)$
   - *More Efficient than Linear Search in Large Data Sets*
+]
+
+#pagebreak()
+
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Binary Search],
+    text(size: 9pt)[
+      #pseudocode-list(
+        title: smallcaps[given an _ordered_ list $A$ of $n$ elements with values $A_0, dots A_(n-1)$, and target value $T$:],
+      )[
+        + $L := 0$; $R := n-1$.
+        + *while* $L <= R$:
+          + $m := floor((L+R) / 2)$
+          + *if* $A_m < T$:
+            + $L := m+1$
+          + *else if* $A_m > T$:
+            + $R := m-1$
+          + *else*:
+            + *return* $m$
+        + *return* _null_
+      ]
+    ],
+  ) <binary-search>
 ]
 
 #pagebreak()
@@ -1849,6 +1903,37 @@ subtrees is at most 1.
   - *Uses a Queue*
   - *Guarantees the Shortest Path in Unweighted Graphs*
   - *Time Complexity*: $O(V + E)$, where $V$ is the number of vertices and $E$ is the number of edges.
+]
+
+#pagebreak()
+
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Breadth-first Search],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[given a graph $G$, a _root_ vertex, and target value $T$:],
+      )[
+        + $Q =: "queue"$
+        + _root_.explored $= "true"$
+        + $Q$.enqueue(_root_)
+        + *while* $!Q$.empty():
+          + $v := Q$.dequeue()
+          + *if* $v = T$
+            + *return* $v$
+        + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.explored:
+            + $w$.explored
+            + $w$.parent $:= v$
+            + $Q$.enqueue($w$)
+        + *return* _null_
+      ]
+    ],
+  ) <breadth-first-search>
 ]
 
 #pagebreak()
@@ -1939,6 +2024,31 @@ subtrees is at most 1.
 
 #pagebreak()
 
+=== Pseudoalgorithm
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Depth-first Search],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[given a graph $G$, a vertex $v$, and target value $T$:],
+      )[
+        + $v$.discovered
+        + *if* $v = T$
+          + *return* $v$
+        + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
+          + *if* $!w$.discovered:
+            + DFS($G$, $w$)
+        + *return* _null_
+      ]
+    ],
+  ) <depth-first-search>
+]
+
+#pagebreak()
+
 === Example in C (Recursive)
 
 #align(horizon)[
@@ -2017,3 +2127,205 @@ subtrees is at most 1.
     )
   ]
 ]
+
+= Divide and Conquer
+
+#align(horizon + center)[
+  #image(
+    "images/divide_and_conquer_meme.png",
+    width: 50%,
+  )
+]
+
+== What is Divide and Conquer?
+
+#align(horizon)[
+  *Divide and Conquer* is an algorithm design paradigm that consists
+  of dividing a problem into smaller subproblems,
+  solving these subproblems recursively,
+  and then combining the solutions to obtain the final solution.
+]
+
+== How Does It Work?
+
+#align(horizon)[
+  1. *Divide*: The problem is divided into smaller subproblems that
+    are instances of the same type as the original problem.
+
+  2. *Conquer*: The subproblems are solved recursively.
+    If they are small enough, they are solved directly.
+
+  3. *Combine*: The solutions of the subproblems are combined to
+    solve the original problem.
+]
+
+== Classic Examples
+
+#align(horizon)[
+  - *_Merge Sort_*: A sorting algorithm that divides the _array_ in half,
+    sorts each half, and then combines the two sorted halves.
+
+  - *_Quick Sort_*: An algorithm that selects a pivot,
+    divides the _array_ into _subarrays_ smaller and larger than the pivot,
+    and then recursively sorts the _subarrays_.
+
+  - *Binary Search*: A search method that
+    divides the search space in half at each iteration.
+]
+
+== Master Theorem
+
+#align(horizon)[
+  In algorithm analysis,
+  the #link("https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)")[*Master Theorem*]
+  for divide and conquer recurrences provides
+  an asymptotic analysis (using Big-O notation)
+  for *recurrence relations* that occur in the analysis of
+  many divide and conquer algorithms.
+
+  #pagebreak()
+
+  Consider a problem that can be solved using a recursive algorithm
+  like the following:
+
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Example of Recursion],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Procedure $p$(input $x$ of size $n$)],
+      )[
+        + *if* $n < "some constant" k$:
+          + solve $x$ directly, without recursion
+        + *else*:
+          + create $a$ subproblems from $x$, each of size $n/b$
+          + call procedure $p$ recursively on each subproblem
+          + combine the results of the subproblems
+      ]
+    ],
+  ) <master-theorem>
+
+  #pagebreak()
+
+  - The call tree has a node for each recursive call.
+  - The leaf nodes are the base cases of the recursion:
+    subproblems of size less than $k$ that are not solved recursively.
+  - Each node performs an amount of work corresponding to the size of
+    the subproblem $m$ given by $p(m)$.
+  - The total amount of work performed by the complete algorithm is
+    the sum of the work performed by all nodes in the tree.
+
+  #pagebreak()
+
+  #align(horizon + center)[
+    #image(
+      "images/master_theorem_intuition.png",
+      width: 100%,
+    )
+  ]
+
+]
+
+== Complexity Analysis
+
+#align(horizon)[
+  The complexity of divide and conquer algorithms can be
+  expressed by the *Master Recurrence*:
+
+  $ T(n) = a T(n / b) + f(n) $
+
+  #pagebreak()
+
+  Where:
+
+  - $T(n)$: Execution time of the algorithm on an input of size $n$.
+  - $a$: Number of subproblems.
+  - $b$: Factor by which the problem size is divided.
+  - $f(n)$: Cost of dividing and combining the subproblems.
+
+  #pagebreak()
+
+  The solution to this recurrence depends on the relationship between $f(n)$ and $n^(log_b a)$.
+
+  - *Case 1*: if $f(n) = O(n^(log_b a - epsilon))$ for some $epsilon > 0$,
+    then $T(n) = O(n^(log_b a))$.
+
+  - *Case 2*: if $f(n) = O(n^(log_b a) log^k n)$ for some $k >= 0$,
+    then $T(n) = O(n^(log_b a) log^(k+1) n)$.
+
+  - *Case 3*: if $f(n) = O(n^(log_b a + epsilon))$ for some $epsilon > 0$
+    e se $a f(n/b) <= c f(n)$ for some $c < 1$,
+    then $T(n) = O(f(n))$.
+]
+
+== Example: _Merge Sort_
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *_Merge Sort_* divides the problem into 2 subproblems of size $n/2$:
+
+    $ T(n) = 2 T(n / 2) + O(n) $
+
+    - Here, $a = 2$, $b = 2$, $f(n) = O(n)$.
+
+    - We calculate $n^(log_b a) = n^(log_2 2) = n^1$.
+
+    - Since $f(n) = O(n^(log_b a))$, we are in *Case 2* of the Master Theorem.
+
+    - Therefore, $T(n) = O(n log n)$.
+  ]
+]
+
+== Example: _Quick Sort_ (Worst Case)
+
+#align(horizon)[
+  - In the worst case, *_Quick Sort_* divides the problem into
+    one subproblem of size $n - 1$ and another of size 0:
+
+  $ T(n) = T(n - 1) + O(n) $
+
+  - This recurrence resolves to $T(n) = O(n^2)$.
+
+  - In the best case (balanced partitions), the complexity is $O(n log n)$.
+]
+
+== Applications of Divide and Conquer
+
+#align(horizon)[
+  - *Multiplication of Large Integers*
+    (#link("https://en.wikipedia.org/wiki/Karatsuba_algorithm")[Karatsuba Algorithm])
+  - *Fast Fourier Transform*
+    (#link("https://en.wikipedia.org/wiki/Fast_Fourier_transform")[FFT])
+  - *Matrix Multiplication*
+    (#link("https://en.wikipedia.org/wiki/Strassen_algorithm")[Strassen's Algorithm])
+  - *Computational Geometry Problems*
+    (#link("https://en.wikipedia.org/wiki/Convex_hull")[Convex Hull], etc.)
+]
+
+== Advantages and Disadvantages
+
+#align(horizon)[
+  #text(size: 14pt)[
+    *Advantages*:
+
+    - Can reduce the complexity of complex problems.
+    - Utilizes recursion, facilitating the implementation of complex algorithms.
+
+    *Disadvantages*:
+
+    - May have time and space overhead due to recursive calls.
+    - Not all problems are naturally divisible into smaller subproblems.
+  ]
+]
+
+== Practical Part (C or pseudocode)
+
+#align(horizon)[
+  - *Problem*: Implement an algorithm that raises a number $x$
+    to a power $n$ using the divide and conquer paradigm,
+    optimizing for $O(log n)$.
+
+  - *Hint*: Use the property that $x^n = (x^(n/2))^2$ for even $n$.
+]
+

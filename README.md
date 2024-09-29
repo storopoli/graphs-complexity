@@ -23,11 +23,12 @@
 1. Graphs, Paths, and Cycles;
 1. Trees;
 1. Computational Complexity;
+1. P, NP-Complete, and NP-Hard Problems.
 1. Algorithm Analysis;
 1. Search and Sorting Algorithms;
 1. Recursion;
-1. Greedy Algorithms; and
-1. P, NP-Complete, and NP-Hard Problems.
+1. Divide and Conquer; and
+1. Greedy Algorithms.
 
 ## Dependencies
 
