@@ -2147,3 +2147,203 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     )
   ]
 ]
+
+= Divisão e Conquista
+
+#align(horizon + center)[
+  #image(
+    "images/divide_and_conquer_meme.png",
+    width: 50%,
+  )
+]
+
+== O que é Divisão e Conquista?
+
+#align(horizon)[
+  *Divisão e Conquista* é um paradigma de projeto de algoritmos que consiste
+  em dividir um problema em subproblemas menores,
+  resolver esses subproblemas de forma recursiva
+  e então combinar as soluções para obter a solução final.
+]
+
+== Como Funciona?
+
+#align(horizon)[
+  1. *Dividir*: O problema é dividido em subproblemas menores que
+    são instâncias do mesmo tipo do problema original.
+
+  2. *Conquistar*: Os subproblemas são resolvidos recursivamente.
+    Se forem suficientemente pequenos, são resolvidos diretamente.
+
+  3. *Combinar*: As soluções dos subproblemas são combinadas para
+    resolver o problema original.
+]
+
+== Exemplos Clássicos
+
+#align(horizon)[
+  - *_Merge Sort_*: Um algoritmo de ordenação que divide o _array_ ao meio,
+    ordena cada metade e então combina as duas metades ordenadas.
+
+  - *_Quick Sort_*: Um algoritmo que seleciona um pivô,
+    divide o _array_ em _subarrays_ menores e maiores que o pivô,
+    e então ordena recursivamente os _subarrays_.
+
+  - *Busca Binária*: Um método de busca que
+    divide o espaço de busca pela metade a cada iteração.
+]
+
+== Teorema mestre
+
+#align(horizon)[
+  Na análise de algoritmos,
+  o #link("https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)")[*teorema mestre*]
+  para recorrências de divisão e conquista fornece
+  uma análise assintótica (usando a notação Big-O)
+  para *relações de recorrência* que ocorrem na análise de
+  muitos algoritmos de divisão e conquista.
+
+  #pagebreak()
+
+  Considere um problema que pode ser resolvido usando um algoritmo recursivo
+  como o algoritmo a seguir:
+
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [Exemplo de Recursão],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Procedimento $p$(entrada $x$ de tamanho$n$)],
+      )[
+        + *if* $n < "alguma constante" k$:
+          + resolver $x$ diretamente, sem recursão
+        + *else*:
+          + criar a subproblemas de $x$, cada um com tamanho $n/b$
+          + chamar o procedimento $p$ recursivamente em cada subproblema
+          + combinar os resultados dos subproblemas
+      ]
+    ],
+  ) <master-theorem>
+
+  #pagebreak()
+
+  - A árvore de chamadas tem um nó para cada chamada recursiva.
+  - Os nós-folha são os casos base da recursão:
+    subproblemas de tamanho menor que $k$ que não se resolve recursivamente.
+  - Cada nó realiza uma quanidade de trabalho que corresponde ao tamanho do
+    subproblema $m$ dada por $p(m)$.
+  - A quantidade total de trabalho realizado pelo algoritmo completo é
+    a soma do trabalho realizado por todos os nós na árvore.
+
+  #pagebreak()
+
+  #align(horizon + center)[
+    #image(
+      "images/master_theorem_intuition.png",
+      width: 100%,
+    )
+  ]
+]
+
+== Análise de Complexidade
+
+#align(horizon)[
+  A complexidade de algoritmos de divisão e conquista pode ser
+  expressa pela *recorrência de Mestre*:
+
+  $ T(n) = a T(n / b) + f(n) $
+
+  #pagebreak()
+
+  Onde:
+
+  - $T(n)$: Tempo de execução do algoritmo em uma entrada $n$.
+  - $a$: Número de subproblemas.
+  - $b$: Fator pelo qual o tamanho do problema é dividido.
+  - $f(n)$: Custo de dividir e combinar os subproblemas.
+
+  #pagebreak()
+
+  A solução dessa recorrência depende da relação entre $f(n)$ e $n^(log_b a)$.
+
+  - *Caso 1*: Se $f(n) = O(n^(log_b a - epsilon))$ para algum $epsilon > 0$,
+    então $T(n) = O(n^(log_b a))$.
+
+  - *Caso 2*: Se $f(n) = O(n^(log_b a) log^k n)$ para algum $k >= 0$,
+    então $T(n) = O(n^(log_b a) log^(k+1) n)$.
+
+  - *Caso 3*: Se $f(n) = O(n^(log_b a + epsilon))$ para algum $epsilon > 0$
+    e se $a f(n/b) <= c f(n)$ para algum $c < 1$,
+    então $T(n) = O(f(n))$.
+]
+
+== Exemplo: _Merge Sort_
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *_Merge Sort_* divide o problema em 2 subproblemas de tamanho $n/2$:
+
+    $ T(n) = 2 T(n / 2) + O(n) $
+
+    - Aqui, $a = 2$, $b = 2$, $f(n) = O(n)$.
+
+    - Calculamos $n^(log_b a) = n^(log_2 2) = n^1$.
+
+    - Como $f(n) = O(n^(log_b a))$, estamos no *Caso 2* do Teorema Mestre.
+
+    - Portanto, $T(n) = O(n log n)$.
+  ]
+]
+
+== Exemplo: _Quick Sort_ (Pior Caso)
+
+#align(horizon)[
+  - No pior caso, o *_Quick Sort_* divide o problema em
+    um subproblema de tamanho $n-1$ e outro de tamanho 0:
+
+  $ T(n) = T(n - 1) + O(n) $
+
+  - Essa recorrência resolve para $T(n) = O(n^2)$.
+
+  - No melhor caso (partições equilibradas), a complexidade é $O(n log n)$.
+]
+
+== Aplicações de Divisão e Conquista
+
+#align(horizon)[
+  - *Multiplicação de Inteiros Grandes*
+    (#link("https://en.wikipedia.org/wiki/Karatsuba_algorithm")[Algoritmo de Karatsuba])
+  - *Transformada Rápida de Fourier*:
+    (#link("https://en.wikipedia.org/wiki/Fast_Fourier_transform")[FFT])
+  - *Multiplicação de Matrizes*
+    (#link("https://en.wikipedia.org/wiki/Strassen_algorithm")[Algoritmo de Strassen])
+  - *Problemas de Geometria Computacional*:
+    (#link("https://en.wikipedia.org/wiki/Convex_hull")[Fecho Convexo], etc.)
+]
+
+== Vantagens e Desvantagens
+
+#align(horizon)[
+  #text(size: 14pt)[
+    *Vantagens*:
+
+    - Pode reduzir a complexidade de problemas complexos.
+    - Utiliza a recursividade, facilitando a implementação de algoritmos complexos.
+
+    *Desvantagens*:
+
+    - Pode ter sobrecarga de tempo e espaço devido às chamadas recursivas.
+    - Nem todos os problemas são naturalmente divisíveis em subproblemas menores.
+  ]
+]
+
+== Parte Prática (C ou pseudocódigo)
+
+#align(horizon)[
+  - *Problema*: Implemente um algoritmo que eleva um número $x$
+    a uma potência $n$ utilizando o paradigma de divisão e conquista,
+    otimizando para $O(log n)$.
+
+  - *Dica*: Utilize a propriedade que $x^n = (x^(n/2))^2$ para $n$ par.
+]
