@@ -2128,6 +2128,234 @@ subtrees is at most 1.
   ]
 ]
 
+= Recursion
+
+#align(horizon + center)[
+  #image(
+    "images/recursion_meme.jpg",
+    width: 50%,
+  )
+]
+
+== What is Recursion?
+
+#align(horizon)[
+  *Recursion* is a programming technique where a function calls itself
+  to solve a smaller problem of the same type _until_ it reaches a base case.
+  It is a way to *divide a complex problem into simpler and more manageable subproblems*.
+]
+
+== How Does It Work?
+
+#align(horizon)[
+  1. *Base Case*: Defines when the recursive function should stop calling itself.
+    It is the stopping condition.
+
+  2. *Recursive Call*: The function calls itself with a modified input
+    that brings it closer to the base case.
+
+  3. *Resolution*: The recursive calls return values that
+    are combined to solve the original problem.
+]
+
+== Classic Example: Factorial
+
+#align(horizon)[
+  - *Mathematical Definition*:
+
+    $
+      n! = cases(
+        1 "if" n = 0,
+        n times (n - 1)! "if" n > 0
+      )
+    $
+
+  - *Recursive Implementation in C*:
+
+    ```c
+    int factorial(int n) {
+      if (n == 0)
+        return 1;
+      else
+        return n * factorial(n - 1);
+    }
+    ```
+]
+
+== Visualization of Factorial Recursion
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph Factorial {
+        n4 [label="f(4)"];
+        n3 [label="f(3)"];
+        n2_1 [label="f(2)"];
+        n2_2 [label="f(2)"];
+        n1_1 [label="f(1)"];
+        n1_2 [label="f(1)"];
+        n1_3 [label="f(1)"];
+        n0_1 [label="f(0)"];
+        n0_2 [label="f(0)"];
+
+        n4 -> {n3, n2_1};
+        n3 -> {n2_2, n1_3};
+        n2_1 -> {n1_1, n0_1};
+        n2_2 -> {n1_2, n0_2};
+      }
+      ```,
+      width: 70%,
+    ),
+    caption: "Recursion Tree for factorial(4)",
+  )
+]
+
+== When to Use Recursion?
+
+#align(horizon)[
+  - *Problems that can be divided into similar subproblems*:
+    Such as trees, graphs, and hierarchical structures.
+
+  - *Algorithms that require backtracking*:
+    Such as depth-first search (DFS), permutation and combination algorithms.
+
+  - *Simplify Implementation*: Some algorithms are easier to
+    implement recursively than iteratively.
+]
+
+== Advantages and Disadvantages
+
+#align(horizon)[
+  *Advantages*:
+
+  - Cleaner and more readable code for certain problems.
+  - Naturally suited for recursive data structures (trees, graphs).
+  - Facilitates solving complex problems by dividing them into smaller parts.
+
+  #pagebreak()
+
+  *Disadvantages*:
+
+  - Consumes more memory due to the call stack.
+  - May be less efficient in terms of time compared to iterative solutions.
+  - Risk of stack overflow if the recursion is too deep.
+]
+
+== Recursion vs Iteration
+
+#align(horizon)[
+  - *Recursion*:
+    - Uses function calls to repeat code.
+    - May be less efficient due to function call overhead.
+    - More intuitive for problems that are naturally recursive.
+  - *Iteration*:
+    - Uses repetition structures like loops (`for`, `while`).
+    - Generally more efficient in terms of memory and time usage.
+    - May be less intuitive for certain problems.
+
+  #pagebreak()
+
+  *Example*: Calculating the factorial of `n`.
+
+  - *Recursive*:
+
+    ```c
+    int factorial(int n) {
+      if (n == 0)
+        return 1;
+      else
+        return n * factorial(n - 1);
+    }
+    ```
+
+  #pagebreak()
+
+  - *Iterative*:
+
+    ```c
+    int factorial(int n) {
+      int result = 1;
+      for (int i = 2; i <= n; i++) {
+        result *= i;
+      }
+      return result;
+    }
+    ```
+]
+
+== Beware of Excessive Recursion
+
+#align(horizon)[
+  - *Stack Overflows*:
+    Each recursive call adds a frame to the call stack.
+    Very deep recursion can lead to overflows.
+
+  - *Redundant Calculations*:
+    In some recursions, like the naive Fibonacci calculation,
+    many calculations are repeated.
+
+  - *Optimization*: Techniques like *_memoization_* or
+    transforming recursion into iteration can improve efficiency.
+]
+
+== _Memoization_
+
+#align(horizon)[
+  Stores the results of subproblems already solved to avoid repeated calculations.
+
+  *Example with Fibonacci*:
+
+  #text(size: 11pt)[
+    ```c
+    int fibonacci(int n, int memo[]) {
+      if (memo[n] != -1)
+        return memo[n];
+      if (n == 0)
+        memo[n] = 0;
+      else if (n == 1)
+        memo[n] = 1;
+      else
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+      return memo[n];
+    }
+    ```
+  ]
+]
+
+== Tail Recursion
+
+#align(horizon)[
+  - *Definition*:
+    A recursion where the recursive call is the last operation of the function.
+
+  - *Benefits*: Some compilers can optimize tail recursions
+    to avoid stack growth (tail call elimination).
+
+  - *Example*:
+
+  #text(size: 11pt)[
+    ```c
+    int factorial_tail(int n, int accumulator) {
+      if (n == 0)
+        return accumulator;
+      else
+        return factorial_tail(n - 1, n * accumulator);
+    }
+    ```
+  ]
+]
+
+== Practical Part (C or pseudocode)
+
+#align(horizon)[
+  - *Problem*: Implement a recursive function that determines
+    if a word is a palindrome.
+
+  - *Hint*: Compare the first and last characters of the string
+    and call the function recursively on the inner substring.
+]
+
 = Divide and Conquer
 
 #align(horizon + center)[

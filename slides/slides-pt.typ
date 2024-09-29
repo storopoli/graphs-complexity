@@ -124,7 +124,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
   - $O(n)$ (complexidade *linear*):
     - Percorrer um _array_
     - Percorrer uma lista encadeada
-    - Comparar duas strings
+    - Comparar duas _strings_
   - $O(n log n)$ (complexidade *log-linear*):
     - Algoritmo de ordenação _Quick Sort_
     - Algoritmo de ordenação _Merge Sort_
@@ -2146,6 +2146,234 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       [Detecção de ciclos, ordenação topológica],
     )
   ]
+]
+
+= Recursão
+
+#align(horizon + center)[
+  #image(
+    "images/recursion_meme.jpg",
+    width: 50%,
+  )
+]
+
+== O que é Recursão?
+
+#align(horizon)[
+  *Recursão* é uma técnica de programação onde uma função chama a si mesma
+  para resolver um problema menor do mesmo tipo _até_ atingir um caso base.
+  É uma forma de *dividir um problema complexo em subproblemas mais simples e manejáveis*.
+]
+
+== Como Funciona?
+
+#align(horizon)[
+  1. *Caso Base*: Define quando a função recursiva deve parar de chamar a si mesma.
+    É a condição de parada.
+
+  2. *Chamada Recursiva*: A função chama a si mesma com uma entrada modificada
+    que a aproxima do caso base.
+
+  3. *Resolução*: As chamadas recursivas retornam valores que
+    são combinados para resolver o problema original.
+]
+
+== Exemplo Clássico: Fatorial
+
+#align(horizon)[
+  - *Definição Matemática*:
+
+    $
+      n! = cases(
+        1 "se" n = 0,
+        n times (n - 1)! "se" n > 0
+      )
+    $
+
+  - *Implementação Recursiva em C*:
+
+    ```c
+    int fatorial(int n) {
+      if (n == 0)
+        return 1;
+      else
+        return n * fatorial(n - 1);
+    }
+    ```
+]
+
+== Visualização da Recursão do Fatorial
+
+#align(horizon + center)[
+  #figure(
+    raw-render(
+      ```dot
+      digraph Fatorial {
+        n4 [label="f(4)"];
+        n3 [label="f(3)"];
+        n2_1 [label="f(2)"];
+        n2_2 [label="f(2)"];
+        n1_1 [label="f(1)"];
+        n1_2 [label="f(1)"];
+        n1_3 [label="f(1)"];
+        n0_1 [label="f(0)"];
+        n0_2 [label="f(0)"];
+
+        n4 -> {n3, n2_1};
+        n3 -> {n2_2, n1_3};
+        n2_1 -> {n1_1, n0_1};
+        n2_2 -> {n1_2, n0_2};
+      }
+      ```,
+      width: 70%,
+    ),
+    caption: "Árvore de Recursão para fatorial(4)",
+  )
+]
+
+== Quando Usar Recursão?
+
+#align(horizon)[
+  - *Problemas que podem ser divididos em subproblemas semelhantes*:
+    Como árvores, grafos e estruturas hierárquicas.
+
+  - *Algoritmos que requerem _backtracking_*:
+    Como busca em profundidade (DFS), algoritmos de permutação e combinação.
+
+  - *Facilitar a implementação*: Alguns algoritmos são mais fáceis de
+    implementar de forma recursiva do que iterativa.
+]
+
+== Vantagens e Desvantagens
+
+#align(horizon)[
+  *Vantagens*:
+
+  - Código mais limpo e legível para certos problemas.
+  - Naturalmente adequada para estruturas de dados recursivas (árvores, grafos).
+  - Facilita a solução de problemas complexos ao dividi-los em partes menores.
+
+  #pagebreak()
+
+  *Desvantagens*:
+
+  - Consome mais memória devido à pilha de chamadas.
+  - Pode ser menos eficiente em termos de tempo em comparação com soluções iterativas.
+  - Risco de estouro de pilha#footnote[_stack overflow_] se a recursão for muito profunda.
+]
+
+== Recursão vs Iteração
+
+#align(horizon)[
+  - *Recursão*:
+    - Usa chamadas de função para repetir o código.
+    - Pode ser menos eficiente devido ao overhead de chamadas de função.
+    - Mais intuitiva para problemas que são naturalmente recursivos.
+  - *Iteração*:
+    - Usa estruturas de repetição como loops (`for`, `while`).
+    - Geralmente mais eficiente em termos de uso de memória e tempo.
+    - Pode ser menos intuitiva para certos problemas.
+
+  #pagebreak()
+
+  *Exemplo*: Cálculo do fatorial de `n`.
+
+  - *Recursivo*:
+
+    ```c
+    int fatorial(int n) {
+      if (n == 0)
+        return 1;
+      else
+        return n * fatorial(n - 1);
+    }
+    ```
+
+  #pagebreak()
+
+  - *Iterativo*:
+
+    ```c
+    int fatorial(int n) {
+      int resultado = 1;
+      for (int i = 2; i <= n; i++) {
+        resultado *= i;
+      }
+      return resultado;
+    }
+    ```
+]
+
+== Cuidado com a Recursão Excessiva
+
+#align(horizon)[
+  - *Estouros de Pilha*:
+    Cada chamada recursiva adiciona um quadro à pilha de chamadas.
+    Recursão muito profunda pode levar a estouros.
+
+  - *Redundância de Cálculos*:
+    Em algumas recursões, como no cálculo ingênuo de Fibonacci,
+    muitos cálculos são repetidos.
+
+  - *Otimização*: Técnicas como *_memoization_* ou
+    transformar a recursão em iteração podem melhorar a eficiência.
+]
+
+== _Memoization_
+
+#align(horizon)[
+  Armazena os resultados de subproblemas já resolvidos para evitar cálculos repetidos.
+
+  *Exemplo com Fibonacci*:
+
+  #text(size: 11pt)[
+    ```c
+    int fibonacci(int n, int memo[]) {
+      if (memo[n] != -1)
+        return memo[n];
+      if (n == 0)
+        memo[n] = 0;
+      else if (n == 1)
+        memo[n] = 1;
+      else
+        memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+      return memo[n];
+    }
+    ```
+  ]
+]
+
+== Recursão de Cauda
+
+#align(horizon)[
+  - *Definição*:
+    Uma recursão onde a chamada recursiva é a última operação da função.
+
+  - *Benefícios*: Alguns compiladores podem otimizar recursões de cauda
+    para evitar o crescimento da pilha (eliminação de recursão de cauda).
+
+  - *Exemplo*:
+
+  #text(size: 11pt)[
+    ```c
+    int fatorial_tail(int n, int acumulador) {
+      if (n == 0)
+        return acumulador;
+      else
+        return fatorial_tail(n - 1, n * acumulador);
+    }
+    ```
+  ]
+]
+
+== Parte Prática (C ou pseudocódigo)
+
+#align(horizon)[
+  - *Problema*: Implemente uma função recursiva que determina
+    se uma palavra é um palíndromo.
+
+  - *Dica*: Compare o primeiro e o último caractere da _string_
+    e chame a função recursivamente para a _substring_ interna.
 ]
 
 = Divisão e Conquista
