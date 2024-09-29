@@ -5,11 +5,23 @@ int N, M;
 
 /** Function to create an adjacency matrix */
 void create_adj_matrix(int adj[][N + 1], int arr[][2]) {
-  // Initialize all value to zero
-  // FIXME: add the necessary code here
+  // Initialize all values to zero
+  for (int i = 0; i < N + 1; i++) {
+    for (int j = 0; j < N + 1; j++) {
+      adj[i][j] = 0;
+    }
+  }
 
-  // Traverse the array of edges and update the values
-  // FIXME: add the necessary code here
+  // Traverse the array of edges
+  for (int i = 0; i < M; i++) {
+    // Find X and Y of edges
+    int x = arr[i][0];
+    int y = arr[i][1];
+
+    // Update value to 1
+    adj[x][y] = 1;
+    adj[y][x] = 1;
+  }
 }
 
 /** Function to print an adjacency matrix */
@@ -24,7 +36,7 @@ void print_adj_matrix(int adj[][N + 1]) {
   }
 }
 
-/** Main function */
+/** Main Function */
 int main() {
   // Number of vertices
   N = 5;

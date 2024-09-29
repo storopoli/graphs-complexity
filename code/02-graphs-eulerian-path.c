@@ -16,33 +16,73 @@ void find_path(int graph[N][N]) {
   int path_length = 0;
 
   // Find out number of edges each vertex has
-  // FIXME: Add the code here
+  for (int i = 0; i < N; i++) {
+    numofadj[i] = 0;
+    for (int j = 0; j < N; j++) {
+      numofadj[i] += graph[i][j];
+    }
+  }
 
   // Find out how many vertex has odd number edges
-  // FIXME: Add the code here
+  int startpoint = 0, numofodd = 0;
+  for (int i = N - 1; i >= 0; i--) {
+    if (numofadj[i] % 2 == 1) {
+      numofodd++;
+      startpoint = i;
+    }
+  }
 
   // If number of vertex with odd number of edges is greater than two return "No
   // Solution".
-  // FIXME: Add the code here
+  if (numofodd > 2) {
+    printf("No Solution\n");
+    return;
+  }
 
   // If there is a path find the path
   // Initialize empty stack and path take the starting current as discussed
-  // FIXME: Add the code here
+  int cur = startpoint;
 
   // Loop will run until there is element in the stack or current edge has some
   // neighbour.
-  // FIXME: Add the code here
+  while (top > 0 || numofadj[cur] > 0) {
+    // If current node has not any neighbour add it to path and pop stack set
+    // new current to the popped element
+    if (numofadj[cur] == 0) {
+      path[path_length++] = cur;
+      if (top > 0) {
+        cur = stack[--top];
+      } else {
+        break;
+      }
+    }
 
-  // If the current vertex has at least one neighbour add the current vertex
-  // to stack, remove the edge between them and set the current to its
-  // neighbour.
-  // FIXME: Add the code here
+    // If the current vertex has at least one neighbour add the current vertex
+    // to stack, remove the edge between them and set the current to its
+    // neighbour.
+    else {
+      for (int i = 0; i < N; i++) {
+        if (graph[cur][i] == 1) {
+          stack[top++] = cur;
+          graph[cur][i] = 0;
+          graph[i][cur] = 0;
+          numofadj[cur]--;
+          numofadj[i]--;
+          cur = i;
+          break;
+        }
+      }
+    }
+  }
 
   // Add the last vertex to the path
-  // FIXME: Add the code here
+  path[path_length++] = cur;
 
   // Print the path
-  // FIXME: Add the code here
+  for (int i = path_length - 1; i >= 0; i--) {
+    printf("%d -> ", path[i]);
+  }
+  printf("\n");
 }
 
 /** Main function */
