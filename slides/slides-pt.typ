@@ -1963,8 +1963,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       #pseudocode-list(
         title: smallcaps[dado um grafo $G$, um vértice raiz _root_, e valor-alvo $T$:],
       )[
-        + $Q =: "queue"$
-        + _root_.explored $= "true"$
+        + $Q := "queue"$
+        + _root_.explored $:= "true"$
         + $Q$.enqueue(_root_)
         + *while* $!Q$.empty():
           + $v := Q$.dequeue()
@@ -1972,7 +1972,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
             + *return* $v$
         + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
           + *if* $!w$.explored:
-            + $w$.explored
+            + $w$.explored $:= "true"$
             + $w$.parent $:= v$
             + $Q$.enqueue($w$)
         + *return* _null_
@@ -1986,9 +1986,11 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 === Exemplo em C
 
 #align(horizon)[
-  #text(size: 9pt)[
+  #text(size: 7pt)[
     ```c
-    void bfs(int grafo[][MAX], int inicio, int n) {
+    int bfs(int grafo[][MAX], int inicio, int n) {
+        if (inicio->value == T)
+          return inicio->id;
         int visitado[MAX] = {0};
         int fila[MAX], frente = 0, traseira = 0;
 
@@ -1997,15 +1999,17 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
         while (frente < traseira) {
             int atual = fila[frente++];
-            printf("%d ", atual);
 
             for (int i = 0; i < n; i++) {
+                if (atual->value == T)
+                  return atual->id;
                 if (grafo[atual][i] && !visitado[i]) {
                     visitado[i] = 1;
                     fila[traseira++] = i;
                 }
             }
         }
+        return -1;
     }
     ```
   ]
@@ -2083,7 +2087,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       #pseudocode-list(
         title: smallcaps[dado um grafo $G$, um vértice $v$, e valor-alvo $T$:],
       )[
-        + $v$.discovered
+        + $v$.discovered $:= "true"$
         + *if* $v = T$
           + *return* $v$
         + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
@@ -2102,15 +2106,17 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 #align(horizon)[
   #text(size: 13pt)[
     ```c
-    void dfs(int grafo[][MAX], int atual, int visitado[], int n) {
+    int dfs(int grafo[][MAX], int atual, int visitado[], int n) {
+        if (atual->value == T)
+          return atual->id;
         visitado[atual] = 1;
-        printf("%d ", atual);
 
         for (int i = 0; i < n; i++) {
             if (grafo[atual][i] && !visitado[i]) {
                 dfs(grafo, i, visitado, n);
             }
         }
+        return -1;
     }
     ```
   ]

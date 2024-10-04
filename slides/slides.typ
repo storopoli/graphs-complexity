@@ -1941,8 +1941,8 @@ subtrees is at most 1.
       #pseudocode-list(
         title: smallcaps[given a graph $G$, a _root_ vertex, and target value $T$:],
       )[
-        + $Q =: "queue"$
-        + _root_.explored $= "true"$
+        + $Q := "queue"$
+        + _root_.explored $:= "true"$
         + $Q$.enqueue(_root_)
         + *while* $!Q$.empty():
           + $v := Q$.dequeue()
@@ -1950,7 +1950,7 @@ subtrees is at most 1.
             + *return* $v$
         + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
           + *if* $!w$.explored:
-            + $w$.explored
+            + $w$.explored $:= "true"$
             + $w$.parent $:= v$
             + $Q$.enqueue($w$)
         + *return* _null_
@@ -1964,9 +1964,11 @@ subtrees is at most 1.
 === Example in C
 
 #align(horizon)[
-  #text(size: 9pt)[
+  #text(size: 7pt)[
     ```c
-    void bfs(int graph[][MAX], int start, int n) {
+    int bfs(int graph[][MAX], int start, int n, int target) {
+        if (start->value == T)
+          return start->id;
         int visited[MAX] = {0};
         int queue[MAX], front = 0, rear = 0;
 
@@ -1975,15 +1977,17 @@ subtrees is at most 1.
 
         while (front < rear) {
             int current = queue[front++];
-            printf("%d ", current);
 
             for (int i = 0; i < n; i++) {
+                if (current->value == T)
+                  return current->id;
                 if (graph[current][i] && !visited[i]) {
                     visited[i] = 1;
                     queue[rear++] = i;
                 }
             }
         }
+        return -1;
     }
     ```
   ]
@@ -2058,7 +2062,7 @@ subtrees is at most 1.
       #pseudocode-list(
         title: smallcaps[given a graph $G$, a vertex $v$, and target value $T$:],
       )[
-        + $v$.discovered
+        + $v$.discovered $:= "true"$
         + *if* $v = T$
           + *return* $v$
         + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
@@ -2075,17 +2079,19 @@ subtrees is at most 1.
 === Example in C (Recursive)
 
 #align(horizon)[
-  #text(size: 15pt)[
+  #text(size: 14pt)[
     ```c
-    void dfs(int graph[][MAX], int current, int visited[], int n) {
+    int dfs(int graph[][MAX], int current, int visited[], int n) {
+        if (current->value == T)
+          return current->id;
         visited[current] = 1;
-        printf("%d ", current);
 
         for (int i = 0; i < n; i++) {
             if (graph[current][i] && !visited[i]) {
                 dfs(graph, i, visited, n);
             }
         }
+        return -1;
     }
     ```
   ]
