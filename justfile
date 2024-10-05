@@ -1,5 +1,7 @@
 alias b := build
+alias b-pt := build-pt
 alias w := watch
+alias w-pt := watch-pt
 
 # List all the available commands
 default:

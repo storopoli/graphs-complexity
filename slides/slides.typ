@@ -2157,6 +2157,1004 @@ subtrees is at most 1.
   ]
 ]
 
+= Sorting Algorithms
+
+#align(horizon + center)[
+  #image(
+    "images/sorting_algorithms_meme.jpg",
+    width: 50%,
+  )
+]
+
+== Introduction
+
+#align(horizon)[
+  *Sorting algorithms* are algorithms that put elements of a list in a certain order.
+  The most frequently used orders are numerical order and lexicographical order.
+
+  Sorting is important because it:
+
+  - Organizes data to make it more usable.
+  - Optimizes the efficiency of other algorithms that require sorted data.
+  - Facilitates searching and data representation.
+]
+
+== Types of Sorting Algorithms
+
+#align(horizon)[
+  #text(size: 14pt)[
+    Sorting algorithms can be classified based on several factors:
+
+    - *Comparison vs Non-comparison based*: Whether elements are compared
+      to determine their order.
+    - *Stable vs Unstable*: Whether equivalent elements maintain their original
+      relative order.
+    - *Time Complexity*: How the runtime increases with the number of elements.
+    - *Space Complexity*: The amount of memory required beyond the input data.
+  ]
+]
+
+== Stable vs Non-Stable
+
+#align(horizon + center)[
+  #image(
+    "images/sort_stable_vs_unstable.png",
+    width: 100%,
+  )
+]
+
+== Common Sorting Algorithms
+
+#align(horizon)[
+  - *Bubble Sort*
+  - *Selection Sort*
+  - *Insertion Sort*
+  - *Merge Sort*
+  - *Quick Sort*
+  - *Heap Sort*
+  - *Counting Sort*
+  - *Radix Sort*
+  - *Bucket Sort*
+]
+
+== Bubble Sort
+
+#align(horizon)[
+  *Bubble Sort* is a simple comparison-based algorithm where
+  each pair of adjacent elements is compared,
+  and the elements are swapped if they are in the wrong order.
+  This process is repeated until no swaps are needed.
+
+  It is called "bubble" sort because smaller elements "bubble" to
+  the top of the list.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Compare each pair of adjacent items.
+  2. Swap them if they are in the wrong order.
+  3. Repeat steps 1 and 2 for all elements.
+  4. Continue the process until a pass completes with no swaps.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Bubble Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Given an array $A$ of $n$ elements:],
+      )[
+        + *for* $i$ from $0$ to $n - 1$:
+          + *for* $j$ from $0$ to $n - i - 1$:
+            + *if* $A[j] > A[j + 1]$:
+              + swap $A[j]$ and $A[j + 1]$
+      ]
+    ],
+  ) <bubble-sort>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    void bubble_sort(int arr[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            // Last i elements are already in place
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap arr[j] and arr[j + 1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n)$ (when the array is already sorted)
+    - Average Case: $O(n^2)$
+    - Worst Case: $O(n^2)$
+  - *Space Complexity*: $O(1)$ (in-place sorting)
+  - *Stability*: Stable (equal elements maintain their relative order)
+]
+
+== Selection Sort
+
+#align(horizon)[
+  *Selection Sort* divides the input list into two parts:
+  a sorted sublist of items built up from left to right,
+  and a sublist of the remaining unsorted items.
+  It repeatedly selects the smallest (or largest) element from the unsorted sublist,
+  swapping it with the leftmost unsorted element.
+
+  The process continues moving the sublist boundaries one element to the right.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Set the first unsorted element as the minimum.
+  2. Compare this minimum with the next element.
+  3. If the next element is smaller, set it as the new minimum.
+  4. Continue until the end of the array.
+  5. Swap the minimum with the first unsorted position.
+  6. Move the boundary one element to the right.
+  7. Repeat until the array is sorted.
+]
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Selection Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Given an array $A$ of $n$ elements:],
+      )[
+        + *for* $i$ from $0$ to $n - 1$:
+          + $"minIdx" := i$
+          + *for* $j$ from $i + 1$ to $n$:
+            + *if* $A[j] < A["minIdx"]$:
+              + minIdx := $j$
+          + swap $A[i]$ and $A["minIdx"]$
+      ]
+    ],
+  ) <selection-sort>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 13pt)[
+    ```c
+    void selection_sort(int arr[], int n) {
+        for (int i = 0; i < n - 1; i++) {
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+            }
+            // Swap the found minimum element with
+            // the first element
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n^2)$
+    - Average Case: $O(n^2)$
+    - Worst Case: $O(n^2)$
+  - *Space Complexity*: $O(1)$
+  - *Stability*: Unstable (equal elements may not maintain their relative order)
+]
+
+== Insertion Sort
+
+#align(horizon)[
+  *Insertion Sort* builds the final sorted array one item at a time.
+  It assumes that the first element is already sorted,
+  then inserts each subsequent element into the correct position relative to
+  the sorted portion.
+
+  It's similar to how people arrange a hand of playing cards.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Start from the second element (index $1$).
+  2. Compare the current element with elements in the sorted portion.
+  3. Shift all larger elements in the sorted portion one position to the right.
+  4. Insert the current element into its correct position.
+  5. Repeat until the array is sorted.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Insertion Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Given an array $A$ of $n$ elements:],
+      )[
+        + *for* $i$ from $1$ to $n - 1$:
+          + $"key" := A[i]$
+          + $j := i - 1$
+          + *while* $j >= 0$ *and* $A[j] > "key"$:
+            + $A[j + 1] := A[j]$
+            + $j := j - 1$
+          + $A[j + 1] := "key"$
+      ]
+    ],
+  ) <insertion-sort>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 11pt)[
+    ```c
+    void insertion_sort(int arr[], int n) {
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Move elements of arr[0..i-1],
+            // that are greater than key,
+            // to one position ahead of
+            // their current position
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    ```
+  ]
+]
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n)$ (when the array is already sorted)
+    - Average Case: $O(n^2)$
+    - Worst Case: $O(n^2)$
+  - *Space Complexity*: $O(1)$
+  - *Stability*: Stable
+]
+
+== Merge Sort
+
+#align(horizon)[
+  *Merge Sort* is a divide and conquer algorithm that divides the array into halves,
+  sorts each half, and then merges them back together.
+
+  It is efficient and has a guaranteed runtime of $O(n log n)$.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. If the array is of length $0$ or $1$, it is already sorted.
+  2. Divide the array into two halves.
+  3. Recursively sort each half.
+  4. Merge the two sorted halves into one sorted array.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Merge Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Function merge_sort(array A, left, right):],
+      )[
+        + *if* $"left" < "right"$:
+          + $"mid" := ("left" + "right") / 2$
+          + $"merge_sort"(A, "left", "mid")$
+          + $"merge_sort"(A, "mid" + 1, "right")$
+          + $"merge"(A, "left", "mid", "right")$
+      ]
+    ],
+  ) <merge-sort>
+]
+
+#pagebreak()
+
+=== `merge` Function
+
+#align(horizon)[
+  The `merge` function combines two sorted subarrays into one sorted array.
+
+  - Left subarray: $A["left".."mid"]$
+  - Right subarray: $A["mid"+1.."right"]$
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 6pt)[
+    ```c
+    void merge(int arr[], int l, int m, int r) {
+        int n1 = m - l + 1;
+        int n2 = r - m;
+        // Create temp arrays
+        int L[n1], R[n2];
+        // Copy data to temp arrays L[] and R[]
+        for (int i = 0; i < n1; i++)
+            L[i] = arr[l + i];
+        for (int j = 0; j < n2; j++)
+            R[j] = arr[m + 1 + j];
+        // Merge the temp arrays back into arr[l..r]
+        int i = 0, j = 0, k = l;
+        while (i < n1 && j < n2) {
+            if (L[i] <= R[j]) {
+                arr[k++] = L[i++];
+            } else {
+                arr[k++] = R[j++];
+            }
+        }
+        // Copy the remaining elements of L[], if any
+        while (i < n1)
+            arr[k++] = L[i++];
+        // Copy the remaining elements of R[], if any
+        while (j < n2)
+            arr[k++] = R[j++];
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+#align(horizon)[
+  #text(size: 12pt)[
+    ```c
+    void merge_sort(int arr[], int l, int r) {
+        if (l < r) {
+            int m = l + (r - l) / 2;
+            merge_sort(arr, l, m);
+            merge_sort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n log n)$
+    - Average Case: $O(n log n)$
+    - Worst Case: $O(n log n)$
+  - *Space Complexity*: $O(n)$ (due to auxiliary arrays)
+  - *Stability*: Stable
+]
+
+== Quick Sort
+
+#align(horizon)[
+  *Quick Sort* is a divide and conquer algorithm that selects a *pivot* element
+  and partitions the array around the pivot,
+  such that elements less than the pivot are on the left,
+  and elements greater than the pivot are on the right.
+
+  It then recursively sorts the subarrays on either side of the pivot.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Choose a pivot element.
+  2. Partition the array into two subarrays:
+    - Elements less than the pivot.
+    - Elements greater than the pivot.
+  3. Recursively apply the above steps to the subarrays.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Quick Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Function quick_sort(array A, low, high):],
+      )[
+        + *if* $"low" < "high"$:
+          + $pi := "partition"(A, "low", "high")$
+          + $"quick_sort"(A, "low", pi - 1)$
+          + $"quick_sort"(A, pi + 1, "high")$
+      ]
+    ],
+  ) <quick-sort>
+]
+
+#pagebreak()
+
+=== `partition` Function
+
+#align(horizon)[
+  The `partition` function rearranges the array such that:
+
+  - All elements less than the pivot come before it.
+  - All elements greater than the pivot come after it.
+  - The pivot is in its final sorted position.
+
+  It returns the index of the pivot.
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 9pt)[
+    ```c
+    int partition(int arr[], int low, int high) {
+        int pivot = arr[high]; // pivot
+        int i = (low - 1);     // Index of smaller element
+
+        for (int j = low; j <= high - 1; j++) {
+            // If current element is smaller than or equal to pivot
+            if (arr[j] <= pivot) {
+                i++;    // increment index of smaller element
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        // Swap arr[i + 1] and arr[high] (or pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return (i + 1);
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    void quick_sort(int arr[], int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+
+            // Separately sort elements before
+            // partition and after partition
+            quick_sort(arr, low, pi - 1);
+            quick_sort(arr, pi + 1, high);
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n log n)$
+    - Average Case: $O(n log n)$
+    - Worst Case: $O(n^2)$
+      (when the smallest or largest element is always chosen as the pivot)
+  - *Space Complexity*: $O(log n)$ (due to recursive calls)
+  - *Stability*: Unstable
+]
+
+== Heap Sort
+
+#align(horizon)[
+  *Heap Sort* involves building a `max heap` from the input data,
+  and then repeatedly extracting the maximum element from the heap
+  and rebuilding the heap.
+
+  It uses the properties of a heap data structure to sort elements.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Build a `max heap` from the input data.
+  2. Swap the root (maximum value) of the heap with the last element.
+  3. Reduce the heap size by one.
+  4. `heapify` the root element to get the highest element at root again.
+  5. Repeat steps 2 to 4 until the heap size is greater than 1.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Heap Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Function heap_sort(array A, n):],
+      )[
+        + *for* $i$ from $n / 2 - 1$ down to $0$:
+          + heapify(A, n, i)
+        + *for* $i$ from $n - 1$ down to $0$:
+          + swap $A[0]$ and $A[i]$
+          + heapify(A, i, 0)
+      ]
+    ],
+  ) <heap-sort>
+]
+
+#pagebreak()
+
+=== `heapify` Function
+
+#align(horizon)[
+  The `heapify` function ensures the subtree rooted at index $i$ satisfies
+  the max heap property.
+
+  - If the children of node $i$ are max heaps
+    but node $i$ might be smaller than its children.
+  - Swap node $i$ with its largest child.
+  - Recursively `heapify` the affected subtree.
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 9pt)[
+    ```c
+    void heapify(int arr[], int n, int i) {
+        int largest = i;   // Initialize largest as root
+        int l = 2 * i + 1; // left = 2*i + 1
+        int r = 2 * i + 2; // right = 2*i + 2
+        // If left child is larger than root
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+        // If right child is larger than largest so far
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+        // If largest is not root
+        if (largest != i) {
+            int swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+            // Recursively heapify the affected sub-tree
+            heapify(arr, n, largest);
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+#align(horizon)[
+  #text(size: 12pt)[
+    ```c
+    void heap_sort(int arr[], int n) {
+        // Build heap (rearrange array)
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
+
+        // One by one extract an element from heap
+        for (int i = n - 1; i >= 0; i--) {
+            // Move current root to end
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // call max heapify on the reduced heap
+            heapify(arr, i, 0);
+        }
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*:
+    - Best Case: $O(n log n)$
+    - Average Case: $O(n log n)$
+    - Worst Case: $O(n log n)$
+  - *Space Complexity*: $O(1)$
+  - *Stability*: Unstable
+]
+
+== Counting Sort
+
+#align(horizon)[
+  *Counting Sort* is an integer sorting algorithm that operates by counting
+  the number of objects that possess distinct key values (kind of hashing).
+  It is not a comparison sort and has a running time of $O(n + k)$ where $k$
+  is the range of the input data.
+
+  It's efficient when the range of input data is not significantly greater
+  than the number of objects to be sorted.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Find the maximum element in the array.
+  2. Initialize a count array of size ($max + 1$) with zeros.
+  3. Store the count of each element at their respective index.
+  4. Modify the count array by adding the previous counts.
+  5. Build the output array by placing elements at their correct positions.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Counting Sort],
+    text(size: 10pt)[
+      #pseudocode-list(
+        title: smallcaps[Given an array $A$ of $n$ elements:],
+      )[
+        + $max := "find_max"(A)$
+        + initialize count array $C[0..max]$
+        + *for* each element in $A$:
+          + $C["element"] := C["element"] + 1$
+        + *for* $i$ from $1$ to $max$:
+          + $C[i] := C[i] + C[i - 1]$
+        + *for* $i$ from $n - 1$ down to $0$:
+          + $"output"[C[A[i]] - 1] := A[i]$
+          + $C[A[i]] := C[A[i]] - 1$
+        + copy output array to $A$
+      ]
+    ],
+  ) <counting-sort>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 5.8pt)[
+    ```c
+    void counting_sort(int arr[], int n) {
+        int output[n];
+        int max = arr[0];
+        // Find the largest element in the array
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > max)
+                max = arr[i];
+        }
+        int count[max + 1];
+        // Initialize count array with all zeros
+        for (int i = 0; i <= max; ++i)
+            count[i] = 0;
+        // Store the count of each element
+        for (int i = 0; i < n; i++)
+            count[arr[i]]++;
+        // Store the cumulative count
+        for (int i = 1; i <= max; i++)
+            count[i] += count[i - 1];
+        // Find the index of each element of the original array in count array, and
+        // place the elements in output array
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[arr[i]] - 1] = arr[i];
+            count[arr[i]]--;
+        }
+        // Copy the sorted elements into original array
+        for (int i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*: $O(n + k)$ where $k$ is the range of the input.
+  - *Space Complexity*: $O(n + k)$
+  - *Stability*: Stable
+  - *Limitation*: Only works with integers and when $k$ is not significantly greater than $n$.
+]
+
+== Radix Sort
+
+#align(horizon)[
+  *Radix Sort* is a non-comparative sorting algorithm that sorts data
+  with integer keys by grouping keys by individual digits that share
+  the same significant position and value.
+
+  It uses Counting Sort as a subroutine to sort elements.
+]
+
+#pagebreak()
+
+=== Algorithm Steps
+
+#align(horizon)[
+  1. Find the maximum number to know the number of digits.
+  2. Do `counting_sort` for every digit, starting from least significant digit
+    to most significant digit.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Radix Sort],
+    text(size: 12pt)[
+      #pseudocode-list(
+        title: smallcaps[Function radix_sort(array A, n):],
+      )[
+        + $max := "find_max"(A)$
+        + *for* $"exp" := 1$; $"max" / "exp" > 0$; $"exp" *= 10$:
+          + $"counting_sort_by_digit"(A, n, "exp")$
+      ]
+    ],
+  ) <radix-sort>
+]
+
+#pagebreak()
+
+=== `counting_sort_by_digit` Function
+
+#align(horizon)[
+  The `counting_sort_by_digit` function sorts the array according
+  to the digit represented by `exp` (exponent).
+
+  - For $"exp" = 1$, sort according to the least significant digit.
+  - For $"exp" = 10$, sort according to the second least significant digit.
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 9pt)[
+    ```c
+    void counting_sort_by_digit(int arr[], int n, int exp) {
+        int output[n];
+        int count[10] = {0};
+        // Store count of occurrences in count[]
+        for (int i = 0; i < n; i++)
+            count[(arr[i] / exp) % 10]++;
+        // Change count[i] so that count[i] contains actual
+        // position of this digit in output[]
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+        // Build the output array
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+            count[(arr[i] / exp) % 10]--;
+        }
+        // Copy the output array to arr[], so that arr[] now
+        // contains sorted numbers according to current digit
+        for (int i = 0; i < n; i++)
+            arr[i] = output[i];
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    void radix_sort(int arr[], int n) {
+        // Find the maximum number to know the number of digits
+        int max = arr[0];
+        for (int i = 1; i < n; i++)
+            if (arr[i] > max)
+                max = arr[i];
+
+        // Do counting sort for every digit
+        for (int exp = 1; max / exp > 0; exp *= 10)
+            counting_sort_by_digit(arr, n, exp);
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity*: $O(d dot.c (n + b))$
+    - $d$: Number of digits
+    - $b$: Base of numbering system (10 for decimal)
+  - *Space Complexity*: $O(n + b)$
+  - *Stability*: Stable
+  - *Limitation*: Works best when $d$ is not significantly large.
+]
+
+== Comparison of Sorting Algos
+
+#align(horizon)[
+  #text(size: 9pt)[
+    #table(
+      columns: 7,
+      align: left + horizon,
+      table.header(
+        [*Algorithm*],
+        [*Best Case*],
+        [*Average Case*],
+        [*Worst Case*],
+        [*Space*],
+        [*Stable*],
+        [*Method*],
+      ),
+
+      [*Bubble Sort*],
+      [$O(n)$],
+      [$O(n^2)$],
+      [$O(n^2)$],
+      [$O(1)$],
+      [Yes],
+      [Exchange],
+
+      [*Selection Sort*],
+      [$O(n^2)$],
+      [$O(n^2)$],
+      [$O(n^2)$],
+      [$O(1)$],
+      [No],
+      [Selection],
+
+      [*Insertion Sort*],
+      [$O(n)$],
+      [$O(n^2)$],
+      [$O(n^2)$],
+      [$O(1)$],
+      [Yes],
+      [Insertion],
+
+      [*Merge Sort*],
+      [$O(n log n)$],
+      [$O(n log n)$],
+      [$O(n log n)$],
+      [$O(n)$],
+      [Yes],
+      [Merge],
+
+      [*Quick Sort*],
+      [$O(n log n)$],
+      [$O(n log n)$],
+      [$O(n^2)$],
+      [$O(log n)$],
+      [No],
+      [Partition],
+
+      [*Heap Sort*],
+      [$O(n log n)$],
+      [$O(n log n)$],
+      [$O(n log n)$],
+      [$O(1)$],
+      [No],
+      [Selection],
+
+      [*Counting Sort*],
+      [$O(n + k)$],
+      [$O(n + k)$],
+      [$O(n + k)$],
+      [$O(n + k)$],
+      [Yes],
+      [Counting],
+
+      [*Radix Sort*],
+      [$O(n k)$],
+      [$O(n k)$],
+      [$O(n k)$],
+      [$O(n + k)$],
+      [Yes],
+      [Digit],
+    )
+  ]
+]
+
+== Practical Section (C or pseudocode)
+
+#align(horizon)[
+  - *Task*: Implement a sorting algorithm of your choice
+    and analyze its time and space complexity.
+  - *Task*: Modify the Quick Sort algorithm to use a random pivot
+    to improve performance on already sorted arrays.
+  - *Task*: Implement a stable version of Selection Sort.
+]
+
 = Recursion
 
 #align(horizon + center)[
@@ -2328,7 +3326,7 @@ subtrees is at most 1.
     transforming recursion into iteration can improve efficiency.
 ]
 
-== _Memoization_
+== Memoization
 
 #align(horizon)[
   Stores the results of subproblems already solved to avoid repeated calculations.
