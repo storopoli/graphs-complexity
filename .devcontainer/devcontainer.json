@@ -1,14 +1,13 @@
 {
 	"name": "Graphs and Algorithmic Complexity",
 	"image": "mcr.microsoft.com/devcontainers/base:alpine",
-
-	"postCreateCommand": "sudo apk update && sudo apk add just typst gdb",
-
+	"postCreateCommand": "sudo apk update && sudo apk add just typst gdb zig",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"ms-vscode.cpptools",
 				"vadimcn.vscode-lldb",
+				"ziglang.vscode-zig",
 				"myriad-dreamin.tinymist"
 			]
 		}
