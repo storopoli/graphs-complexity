@@ -1,0 +1,18 @@
+name: c-code
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  clang-format:
+    name: Check if C code compiles and runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup just
+        uses: extractions/setup-just@v2
+      - name: Compile and run C code
+        run: just c-run

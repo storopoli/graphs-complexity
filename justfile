@@ -32,6 +32,7 @@ watch-pt:
 # Compile the C code in "code/c/"
 c-compile:
     #!/usr/bin/env bash
+    set -e
     echo "Compiling all *.c code in performance mode to \"output/\""
     mkdir -p ./output
     rm -rf ./output/*
@@ -43,6 +44,7 @@ c-compile:
 # Compile and run the C code in "code/c/"
 c-run: c-compile
     #!/usr/bin/env bash
+    set -e
     echo "Running all compiled C code in \"output\""
     for FILE in $(ls ./output/); do
         "./output/$FILE"
@@ -51,6 +53,7 @@ c-run: c-compile
 # Compile the Zig code in "code/zig/"
 z-compile:
     #!/usr/bin/env bash
+    set -e
     echo "Compiling all *.zig code in performance mode to \"output/\""
     current_path=$(pwd)
     mkdir -p ./output
@@ -64,8 +67,15 @@ z-compile:
 # Compile and run the Zig code in "code/zig/"
 z-run: z-compile
     #!/usr/bin/env bash
+    set -e
     echo "Running all compiled Zig code in \"output\""
     for FILE in $(ls ./output/*.o); do
         BASENAME="${FILE%.o}"
         "$BASENAME"
     done
+
+# Format Zig code in "code/zig/"
+z-fmt:
+    #!/usr/bin/env bash
+    set -e
+    zig fmt ./code/zig/*.zig
