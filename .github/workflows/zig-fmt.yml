@@ -1,0 +1,18 @@
+name: zig-fmt
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  clang-format:
+    name: Check if zig code is formatted
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup zig
+        uses: mlugg/setup-zig@v1
+      - name: Check zig code format
+        run: zig fmt --check ./code/zig/*.zig

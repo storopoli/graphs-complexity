@@ -4,3 +4,6 @@
 # C++
 *.out
 *.exe
+
+# Output
+output/

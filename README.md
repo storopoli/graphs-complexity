@@ -1,6 +1,8 @@
 # Graph Theory and Computational Complexity
 
 [![CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![C code](https://img.shields.io/badge/code-C-blue)](./code/c)
+[![Zig code](https://img.shields.io/badge/code-Zig-orange)](./code/zig)
 [![Run on Repl.it](https://repl.it/badge/github/storopoli/grafos-complexidade)](https://repl.it/github/storopoli/grafos-complexidade)
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/storopoli/grafos-complexidade)
 
@@ -30,9 +32,16 @@
 1. Divide and Conquer; and
 1. Greedy Algorithms.
 
+## Code Examples
+
+The primary programming language used for examples is C.
+Also there are [Zig](https://ziglang.org) examples.
+Check them at `code/c/` and `code/zig/` directories, respectively.
+
 ## Dependencies
 
-- C/C++ Compiler; and
+- C/C++ Compiler;
+- (Optional) [Zig](https://ziglang.org) compiler; and
 - [`typst`](https://typst.app) for the slides.
 
 The slides are generated using [Typst](https://typst.app) with GitHub Actions
