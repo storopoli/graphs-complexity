@@ -2445,7 +2445,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
         + *para* $i$ de $1$ até $n - 1$:
           + $"key" := A[i]$
           + $j := i - 1$
-          + *enquanto* $j \geq 0$ *e* $A[j] > "key"$:
+          + *enquanto* $j >= 0$ *e* $A[j] > "key"$:
             + $A[j + 1] := A[j]$
             + $j := j - 1$
           + $A[j + 1] := "key"$
