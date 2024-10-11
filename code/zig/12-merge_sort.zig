@@ -104,9 +104,8 @@ fn isSorted(arr: []usize) bool {
 pub fn main() !void {
     const N_values = [_]usize{ 10_000, 20_000, 30_000, 40_000 };
 
-    // Seed the random number generator
-    const seed: u64 = @intCast(time.nanoTimestamp());
-    var rng = rand.DefaultPrng.init(seed); // Xoshiro256 is good enough
+    // Seedthe random number generator
+    var rng = rand.DefaultPrng.init(123); // Xoshiro256 is good enough
 
     for (N_values) |N| {
         // Allocate memory for the array

@@ -33,7 +33,7 @@ int main() {
     int *arr = (int *)malloc(N * sizeof(int));
 
     // Seed the random number generator
-    srand(time(NULL));
+    srand(123);
 
     // Fill the array with random integers
     for (int i = 0; i < N; i++) {
