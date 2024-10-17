@@ -2681,7 +2681,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     ```c
     int partition(int arr[], int low, int high) {
         int pivot = arr[high]; // pivô
-        int i = (low - 1);     // Índice do menor elemento
+        int i = low;           // Índice do menor elemento
 
         for (int j = low; j <= high - 1; j++) {
             // Se o elemento atual é menor ou igual ao pivô
@@ -2692,12 +2692,12 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
                 arr[j] = temp;
             }
         }
-        // Troca arr[i + 1] e arr[high] (ou pivô)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
+        // Troca arr[i] e arr[high] (ou pivô)
+        int temp = arr[i];
+        arr[i] = arr[high];
         arr[high] = temp;
 
-        return (i + 1);
+        return i;
     }
     ```
   ]
