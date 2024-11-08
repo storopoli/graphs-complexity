@@ -2978,7 +2978,7 @@ subtrees is at most 1.
         title: smallcaps[Function radix_sort(array A, n):],
       )[
         + $max := "find_max"(A)$
-        + *for* $"exp" := 1$; $"max" / "exp" > 0$; $"exp" *= 10$:
+        + *for* $"exp" := 1$; $floor("max" / "exp") > 0$; $"exp" *= 10$:
           + $"counting_sort_by_digit"(A, n, "exp")$
       ]
     ],

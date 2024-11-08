@@ -2999,7 +2999,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
         title: smallcaps[Função radix_sort(_array_ A, n):],
       )[
         + $max := "find_max"(A)$
-        + *para* $"exp" := 1$; $"max" / "exp" > 0$; $"exp" *= 10$:
+        + *para* $"exp" := 1$; $floor("max" / "exp") > 0$; $"exp" *= 10$:
           + $"counting_sort_by_digit"(A, n, "exp")$
       ]
     ],
