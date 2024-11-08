@@ -1,5 +1,5 @@
-#import "@preview/slydst:0.1.0": *
-#import "@preview/diagraph:0.2.5": *
+#import "@preview/slydst:0.1.1": *
+#import "@preview/diagraph:0.3.0": *
 #import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "pt")
