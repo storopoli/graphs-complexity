@@ -9,6 +9,13 @@ alias z := z-compile
 default:
   just --list
 
+# Clean the PDFs and the output directory
+clean:
+    @echo "Cleaning up"
+    rm slides/slides.pdf
+    rm slides/slides-pt.pdf
+    rm -rf output
+
 # Build the slides
 build:
     @echo "Building slides"
