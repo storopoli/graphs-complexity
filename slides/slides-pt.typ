@@ -28,6 +28,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #align(horizon + center)[#image("images/cc-zero.svg", width: 80%)]
 
 == Links
+
 #align(horizon + center)[
   Todos os links estão em #text(blue)[azul].
 
@@ -39,6 +40,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
 #outline()
 
 = Por que estudar Teoria dos Grafos e Complexidade Computacional?
+
+==
 
 #align(horizon + center)[#image(
     "images/algorithm_analysis_meme.jpg",
@@ -143,6 +146,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ]
 
 = Grafos
+
+==
 
 #align(horizon + center)[#image(
     "images/graph_isomorphism_meme.jpg",
@@ -651,6 +656,8 @@ delas), retornando à cidade de origem.
 
 = Árvores
 
+==
+
 #align(horizon + center)[#image("images/trees_meme.jpg", width: 50%)]
 
 == O que são Árvores?
@@ -839,6 +846,8 @@ e direita é no máximo 1.
 
 = Interlúdio: Funções Polinomiais e Exponenciais
 
+==
+
 #align(horizon + center)[#image("images/polynomials_meme.jpg", width: 50%)]
 
 == Funções Polinomiais
@@ -917,6 +926,8 @@ e direita é no máximo 1.
 ]
 
 = Complexidade Computacional
+
+==
 
 #align(horizon + center)[#image("images/big_o_meme.jpg", width: 45%)]
 
@@ -1094,6 +1105,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ]
 
 = Identificando a Complexidade de Algoritmos
+
+==
 
 #align(horizon + center)[#image(
     "images/recursion_joker_debugging_meme.jpg",
@@ -1355,6 +1368,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ]
 
 = Interlúdio: Analisando a Complexidade de Algoritmos com Código C
+
+==
 
 #align(horizon + center)[#image("images/programming_meme.jpg", width: 50%)]
 
@@ -1697,6 +1712,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ]
 
 = Algoritmos de Busca
+
+==
 
 #align(horizon + center)[#image(
     "images/search_algorithms_meme.png",
@@ -2178,6 +2195,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ]
 
 = Algoritmos de Ordenação
+
+==
 
 #align(horizon + center)[
   #image(
@@ -3178,6 +3197,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 = Recursão
 
+==
+
 #align(horizon + center)[
   #image(
     "images/recursion_meme.jpg",
@@ -3227,6 +3248,16 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
       else
         return n * fatorial(n - 1);
     }
+    ```
+
+  #pagebreak()
+
+  - *Bonus: Implementação em Haskell*:
+
+    ```haskell
+    fatorial :: Int -> Int
+    fatorial 0 = 1
+    fatorial n = n * fatorial (n - 1)
     ```
 ]
 
@@ -3407,6 +3438,8 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ]
 
 = Divisão e Conquista
+
+==
 
 #align(horizon + center)[
   #image(

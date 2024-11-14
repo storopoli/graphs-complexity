@@ -40,6 +40,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
 = Why study Graph Theory and Computational Complexity?
 
+==
+
 #align(horizon + center)[#image(
     "images/algorithm_analysis_meme.jpg",
     width: 50%,
@@ -142,6 +144,8 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ]
 
 = Graphs
+
+==
 
 #align(horizon + center)[#image(
     "images/graph_isomorphism_meme.jpg",
@@ -647,6 +651,8 @@ returning to the starting city.
 
 = Trees
 
+==
+
 #align(horizon + center)[#image("images/trees_meme.jpg", width: 50%)]
 
 == What are Trees?
@@ -835,6 +841,8 @@ subtrees is at most 1.
 
 = Interlude: Polynomial and Exponential Functions
 
+==
+
 #align(horizon + center)[#image("images/polynomials_meme.jpg", width: 50%)]
 
 == Polynomial Functions
@@ -914,6 +922,8 @@ subtrees is at most 1.
 ]
 
 = Computational Complexity
+
+==
 
 #align(horizon + center)[#image("images/big_o_meme.jpg", width: 45%)]
 
@@ -1091,6 +1101,8 @@ subtrees is at most 1.
 ]
 
 = Identifying Algorithm Complexity
+
+==
 
 #align(horizon + center)[#image(
     "images/recursion_joker_debugging_meme.jpg",
@@ -1352,6 +1364,8 @@ subtrees is at most 1.
 ]
 
 = Interlude: Analyzing Algorithm Complexity using C Code
+
+==
 
 #align(horizon + center)[#image("images/programming_meme.jpg", width: 50%)]
 
@@ -1691,6 +1705,8 @@ subtrees is at most 1.
 ]
 
 = Search Algorithms
+
+==
 
 #align(horizon + center)[#image(
     "images/search_algorithms_meme.png",
@@ -2158,6 +2174,8 @@ subtrees is at most 1.
 ]
 
 = Sorting Algorithms
+
+==
 
 #align(horizon + center)[
   #image(
@@ -3157,6 +3175,8 @@ subtrees is at most 1.
 
 = Recursion
 
+==
+
 #align(horizon + center)[
   #image(
     "images/recursion_meme.jpg",
@@ -3206,6 +3226,16 @@ subtrees is at most 1.
       else
         return n * factorial(n - 1);
     }
+    ```
+
+  #pagebreak()
+
+  - *Bonus: Implementation in Haskell*:
+
+    ```haskell
+    fatorial :: Int -> Int
+    fatorial 0 = 1
+    fatorial n = n * fatorial (n - 1)
     ```
 ]
 
@@ -3384,6 +3414,8 @@ subtrees is at most 1.
 ]
 
 = Divide and Conquer
+
+==
 
 #align(horizon + center)[
   #image(
