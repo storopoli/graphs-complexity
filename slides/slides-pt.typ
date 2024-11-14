@@ -1,4 +1,4 @@
-#import "@preview/slydst:0.1.1": *
+#import "@preview/slydst:0.1.2": *
 #import "@preview/diagraph:0.3.0": *
 #import "@preview/lovelace:0.3.0": *
 
