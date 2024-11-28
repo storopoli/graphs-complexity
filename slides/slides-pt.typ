@@ -66,8 +66,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     grid(
       columns: 2,
       gutter: 2mm,
-      image("images/turing.jpg", width: 60%),
-      image("images/church.jpg", width: 60%),
+      image("images/turing.jpg", width: 60%), image("images/church.jpg", width: 60%),
     ),
     caption: "Alan Turing e Alonzo Church",
   )<turing-church>
@@ -3118,69 +3117,14 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
         [*Método*],
       ),
 
-      [*_Bubble Sort_*],
-      [$O(n)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [Sim],
-      [Troca],
-
-      [*_Selection Sort_*],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [Não],
-      [Seleção],
-
-      [*_Insertion Sort_*],
-      [$O(n)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [Sim],
-      [Inserção],
-
-      [*_Merge Sort_*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n)$],
-      [Sim],
-      [Intercalação],
-
-      [*_Quick Sort_*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n^2)$],
-      [$O(log n)$],
-      [Não],
-      [Partição],
-
-      [*_Heap Sort_*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(1)$],
-      [Não],
-      [Seleção],
-
-      [*_Counting Sort_*],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [Sim],
-      [Contagem],
-
-      [*_Radix Sort_*],
-      [$O(n k)$],
-      [$O(n k)$],
-      [$O(n k)$],
-      [$O(n + k)$],
-      [Sim],
-      [Dígito],
+      [*_Bubble Sort_*], [$O(n)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [Sim], [Troca],
+      [*_Selection Sort_*], [$O(n^2)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [Não], [Seleção],
+      [*_Insertion Sort_*], [$O(n)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [Sim], [Inserção],
+      [*_Merge Sort_*], [$O(n log n)$], [$O(n log n)$], [$O(n log n)$], [$O(n)$], [Sim], [Intercalação],
+      [*_Quick Sort_*], [$O(n log n)$], [$O(n log n)$], [$O(n^2)$], [$O(log n)$], [Não], [Partição],
+      [*_Heap Sort_*], [$O(n log n)$], [$O(n log n)$], [$O(n log n)$], [$O(1)$], [Não], [Seleção],
+      [*_Counting Sort_*], [$O(n + k)$], [$O(n + k)$], [$O(n + k)$], [$O(n + k)$], [Sim], [Contagem],
+      [*_Radix Sort_*], [$O(n k)$], [$O(n k)$], [$O(n k)$], [$O(n + k)$], [Sim], [Dígito],
     )
   ]
 ]
@@ -3522,7 +3466,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - A árvore de chamadas tem um nó para cada chamada recursiva.
   - Os nós-folha são os casos base da recursão:
     subproblemas de tamanho menor que $k$ que não se resolve recursivamente.
-  - Cada nó realiza uma quanidade de trabalho que corresponde ao tamanho do
+  - Cada nó realiza uma quantidade de trabalho que corresponde ao tamanho do
     subproblema $m$ dada por $p(m)$.
   - A quantidade total de trabalho realizado pelo algoritmo completo é
     a soma do trabalho realizado por todos os nós na árvore.
@@ -3541,7 +3485,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #align(horizon)[
   A complexidade de algoritmos de divisão e conquista pode ser
-  expressa pela *recorrência de Mestre*:
+  expressa pela *recorrência Mestre*:
 
   $ T(n) = a T(n / b) + f(n) $
 
@@ -3558,14 +3502,13 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
   A solução dessa recorrência depende da relação entre $f(n)$ e $n^(log_b a)$.
 
-  - *Caso 1*: Se $f(n) = O(n^(log_b a - epsilon))$ para algum $epsilon > 0$,
+  - *Caso 1*: Se $f(n) = O(n^(log_b a - epsilon))$ para alguma constante $epsilon > 0$,
     então $T(n) = O(n^(log_b a))$.
 
-  - *Caso 2*: Se $f(n) = O(n^(log_b a) log^k n)$ para algum $k >= 0$,
-    então $T(n) = O(n^(log_b a) log^(k+1) n)$.
+  - *Caso 2*: Se $f(n) = O(n^(log_b a))$, então $T(n) = O(n^(log_b a) log n)$.
 
-  - *Caso 3*: Se $f(n) = O(n^(log_b a + epsilon))$ para algum $epsilon > 0$
-    e se $a f(n/b) <= c f(n)$ para algum $c < 1$,
+  - *Caso 3*: Se $f(n) = O(n^(log_b a + epsilon))$ para alguma constante $epsilon > 0$
+    e se $a f(n/b) <= c f(n)$ para alguma constante $c < 1$,
     então $T(n) = O(f(n))$.
 ]
 

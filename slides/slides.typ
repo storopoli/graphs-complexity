@@ -65,8 +65,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     grid(
       columns: 2,
       gutter: 2mm,
-      image("images/turing.jpg", width: 60%),
-      image("images/church.jpg", width: 60%),
+      image("images/turing.jpg", width: 60%), image("images/church.jpg", width: 60%),
     ),
     caption: "Alan Turing and Alonzo Church",
   )<turing-church>
@@ -2160,15 +2159,10 @@ subtrees is at most 1.
       align: left + horizon,
       table.header([*Characteristic*], [*BFS*], [*DFS*]),
       [*Data Structure*], [Queue], [Stack],
-      [*Memory Usage*],
-      [Higher (stores all neighbors)],
-      [Lower (stores only current path)],
-
+      [*Memory Usage*], [Higher (stores all neighbors)], [Lower (stores only current path)],
       [*Shortest Path*], [Yes (in unweighted graphs)], [Not necessarily],
       [*Completeness*], [Yes], [Yes],
-      [*Applications*],
-      [Shortest path, node levels],
-      [Cycle detection, topological sorting],
+      [*Applications*], [Shortest path, node levels], [Cycle detection, topological sorting],
     )
   ]
 ]
@@ -3096,69 +3090,14 @@ subtrees is at most 1.
         [*Method*],
       ),
 
-      [*Bubble Sort*],
-      [$O(n)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [Yes],
-      [Exchange],
-
-      [*Selection Sort*],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [No],
-      [Selection],
-
-      [*Insertion Sort*],
-      [$O(n)$],
-      [$O(n^2)$],
-      [$O(n^2)$],
-      [$O(1)$],
-      [Yes],
-      [Insertion],
-
-      [*Merge Sort*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n)$],
-      [Yes],
-      [Merge],
-
-      [*Quick Sort*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n^2)$],
-      [$O(log n)$],
-      [No],
-      [Partition],
-
-      [*Heap Sort*],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(n log n)$],
-      [$O(1)$],
-      [No],
-      [Selection],
-
-      [*Counting Sort*],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [$O(n + k)$],
-      [Yes],
-      [Counting],
-
-      [*Radix Sort*],
-      [$O(n k)$],
-      [$O(n k)$],
-      [$O(n k)$],
-      [$O(n + k)$],
-      [Yes],
-      [Digit],
+      [*Bubble Sort*], [$O(n)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [Yes], [Exchange],
+      [*Selection Sort*], [$O(n^2)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [No], [Selection],
+      [*Insertion Sort*], [$O(n)$], [$O(n^2)$], [$O(n^2)$], [$O(1)$], [Yes], [Insertion],
+      [*Merge Sort*], [$O(n log n)$], [$O(n log n)$], [$O(n log n)$], [$O(n)$], [Yes], [Merge],
+      [*Quick Sort*], [$O(n log n)$], [$O(n log n)$], [$O(n^2)$], [$O(log n)$], [No], [Partition],
+      [*Heap Sort*], [$O(n log n)$], [$O(n log n)$], [$O(n log n)$], [$O(1)$], [No], [Selection],
+      [*Counting Sort*], [$O(n + k)$], [$O(n + k)$], [$O(n + k)$], [$O(n + k)$], [Yes], [Counting],
+      [*Radix Sort*], [$O(n k)$], [$O(n k)$], [$O(n k)$], [$O(n + k)$], [Yes], [Digit],
     )
   ]
 ]
@@ -3535,14 +3474,13 @@ subtrees is at most 1.
 
   The solution to this recurrence depends on the relationship between $f(n)$ and $n^(log_b a)$.
 
-  - *Case 1*: if $f(n) = O(n^(log_b a - epsilon))$ for some $epsilon > 0$,
+  - *Case 1*: if $f(n) = O(n^(log_b a - epsilon))$ for some constant $epsilon > 0$,
     then $T(n) = O(n^(log_b a))$.
 
-  - *Case 2*: if $f(n) = O(n^(log_b a) log^k n)$ for some $k >= 0$,
-    then $T(n) = O(n^(log_b a) log^(k+1) n)$.
+  - *Case 2*: if $f(n) = O(n^(log_b a))$, then $T(n) = O(n^(log_b a) log n)$.
 
-  - *Case 3*: if $f(n) = O(n^(log_b a + epsilon))$ for some $epsilon > 0$
-    e se $a f(n/b) <= c f(n)$ for some $c < 1$,
+  - *Case 3*: if $f(n) = O(n^(log_b a + epsilon))$ for some constant $epsilon > 0$
+    and if $a f(n/b) <= c f(n)$ for some constant $c < 1$,
     then $T(n) = O(f(n))$.
 ]
 
