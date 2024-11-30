@@ -3752,3 +3752,304 @@ subtrees is at most 1.
   - *Task*: Identify a problem that cannot be optimally solved with greedy algorithms and explain why.
 ]
 
+= Dynamic Programming
+
+==
+
+#align(horizon + center)[
+  #image(
+    "images/dynamic_programming_meme.png",
+    width: 95%,
+  )
+]
+
+== Introduction
+
+#align(horizon)[
+  *Dynamic Programming* is an optimization technique that solves complex problems
+  by breaking them down into smaller, simpler subproblems, storing the results
+  of already solved subproblems to avoid redundant computations.
+
+  It is particularly useful for problems that exhibit *optimal substructure*
+  and *overlapping subproblems*.
+]
+
+== Characteristics of Dynamic Programming
+
+#align(horizon)[
+  - *Optimal Substructure*: The optimal solution to the problem can be constructed from the optimal solutions of its subproblems.
+  - *Overlapping Subproblems*: Subproblems are solved multiple times; therefore, it is efficient to store their results.
+  - *Memoization*: Storing results of already solved subproblems.
+]
+
+== Implementation Approaches
+
+#align(horizon)[
+  - *Top-Down with Memoization*:
+    - Recursive implementation.
+    - Stores results of subproblems in a data structure (such as a table or dictionary).
+  - *Bottom-Up (Iterative)*:
+    - Solves smaller subproblems first and uses their results to build solutions for larger subproblems.
+    - Generally involves building a table.
+]
+
+== Example: Fibonacci
+
+#align(horizon)[
+  - *Recursive Definition*:
+    - $F(0) = 0$
+    - $F(1) = 1$
+    - $F(n) = F(n-1) + F(n-2)$, for $n >= 2$
+  - *Problem:* Calculate the $n$-th Fibonacci number.
+]
+
+#pagebreak()
+
+=== Simple Recursive Implementation (Inefficient)
+
+#align(horizon)[
+  ```c
+  int fibonacci(int n) {
+      if (n <= 1)
+          return n;
+      else
+          return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+  ```
+  - *Time Complexity:* Exponential, $O(2^n)$.
+  - *Issue:* Many redundant computations.
+]
+
+#pagebreak()
+
+=== Implementation with Memoization (Top-Down)
+
+#align(horizon)[
+  #text(size: 11pt)[
+    ```c
+    int fib_memo[MAX]; // Initialize with -1
+    int fibonacci(int n) {
+    if (fib_memo[n] != -1)
+        return fib_memo[n];
+    if (n <= 1)
+        fib_memo[n] = n;
+    else
+        fib_memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
+    return fib_memo[n];
+    }
+    ```
+    - *Time Complexity:* $O(n)$
+    - *Advantage:* Avoids redundant computations by storing results.
+  ]
+]
+
+#pagebreak()
+
+=== Iterative Implementation (Bottom-Up)
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    int fibonacci(int n) {
+        int fib[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        return fib[n];
+    }
+    ```
+    - *Time Complexity:* $O(n)$
+    - *Space Complexity:* $O(n)$
+  ]
+]
+
+#pagebreak()
+
+=== Space Optimization
+
+#align(horizon)[
+  #text(size: 11pt)[
+    ```c
+    int fibonacci(int n) {
+        int a = 0, b = 1, c;
+        if (n == 0) return a;
+        for (int i = 2; i <= n; i++) {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return b;
+    }
+    ```
+    - *Time Complexity:* $O(n)$
+    - *Space Complexity:* $O(1)$
+    - *Advantage:* Uses only scalar variables, saving memory.
+  ]
+]
+
+== Example: 0-1 Knapsack
+
+#align(horizon)[
+  - *Problem*: Given a set of items, each with a weight and a value, determine the number of each item to include in a collection so that the total weight is less than or equal to a given capacity and the total value is maximized.
+  - *Constraints*:
+    - Each item can be included at most once.
+    - Items cannot be divided.
+]
+
+#pagebreak()
+
+=== Approach with Dynamic Programming
+
+#align(horizon)[
+  - *Function Definition*:
+    - $K(n, W)$ is the maximum value that can be obtained considering the first $n$ items and maximum capacity $W$.
+  - *Recurrence*:
+    - If $w_n > W$ (weight of item $n$ is greater than current capacity):
+      $K(n, W) = K(n-1, W)$
+    - Else:
+      $K(n, W) = max(K(n-1, W), v_n + K(n-1, W - w_n))$
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [0-1 Knapsack with Dynamic Programming],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[Function knapsack(values, weights, n, W):],
+      )[
+        + create table $K[0..n][0..W]$
+        + for $i$ from $0$ to $n$:
+          + for $w$ from $0$ to $W$:
+            + $K[i][w] = 0$
+        + for $i$ from $1$ to $n$:
+          + for $w$ from $0$ to $W$:
+            + if $"weights"[i-1] \leq w$:
+              + $K[i][w] = max(K[i-1][w], "values"[i-1] + K[i-1][w - "weights"[i-1]])$
+            + else:
+              + $K[i][w] = K[i-1][w]$
+        + return $K[n][W]$
+      ]
+    ],
+  ) <knapsack>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 10pt)[
+    ```c
+    int knapsack(int W, int weights[], int values[], int n) {
+      int i, w;
+      int K[n + 1][W + 1];
+      // Build table K[][] in bottom-up manner
+      for (i = 0; i <= n; i++) {
+        for (w = 0; w <= W; w++) {
+          if (i == 0 || w == 0)
+            K[i][w] = 0;
+          else if (weights[i - 1] <= w)
+            K[i][w] = max(values[i - 1] +
+                K[i - 1][w - weights[i - 1]],  K[i - 1][w]);
+          else
+            K[i][w] = K[i - 1][w];
+        }
+      }
+
+      return K[n][W];
+    }
+    ```
+  ]
+]
+
+== Complexity Analysis
+
+#align(horizon)[
+  - *Time Complexity:* $O(n W)$, where $n$ is the number of items and $W$ is the knapsack capacity.
+  - *Space Complexity:* $O(n W)$, due to the table used.
+]
+
+== Other Classic Problems
+
+#align(horizon)[
+  - *Longest Common Subsequence (LCS) Problem*
+  - *Shortest Path Problem* (like the Floyd-Warshall algorithm)
+  - *Rod Cutting Problem*
+  - *Task Scheduling Problem*
+]
+
+== How to Identify Suitable Problems
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Optimal Substructure:*
+      The optimal solution to the problem can be constructed from the optimal solutions of its subproblems.
+    - *Overlapping Subproblems:*
+      The problem can be divided into subproblems that are reused multiple times.
+    - *Sample Questions:*
+      - Can the problem be divided into smaller steps?
+      - Do the smaller steps repeat?
+  ]
+]
+
+== Comparison with Greedy Algorithms
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Greedy Algorithms:*
+      - Make the best local choice at each step.
+      - Do not revisit previous decisions.
+      - May not find the globally optimal solution.
+    - *Dynamic Programming:*
+      - Considers all possibilities and chooses the best.
+      - Stores results of subproblems to avoid recomputation.
+      - Guarantees the globally optimal solution.
+  ]
+]
+
+== Optimization Techniques
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Space Optimization:*
+      Reduce space used by storing only what's necessary.
+      - *Example:*
+        Use one-dimensional arrays instead of two-dimensional matrices when possible.
+    - *Subproblem Reuse:*
+      Identify identical subproblems to avoid recomputation.
+    - *Dynamic Programming with Memoization vs. Iterative:*
+      Choose the approach that best fits the problem and resource constraints.
+  ]
+]
+
+== Conclusion
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Advantages:*
+      - Guarantees the globally optimal solution.
+      - Avoids redundant computations.
+    - *Challenges:*
+      - May consume a lot of time and space for problems with large inputs.
+      - Identifying the optimal substructure and overlapping subproblems is not always trivial.
+    - *Important:*
+      - Correctly formulate the recurrence and initial conditions.
+      - Decide between Top-Down and Bottom-Up approaches.
+  ]
+]
+
+== Practical Section
+
+#align(horizon)[
+  - *Task*: Implement the LCS (Longest Common Subsequence) algorithm and analyze its complexity.
+  - *Task*: Solve the Rod Cutting Problem using dynamic programming and compare with the simple recursive approach.
+  - *Task*: Identify a real-world problem that can be optimized using dynamic programming and develop the solution.
+]

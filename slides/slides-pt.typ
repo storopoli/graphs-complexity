@@ -3779,3 +3779,304 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   - *Tarefa:* Resolva o Problema do _0-1 Knapsack_ usando uma abordagem gulosa e compare com a solução ótima.
   - *Tarefa:* Identifique um problema que não possa ser resolvido de forma ótima com algoritmos gulosos e explique por quê.
 ]
+
+= Programação Dinâmica
+
+==
+
+#align(horizon + center)[
+  #image(
+    "images/dynamic_programming_meme.png",
+    width: 95%,
+  )
+]
+
+== Introdução
+
+#align(horizon)[
+  *Programação Dinâmica* é uma técnica de otimização que resolve problemas complexos
+  dividindo-os em subproblemas menores e mais simples, armazenando os resultados
+  de subproblemas já solucionados para evitar computações redundantes.
+
+  É particularmente útil para problemas que exibem *subestrutura ótima*
+  e *sobreposição de subproblemas*.
+]
+
+== Características da Programação Dinâmica
+
+#align(horizon)[
+  - *Subestrutura Ótima:* A solução ótima do problema pode ser construída a partir das soluções ótimas de seus subproblemas.
+  - *Sobreposição de Subproblemas:* Os subproblemas se repetem várias vezes; portanto, é eficiente armazenar seus resultados.
+  - *Memorização:* Armazenamento de resultados de subproblemas já resolvidos.
+]
+
+== Abordagens de Implementação
+
+#align(horizon)[
+  - *Top-Down com Memorização:*
+    - Implementação recursiva.
+    - Armazena os resultados de subproblemas em uma estrutura de dados (como uma tabela ou dicionário).
+  - *Bottom-Up (Iterativa):*
+    - Resolve subproblemas menores primeiro e utiliza seus resultados para construir soluções para subproblemas maiores.
+    - Geralmente envolve a construção de uma tabela.
+]
+
+== Exemplo: Fibonacci
+
+#align(horizon)[
+  - *Definição Recursiva:*
+    - $F(0) = 0$
+    - $F(1) = 1$
+    - $F(n) = F(n-1) + F(n-2)$, para $n >= 2$
+  - *Problema:* Calcular o $n$-ésimo número de Fibonacci.
+]
+
+#pagebreak()
+
+=== Implementação Recursiva Simples (Ineficiente)
+
+#align(horizon)[
+  ```c
+  int fibonacci(int n) {
+      if (n <= 1)
+          return n;
+      else
+          return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+  ```
+  - *Complexidade de Tempo:* Exponencial, $O(2^n)$
+  - *Problema:* Muitas computações redundantes.
+]
+
+#pagebreak()
+
+=== Implementação com Memorização (Top-Down)
+
+#align(horizon)[
+  #text(size: 11pt)[
+    ```c
+    int fib_memo[int_MAX]; // Inicialize com -1
+
+    int fibonacci(int n) {
+        if (fib_memo[n] != -1)
+            return fib_memo[n];
+        if (n <= 1)
+            fib_memo[n] = n;
+        else
+            fib_memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
+        return fib_memo[n];
+    }
+    ```
+    - *Complexidade de Tempo:* $O(n)$
+    - *Vantagem:* Evita computações redundantes armazenando resultados.
+  ]
+]
+
+#pagebreak()
+
+=== Implementação Iterativa (Bottom-Up)
+
+#align(horizon)[
+  #text(size: 14pt)[
+    ```c
+    int fibonacci(int n) {
+        int fib[n + 1];
+        fib[0] = 0;
+        fib[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            fib[i] = fib[i - 1] + fib[i - 2];
+        }
+        return fib[n];
+    }
+    ```
+    - *Complexidade de Tempo:* $O(n)$
+    - *Complexidade de Espaço:* $O(n)$
+  ]
+]
+
+#pagebreak()
+
+=== Otimização de Espaço
+
+#align(horizon)[
+  #text(size: 11pt)[
+    ```c
+      int fibonacci(int n) {
+        int a = 0, b = 1, c;
+        if (n == 0)
+            return a;
+        for (int i = 2; i <= n; i++) {
+          c = a + b;
+          a = b;
+          b = c;
+      }
+      return b;
+    }
+    ```
+    - *Complexidade de Tempo:* $O(n)$
+    - *Complexidade de Espaço:* $O(1)$
+    - *Vantagem:* Utiliza apenas variáveis escalares, economizando memória.
+  ]
+]
+
+== Exemplo: 0-1 _Knapsack_
+
+#align(horizon)[
+  - *Problema:* Dado um conjunto de itens, cada um com um peso e um valor, determinar o número de cada item a ser incluído em uma coleção de modo que o peso total seja menor ou igual a uma capacidade dada e o valor total seja o máximo possível.
+  - *Restrições:*
+    - Cada item pode ser incluído no máximo uma vez.
+    - Itens não podem ser fracionados.
+]
+#pagebreak()
+
+=== Abordagem com Programação Dinâmica
+
+#align(horizon)[
+  - *Definição da Função:*
+    $K(n, W)$ é o valor máximo que pode ser obtido considerando os primeiros $n$ itens e capacidade máxima $W$.
+  - *Recorrência:*
+    - Se $w_n > W$ (peso do item $n$ é maior que a capacidade atual):
+      $K(n, W) = K(n - 1, W)$
+    - Senão:
+      $K(n, W) = max( K(n - 1, W), v_n + K(n - 1, W - w_n) )$
+]
+
+#pagebreak()
+
+=== Pseudocódigo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [0-1 _Knapsack_ com Programação Dinâmica],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[Função knapsack(valores, pesos, n, W):],
+      )[
+        + criar tabela $K[0..n][0..W]$
+        + para $i$ de $0$ até $n$:
+        + para $w$ de $0$ até $W$:
+          + se $i == 0$ ou $w == 0$:
+            + $K[i][w] = 0$
+          + senão se $"pesos"[i - 1] \leq w$:
+            + $K[i][w] = max( "valores"[i - 1] + K[i - 1][w - "pesos"[i - 1]],\ K[i - 1][w] )$
+          + senão:
+            + $K[i][w] = K[i - 1][w]$
+        + retornar $K[n][W]$
+      ]
+    ],
+  ) <knapsack>
+]
+
+#pagebreak()
+
+=== Exemplo em C
+
+#align(horizon)[
+  #text(size: 10pt)[
+    ```c
+    int knapsack(int W, int weights[], int values[], int n) {
+      int i, w;
+      int K[n + 1][W + 1];
+      // Construir tabela K[][] de forma bottom-up
+      for (i = 0; i <= n; i++) {
+        for (w = 0; w <= W; w++) {
+          if (i == 0 || w == 0)
+            K[i][w] = 0;
+          else if (weights[i - 1] <= w)
+            K[i][w] = max(values[i - 1] +
+                K[i - 1][w - weights[i - 1]], K[i - 1][w]);
+          else
+            K[i][w] = K[i - 1][w];
+        }
+      }
+
+      return K[n][W];
+    }
+    ```
+  ]
+]
+
+== Análise de Complexidade
+
+#align(horizon)[
+  - *Complexidade de Tempo:* $O(n W)$, onde $n$ é o número de itens e $W$ é a capacidade da mochila.
+  - *Complexidade de Espaço:* $O(n W)$, devido à tabela utilizada.
+]
+
+== Outros Problemas Clássicos
+
+#align(horizon)[
+  - *Problema da Subsequência Comum Máxima (LCS)*
+  - *Problema do Caminho Mínimo* (como o algoritmo de Floyd-Warshall)
+  - *Problema de Corte de Hastes*
+  - *Problema de Escalonamento de Tarefas*
+]
+
+== Como Identificar Problemas Adequados
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Subestrutura Ótima:*
+      A solução ótima do problema pode ser construída a partir das soluções ótimas de seus subproblemas.
+    - *Sobreposição de Subproblemas:*
+      O problema pode ser dividido em subproblemas que são reutilizados várias vezes.
+    - *Exemplos de Perguntas:*
+      - O problema pode ser dividido em etapas menores?
+      - As etapas menores se repetem?
+  ]
+]
+
+== Comparação com Algoritmos Gulosos
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Algoritmos Gulosos:*
+      - Fazem a melhor escolha local em cada etapa.
+      - Não revisitam decisões anteriores.
+      - Podem não encontrar a solução ótima global.
+    - *Programação Dinâmica:*
+      - Considera todas as possibilidades e escolhe a melhor.
+      - Armazena resultados de subproblemas para evitar recomputação.
+      - Garante a solução ótima global.
+  ]
+]
+
+== Técnicas de Otimização
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Otimização de Espaço:*
+      Reduzir o espaço utilizado armazenando apenas o necessário.
+      - Exemplo: Usar vetores unidimensionais em vez de matrizes bidimensionais quando possível.
+    - *Reutilização de Subproblemas:*
+      Identificar subproblemas idênticos para evitar recomputação.
+    - *Programação Dinâmica com Memoização vs. Iterativa:*
+      Escolher a abordagem que melhor se adapta ao problema e às restrições de recursos.
+  ]
+]
+
+== Conclusão
+
+#align(horizon)[
+  #text(size: 14pt)[
+    - *Vantagens:*
+      - Garante a solução ótima global.
+      - Evita computações redundantes.
+    - *Desafios:*
+      - Pode consumir muito tempo e espaço para problemas com grandes entradas.
+      - Identificar a subestrutura ótima e a sobreposição de subproblemas nem sempre é trivial.
+    - *Importante:*
+      - Formular corretamente a recorrência e as condições iniciais.
+      - Decidir entre abordagem Top-Down e Bottom-Up.
+  ]
+]
+
+== Seção Prática
+
+#align(horizon)[
+  - *Tarefa:* Implementar o algoritmo de LCS (Subsequência Comum Máxima) e analisar sua complexidade.
+  - *Tarefa:* Resolver o Problema do Corte de Hastes usando programação dinâmica e comparar com a abordagem recursiva simples.
+  - *Tarefa:* Identificar um problema real que pode ser otimizado usando programação dinâmica e desenvolver a solução.
+]
