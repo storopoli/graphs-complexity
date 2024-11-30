@@ -29,7 +29,8 @@
 1. Algorithm Analysis;
 1. Search and Sorting Algorithms;
 1. Recursion;
-1. Divide and Conquer; and
+1. Divide and Conquer;
+1. Dynamic Programming; and
 1. Greedy Algorithms.
 
 ## Code Examples

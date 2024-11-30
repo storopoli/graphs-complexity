@@ -29,10 +29,12 @@
 1. Análise de Algoritmos;
 1. Algoritmos de Busca e Ordenação;
 1. Recursividade;
-1. Divisão e Conquista; e
+1. Divisão e Conquista;
+1. Programação Dinâmica; e
 1. Algoritmos Gulosos.
 
 ## Exemplos de Código
+
 A principal linguagem de programação usada para os exemplos é C.
 Também há exemplos em Zig.
 Confira-os nos diretórios `code/c/` e `code/zig/`, respectivamente.
