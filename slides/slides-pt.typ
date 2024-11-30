@@ -3581,3 +3581,201 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
   - *Dica*: Utilize a propriedade que $x^n = (x^(n/2))^2$ para $n$ par.
 ]
+
+= Algoritmos Gulosos
+
+==
+
+#align(horizon + center)[
+  #image(
+    "images/greedy_algo_meme.jpeg",
+    width: 95%,
+  )
+]
+
+== Introdução
+
+#align(horizon)[
+  *Algoritmos Gulosos* são uma abordagem para resolver problemas de otimização
+  que segue a estratégia de fazer a melhor escolha local em cada etapa,
+  com a esperança de encontrar uma solução global ótima.
+
+  A ideia é construir uma solução peça por peça,
+  sempre escolhendo a opção que parece ser a melhor no momento.
+]
+
+== Características dos Algoritmos Gulosos
+
+#align(horizon)[
+  - *Escolha Gulosa (_Greedy Choice_)*: Em cada passo, escolhe a opção que parece ser a melhor no momento.
+  - *Subestrutura Ótima*: Uma solução ótima para o problema contém soluções ótimas para subproblemas.
+  - *Não-Reversão*: Decisões tomadas não são revistas posteriormente.
+]
+
+== Quando Usar Algoritmos Gulosos
+
+#align(horizon)[
+  - Quando o problema exibe a *propriedade gulosa*, ou seja, uma solução ótima pode ser alcançada fazendo escolhas locais ótimas.
+  - Quando o problema tem a *propriedade de subestrutura ótima*, permitindo que soluções ótimas sejam construídas a partir de subsoluções ótimas.
+]
+
+== Exemplo: _Fractional Knapsack_
+
+#align(horizon)[
+  - *Problema:* Dado um conjunto de itens, cada um com um peso e um valor, determine a fração de cada item a ser incluída em uma mochila com capacidade limitada de peso, de modo a maximizar o valor total.
+  - *Nota:* Itens podem ser divididos (diferente do _0-1 Knapsack_).
+]
+
+#pagebreak()
+
+=== Abordagem Gulosa
+
+#align(horizon)[
+  1. Calcular o valor por unidade de peso para cada item $(v_i / w_i)$.
+  2. Ordenar os itens em ordem decrescente de valor por unidade de peso.
+  3. Incluir o máximo possível do item com o maior valor por unidade de peso.
+  4. Se a capacidade permitir, passar para o próximo item na ordem e repetir o passo 3.
+]
+
+#pagebreak()
+
+=== Pseudocódigo
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algoritmo],
+    caption: [_Fractional Knapsack_ Guloso],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[Função fractional_knapsack(capacidade, itens):],
+      )[
+        + *para* cada item em itens:
+          + calcular $"valor_por_peso" := "valor" / "peso"$
+        + ordenar itens em ordem decrescente de $"valor_por_peso"$
+        + $"valor_total" := 0$
+        + *para* cada item em itens ordenados:
+          + *se* $"capacidade" > 0$:
+            + $"quantidade" := \min("peso_item", "capacidade")$
+            + $"valor_total" := "valor_total" + "quantidade" times "valor_por_peso"$
+            + $"capacidade" := "capacidade" - "quantidade"$
+          + *senão*:
+            + *quebrar* o _loop_
+        + *retornar* $"valor_total"$
+      ]
+    ],
+  ) <fractional-knapsack>
+]
+
+#pagebreak()
+
+=== Exemplo em C
+
+#align(horizon)[
+  #text(size: 6.8pt)[
+    ```c
+    typedef struct {
+        double value;
+        double weight;
+    } Item;
+
+    int compare(const void *a, const void *b) {
+        Item *itemA = (Item *)a;
+        Item *itemB = (Item *)b;
+        double ratioA = itemA->value / itemA->weight;
+        double ratioB = itemB->value / itemB->weight;
+        return ratioB - ratioA;
+    }
+
+    double fractional_knapsack(Item items[], int n, double capacity) {
+        quick_sort(items, n, sizeof(Item), compare);
+        double total_value = 0.0;
+        double remaining_capacity = capacity;
+
+        for (int i = 0; i < n && remaining_capacity > 0; i++) {
+            double amount = fmin(items[i].weight, remaining_capacity);
+            total_value += amount * (items[i].value / items[i].weight);
+            remaining_capacity -= amount;
+        }
+
+        return total_value;
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Análise de Complexidade
+
+#align(horizon)[
+  - *Tempo de Ordenação:* $O(n log n)$ devido ao _quicksort_.
+  - *Tempo Total:* $O(n log n)$
+  - *Espaço Auxiliar:* $O(1)$ (se a ordenação for _in-place_)
+]
+
+== Características Importantes dos Algoritmos Gulosos
+
+#align(horizon)[
+  - *Simples e Intuitivos:* Fácil de implementar e entender.
+  - *Eficiência:* Muitas vezes têm uma complexidade de tempo menor que algoritmos como programação dinâmica.
+  - *Limitações:* Nem sempre fornecem a solução ótima global; dependem das propriedades do problema.
+]
+
+== Problemas Comuns Resolvidos com Algoritmos Gulosos
+
+#align(horizon)[
+  - Problema de Seleção de Atividades
+  - Problema de Codificação de Huffman
+  - Problema do Troco com Moedas
+  - Caminho de Custo Mínimo em Grafos (Dijkstra)
+  - Problema do Caixeiro Viajante (Heurísticas)
+]
+
+#pagebreak()
+
+== Quando Algoritmos Gulosos Não Funcionam
+
+#align(horizon)[
+  - *Problema do _0-1 Knapsack_*:
+    Não é possível dividir itens; a abordagem gulosa não garante a solução ótima.
+  - *Problema do Caixeiro Viajante:*
+    Escolher a próxima cidade mais próxima não leva à rota ótima global.
+]
+
+== Comparação com Programação Dinâmica
+
+#align(horizon)[
+  #text(size: 13pt)[
+    - *Programação Dinâmica:*
+      - Resolve subproblemas menores e armazena seus resultados para evitar recomputação.
+      - Garante a solução ótima global.
+      - Pode ser mais complexo e consumir mais tempo e espaço.
+    - *Algoritmos Gulosos:*
+      - Fazem a melhor escolha local sem considerar subproblemas.
+      - Podem não garantir a solução ótima global.
+      - Mais eficientes em termos de tempo e espaço.
+  ]
+]
+
+#pagebreak()
+
+== Conclusão
+
+#align(horizon)[
+  - *Vantagens:*
+    - Simplicidade e eficiência.
+    - Adequado para problemas com propriedades gulosas e subestrutura ótima.
+  - *Desvantagens:*
+    - Não aplicável a todos os problemas.
+    - Pode não encontrar a solução ótima global.
+  - *Importante:*
+    - Analisar cuidadosamente o problema para determinar se uma abordagem gulosa é adequada.
+]
+
+== Seção Prática
+
+#align(horizon)[
+  - *Tarefa:* Resolva o Problema do _0-1 Knapsack_ usando uma abordagem gulosa e compare com a solução ótima.
+  - *Tarefa:* Identifique um problema que não possa ser resolvido de forma ótima com algoritmos gulosos e explique por quê.
+]

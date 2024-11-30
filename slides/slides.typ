@@ -3554,3 +3554,201 @@ subtrees is at most 1.
   - *Hint*: Use the property that $x^n = (x^(n/2))^2$ for even $n$.
 ]
 
+= Greedy Algorithms
+
+==
+
+#align(horizon + center)[
+  #image(
+    "images/greedy_algo_meme.jpeg",
+    width: 95%,
+  )
+]
+
+== Introduction
+
+#align(horizon)[
+  *Greedy Algorithms* are an approach to solve optimization problems
+  that follows the strategy of making the best local choice at each step,
+  with the hope of finding a globally optimal solution.
+
+  The idea is to build a solution piece by piece,
+  always choosing the option that seems the best at the moment.
+]
+
+== Characteristics of Greedy Algorithms
+
+#align(horizon)[
+  - *Greedy Choice*: At each step, choose the option that seems the best at the moment.
+  - *Optimal Substructure*: An optimal solution to the problem contains optimal solutions to subproblems.
+  - *Irrevocability*: Decisions made are not reconsidered later.
+]
+
+== When to Use Greedy Algorithms
+
+#align(horizon)[
+  - When the problem exhibits the *greedy property*, that is, an optimal solution can be achieved by making locally optimal choices.
+  - When the problem has the *optimal substructure property*, allowing optimal solutions to be constructed from optimal subsolutions.
+]
+
+== Example: Fractional Knapsack
+
+#align(horizon)[
+  - *Problem*: Given a set of items, each with a weight and a value, determine the fraction of each item to include in a knapsack with limited weight capacity, so as to maximize the total value.
+  - *Note*: Items can be divided (unlike the 0-1 Knapsack).
+]
+
+#pagebreak()
+
+=== Greedy Approach
+
+#align(horizon)[
+  1. Compute the value per unit weight for each item $(v_i / w_i)$.
+  2. Sort the items in decreasing order of value per unit weight.
+  3. Include as much as possible of the item with the highest value per unit weight.
+  4. If the capacity allows, move to the next item in order and repeat step 3.
+]
+
+#pagebreak()
+
+=== Pseudocode
+
+#align(horizon)[
+  #figure(
+    kind: "algorithm",
+    supplement: [Algorithm],
+    caption: [Greedy Fractional Knapsack],
+    text(size: 8pt)[
+      #pseudocode-list(
+        title: smallcaps[Function fractional_knapsack(capacity, items):],
+      )[
+        + *for* each item in items:
+          + compute $"value_per_weight" := "value" / "weight"$
+        + sort items in decreasing order of $"value_per_weight"$
+        + $"total_value" := 0$
+        + *for* each item in sorted items:
+          + *if* $"capacity" > 0$:
+            + $"amount" := \min("item_weight", "capacity")$
+            + $"total_value" := "total_value" + "amount" times "value_per_weight"$
+            + $"capacity" := "capacity" - "amount"$
+          + *else*:
+            + *break* the loop
+        + *return* $"total_value"$
+      ]
+    ],
+  ) <fractional-knapsack>
+]
+
+#pagebreak()
+
+=== Example in C
+
+#align(horizon)[
+  #text(size: 6.8pt)[
+    ```c
+    typedef struct {
+        double value;
+        double weight;
+    } Item;
+
+    int compare(const void *a, const void *b) {
+        Item *itemA = (Item *)a;
+        Item *itemB = (Item *)b;
+        double ratioA = itemA->value / itemA->weight;
+        double ratioB = itemB->value / itemB->weight;
+        return (ratioB - ratioA) > 0 ? 1 : -1;
+    }
+
+    double fractional_knapsack(Item items[], int n, double capacity) {
+        qsort(items, n, sizeof(Item), compare);
+        double total_value = 0.0;
+        double remaining_capacity = capacity;
+
+        for (int i = 0; i < n && remaining_capacity > 0; i++) {
+            double amount = fmin(items[i].weight, remaining_capacity);
+            total_value += amount * (items[i].value / items[i].weight);
+            remaining_capacity -= amount;
+        }
+
+        return total_value;
+    }
+    ```
+  ]
+]
+
+#pagebreak()
+
+=== Complexity Analysis
+
+#align(horizon)[
+  - *Sorting Time*: $O(n log n)$ due to Quicksort.
+  - *Total Time*: $O(n log n)$
+  - *Auxiliary Space*: $O(1)$ (if the sorting is in-place)
+]
+
+== Important Characteristics of Greedy Algorithms
+
+#align(horizon)[
+  - *Simple and Intuitive*: Easy to implement and understand.
+  - *Efficiency*: Often have a lower time complexity than algorithms like dynamic programming.
+  - *Limitations*: Do not always provide the globally optimal solution; depend on the problem's properties.
+]
+
+== Common Problems Solved with Greedy Algorithms
+
+#align(horizon)[
+  - Activity Selection Problem
+  - Huffman Coding Problem
+  - Coin Change Problem
+  - Minimum Cost Path in Graphs (Dijkstra)
+  - Traveling Salesman Problem (Heuristics)
+]
+
+#pagebreak()
+
+== When Greedy Algorithms Do Not Work
+
+#align(horizon)[
+  - *0-1 Knapsack Problem*:
+    It's not possible to divide items; the greedy approach does not guarantee the optimal solution.
+  - *Traveling Salesman Problem*:
+    Choosing the nearest next city does not lead to the globally optimal route.
+]
+
+== Comparison with Dynamic Programming
+
+#align(horizon)[
+  #text(size: 13pt)[
+    - *Dynamic Programming:*
+      - Solves smaller subproblems and stores their results to avoid recomputation.
+      - Guarantees the globally optimal solution.
+      - Can be more complex and consume more time and space.
+    - *Greedy Algorithms:*
+      - Make the best local choice without considering subproblems.
+      - May not guarantee the globally optimal solution.
+      - More efficient in terms of time and space.
+  ]
+]
+
+#pagebreak()
+
+== Conclusion
+
+#align(horizon)[
+  - *Advantages:*
+    - Simplicity and efficiency.
+    - Suitable for problems with greedy properties and optimal substructure.
+  - *Disadvantages:*
+    - Not applicable to all problems.
+    - May not find the globally optimal solution.
+  - *Important:*
+    - Carefully analyze the problem to determine if a greedy approach is suitable.
+]
+
+== Practical Section
+
+#align(horizon)[
+  - *Task*: Solve the 0-1 Knapsack Problem using a greedy approach and compare with the optimal solution.
+  - *Task*: Identify a problem that cannot be optimally solved with greedy algorithms and explain why.
+]
+
