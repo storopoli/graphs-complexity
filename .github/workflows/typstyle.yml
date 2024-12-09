@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Bininstall
-        uses: cargo-bins/cargo-binstall@v1.10.15
+        uses: cargo-bins/cargo-binstall@v1.10.16
 
       - name: Binstall typstyle
         run: cargo binstall --no-confirm typstyle
