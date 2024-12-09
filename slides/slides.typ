@@ -2268,9 +2268,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Bubble Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Given an array $A$ of $n$ elements:],
-      )[
+      #pseudocode-list(title: smallcaps[Given an array $A$ of $n$ elements:])[
         + *for* $i$ from $0$ to $n - 1$:
           + *for* $j$ from $0$ to $n - i - 1$:
             + *if* $A[j] > A[j + 1]$:
@@ -2351,9 +2349,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Selection Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Given an array $A$ of $n$ elements:],
-      )[
+      #pseudocode-list(title: smallcaps[Given an array $A$ of $n$ elements:])[
         + *for* $i$ from $0$ to $n - 1$:
           + $"minIdx" := i$
           + *for* $j$ from $i + 1$ to $n$:
@@ -2436,9 +2432,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Insertion Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Given an array $A$ of $n$ elements:],
-      )[
+      #pseudocode-list(title: smallcaps[Given an array $A$ of $n$ elements:])[
         + *for* $i$ from $1$ to $n - 1$:
           + $"key" := A[i]$
           + $j := i - 1$
@@ -2765,9 +2759,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Heap Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Function heap_sort(array A, n):],
-      )[
+      #pseudocode-list(title: smallcaps[Function heap_sort(array A, n):])[
         + *for* $i$ from $n / 2 - 1$ down to $0$:
           + heapify(A, n, i)
         + *for* $i$ from $n - 1$ down to $0$:
@@ -2894,9 +2886,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Counting Sort],
     text(size: 10pt)[
-      #pseudocode-list(
-        title: smallcaps[Given an array $A$ of $n$ elements:],
-      )[
+      #pseudocode-list(title: smallcaps[Given an array $A$ of $n$ elements:])[
         + $max := "find_max"(A)$
         + initialize count array $C[0..max]$
         + *for* each element in $A$:
@@ -2992,9 +2982,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Radix Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Function radix_sort(array A, n):],
-      )[
+      #pseudocode-list(title: smallcaps[Function radix_sort(array A, n):])[
         + $max := "find_max"(A)$
         + *for* $"exp" := 1$; $floor("max" / "exp") > 0$; $"exp" *= 10$:
           + $"counting_sort_by_digit"(A, n, "exp")$
@@ -3480,9 +3468,7 @@ subtrees is at most 1.
     supplement: [Algorithm],
     caption: [Example of Recursion],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Procedure $p$(input $x$ of size $n$)],
-      )[
+      #pseudocode-list(title: smallcaps[Procedure $p$(input $x$ of size $n$)])[
         + *if* $n < "some constant" k$:
           + solve $x$ directly, without recursion
         + *else*:

@@ -2289,9 +2289,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [_Bubble Sort_],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Dado um _array_ $A$ de $n$ elementos:],
-      )[
+      #pseudocode-list(title: smallcaps[Dado um _array_ $A$ de $n$ elementos:])[
         + *para* $i$ de $0$ até $n - 1$:
           + *para* $j$ de $0$ até $n - i - 1$:
             + *se* $A[j] > A[j + 1]$:
@@ -2373,9 +2371,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [_Selection Sort_],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Dado um _array_ $A$ de $n$ elementos:],
-      )[
+      #pseudocode-list(title: smallcaps[Dado um _array_ $A$ de $n$ elementos:])[
         + *para* $i$ de $0$ até $n - 1$:
           + $"minIdx" := i$
           + *para* $j$ de $i + 1$ até $n$:
@@ -2458,9 +2454,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [_Insertion Sort_],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Dado um _array_ $A$ de $n$ elementos:],
-      )[
+      #pseudocode-list(title: smallcaps[Dado um _array_ $A$ de $n$ elementos:])[
         + *para* $i$ de $1$ até $n - 1$:
           + $"key" := A[i]$
           + $j := i - 1$
@@ -2787,9 +2781,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [_Heap Sort_],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Função heap_sort(_array_ A, n):],
-      )[
+      #pseudocode-list(title: smallcaps[Função heap_sort(_array_ A, n):])[
         + *para* $i$ de $n / 2 - 1$ até $0$:
           + heapify(A, n, i)
         + *para* $i$ de $n - 1$ até $0$:
@@ -2916,9 +2908,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [_Counting Sort_],
     text(size: 10pt)[
-      #pseudocode-list(
-        title: smallcaps[Dado um _array_ $A$ de $n$ elementos:],
-      )[
+      #pseudocode-list(title: smallcaps[Dado um _array_ $A$ de $n$ elementos:])[
         + $max := "find_max"(A)$
         + inicialize o _array_ de contagem $C[0..max]$
         + *para* cada elemento em $A$:
@@ -3014,9 +3004,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     supplement: [Algoritmo],
     caption: [Radix Sort],
     text(size: 12pt)[
-      #pseudocode-list(
-        title: smallcaps[Função radix_sort(_array_ A, n):],
-      )[
+      #pseudocode-list(title: smallcaps[Função radix_sort(_array_ A, n):])[
         + $max := "find_max"(A)$
         + *para* $"exp" := 1$; $floor("max" / "exp") > 0$; $"exp" *= 10$:
           + $"counting_sort_by_digit"(A, n, "exp")$
