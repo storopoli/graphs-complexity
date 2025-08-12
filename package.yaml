@@ -64,12 +64,12 @@ executables:
   algorithms-07-bfs-search:
     main: Algorithms07BfsSearch.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-08-dfs-search:
     main: Algorithms08DfsSearch.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-09-bubble-sort:
     main: Algorithms09BubbleSort.hs
