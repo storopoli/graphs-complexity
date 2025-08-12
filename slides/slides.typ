@@ -43,9 +43,9 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ==
 
 #align(horizon + center)[#image(
-    "images/algorithm_analysis_meme.jpg",
-    width: 50%,
-  )]
+  "images/algorithm_analysis_meme.jpg",
+  width: 50%,
+)]
 
 == Computational Theory
 
@@ -148,9 +148,9 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ==
 
 #align(horizon + center)[#image(
-    "images/graph_isomorphism_meme.jpg",
-    width: 50%,
-  )]
+  "images/graph_isomorphism_meme.jpg",
+  width: 50%,
+)]
 
 == What are Graphs?
 
@@ -253,7 +253,9 @@ Most graphs are *weighted*, meaning they have values associated with the edges.
   - Molecular structures
 ]
 
-== #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[The 7 Bridges of Königsberg]
+== #link(
+  "https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg",
+)[The 7 Bridges of Königsberg]
 
 The first practical application of graph theory, solved by Euler in 1736.
 
@@ -268,7 +270,9 @@ The first practical application of graph theory, solved by Euler in 1736.
   ) <konigsberg-brigdes>
 ]
 
-== #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[The 7 Bridges of Königsberg]
+== #link(
+  "https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg",
+)[The 7 Bridges of Königsberg]
 
 #align(horizon + center)[
   #figure(
@@ -302,11 +306,13 @@ The first practical application of graph theory, solved by Euler in 1736.
   - The graph must have exactly *0 or 2 vertices of odd degree*
 ]
 
-== #link("https://en.wikipedia.org/wiki/Four_color_theorem")[The Four Color Theorem]
+== #link(
+  "https://en.wikipedia.org/wiki/Four_color_theorem",
+)[The Four Color Theorem]
 
 #align(horizon)[
   *No more than four colors are needed to color the regions of any map, so that two
-  adjacent regions do not share the same color.*
+    adjacent regions do not share the same color.*
 ]
 
 #pagebreak()
@@ -335,7 +341,7 @@ The first practical application of graph theory, solved by Euler in 1736.
 == Subgraphs
 
 A *subgraph* of a graph $G$ is another graph formed from a *subset of the
-vertices and edges of $G$*. The vertex subset must include all the edges'
+  vertices and edges of $G$*. The vertex subset must include all the edges'
 vertices, but may include additional vertices.
 
 #align(horizon + center)[
@@ -401,10 +407,10 @@ $ f: V(G) -> V(H) $
       columns: 2,
       gutter: 2mm,
       text[$
-          bold(A) = mat(
-        1, 1, 0, 0, 1, 0;1, 0, 1, 0, 1, 0;0, 1, 0, 1, 0, 0;0, 0, 1, 0, 1, 1;1, 1, 0, 1, 0, 0;0, 0, 0, 1, 0, 0;
-      )
-        $],
+        bold(A) = mat(
+          1, 1, 0, 0, 1, 0; 1, 0, 1, 0, 1, 0; 0, 1, 0, 1, 0, 0; 0, 0, 1, 0, 1, 1; 1, 1, 0, 1, 0, 0; 0, 0, 0, 1, 0, 0;
+        )
+      $],
       raw-render(
         ```dot
         graph G {
@@ -591,16 +597,14 @@ $ f: V(G) -> V(H) $
 
   A *Hamiltonian cycle*#footnote[
     fun fact: one of the first zero-knowledge proof schemes was based on finding a
-    Hamiltonian cycle in a giant graph. For more details, see #link(
-      "https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph",
-    )[Wikipedia]
-    and the #link(
-      "https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf",
-    )[original paper].
+    Hamiltonian cycle in a giant graph. For more details, see #link("https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph")[Wikipedia]
+    and the #link("https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf")[original paper].
   ] is a cycle that visits each vertex exactly once.
 ]
 
-== #link("https://en.wikipedia.org/wiki/Travelling_salesman_problem")[Traveling Salesman Problem]
+== #link(
+  "https://en.wikipedia.org/wiki/Travelling_salesman_problem",
+)[Traveling Salesman Problem]
 
 The *traveling salesman problem* (TSP) is a problem that tries to determine the
 shortest route to visit a series of cities (visiting each city only once),
@@ -931,8 +935,8 @@ subtrees is at most 1.
 
 #align(horizon)[
   The computational complexity of an algorithm is the *number of computational
-  operations (such as arithmetic operations, comparisons,
-  and memory accesses) required for its execution*.
+    operations (such as arithmetic operations, comparisons,
+    and memory accesses) required for its execution*.
 
   #v(1em)
 
@@ -1017,7 +1021,7 @@ subtrees is at most 1.
 
 #align(horizon)[
   A $cal(N P)$-complete problem is an $cal(N P)$ problem that is *as hard as any
-  other problem in $cal(N P)$*. If a $cal(N P)$-complete problem can be solved in
+    other problem in $cal(N P)$*. If a $cal(N P)$-complete problem can be solved in
   polynomial time, then all problems in $cal(N P)$-complete can also be solved in
   polynomial time.
 ]
@@ -1044,7 +1048,9 @@ subtrees is at most 1.
 
   #v(1em)
 
-  #link("https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem")[Cook and Levin proved]
+  #link(
+    "https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem",
+  )[Cook and Levin proved]
   that every problem that can be easily verified can be solved as quickly as SAT,
   which is why it is NP-complete.
 ]
@@ -1053,7 +1059,7 @@ subtrees is at most 1.
 
 #align(horizon)[
   An $cal(N P)$-hard problem is one for which *no efficient algorithm is known to
-  solve it*. However, if an efficient algorithm for an $cal(N P)$-hard problem is
+    solve it*. However, if an efficient algorithm for an $cal(N P)$-hard problem is
   found, then all problems in $cal(N P)$ can be solved efficiently.
 ]
 
@@ -1105,9 +1111,9 @@ subtrees is at most 1.
 ==
 
 #align(horizon + center)[#image(
-    "images/recursion_joker_debugging_meme.jpg",
-    width: 80%,
-  )]
+  "images/recursion_joker_debugging_meme.jpg",
+  width: 80%,
+)]
 
 == Introduction
 
@@ -1122,7 +1128,7 @@ subtrees is at most 1.
 
 #align(horizon)[
   Big-O notation ($O$) is used to describe the *worst-case runtime of an
-  algorithm* in terms of the *input size $n$*.
+    algorithm* in terms of the *input size $n$*.
 ]
 
 == Steps to Determine Complexity
@@ -1150,9 +1156,9 @@ subtrees is at most 1.
 #pagebreak()
 
 #align(horizon + center)[#image(
-    "images/recursion_world_burn_meme.jpeg",
-    width: 80%,
-  )]
+  "images/recursion_world_burn_meme.jpeg",
+  width: 80%,
+)]
 
 == Control Structures
 
@@ -1237,9 +1243,9 @@ subtrees is at most 1.
 == Recursion
 
 #align(horizon + center)[#image(
-    "images/recursion_joker_stackoverflow_meme.jpeg",
-    width: 80%,
-  )]
+  "images/recursion_joker_stackoverflow_meme.jpeg",
+  width: 80%,
+)]
 
 #pagebreak()
 
@@ -1492,7 +1498,9 @@ subtrees is at most 1.
     #pagebreak()
 
     Find the
-    #link("https://en.wikipedia.org/wiki/Greatest_common_divisor")[greatest common divisor]
+    #link(
+      "https://en.wikipedia.org/wiki/Greatest_common_divisor",
+    )[greatest common divisor]
     of two numbers:
     // Total complexity: O(log(min(a, b)))
     ```c
@@ -1526,9 +1534,7 @@ subtrees is at most 1.
     #pagebreak()
 
     Find the majority element (an element that appears more than $n/2$ times) using
-    #link(
-  "https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm",
-)[Boyer-Moore's Voting Algorithm].
+    #link("https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm")[Boyer-Moore's Voting Algorithm].
     // Total complexity: O(n)
     #text(size: 6pt)[
       ```c
@@ -1588,7 +1594,9 @@ subtrees is at most 1.
 
     #pagebreak()
 
-    #link("https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm")[Kadane's algorithm]
+    #link(
+      "https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm",
+    )[Kadane's algorithm]
     to find the maximum subarray sum:
     // Total complexity: O(n)
     #text(size: 11pt)[
@@ -1614,9 +1622,7 @@ subtrees is at most 1.
 
     #pagebreak()
 
-    #link(
-  "https://en.wikipedia.org/wiki/Longest_common_subsequence",
-)[Longest Common Subsequence (LCS)]:
+    #link("https://en.wikipedia.org/wiki/Longest_common_subsequence")[Longest Common Subsequence (LCS)]:
     // Total complexity: O(n * m)
     #text(size: 10pt)[
       ```c
@@ -1674,9 +1680,7 @@ subtrees is at most 1.
     #pagebreak()
 
     This algorithm is a
-    #link(
-  "https://en.wikipedia.org/wiki/Fast_inverse_square_root",
-)[fast way to compute the inverse square root],
+    #link("https://en.wikipedia.org/wiki/Fast_inverse_square_root")[fast way to compute the inverse square root],
     $1 / sqrt(x)$, made famous by its use in the game Quake III Arena by
     #link("https://en.wikipedia.org/wiki/John_Carmack")[John Carmack]. The method
     uses a clever approximation and a single iteration of #link("https://en.wikipedia.org/wiki/Newton%27s_method")[Newton's method] to
@@ -1709,9 +1713,9 @@ subtrees is at most 1.
 ==
 
 #align(horizon + center)[#image(
-    "images/search_algorithms_meme.png",
-    width: 100%,
-  )]
+  "images/search_algorithms_meme.png",
+  width: 100%,
+)]
 
 == What is a Search Algorithm?
 
