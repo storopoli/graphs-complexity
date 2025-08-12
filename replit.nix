@@ -3,5 +3,7 @@
     clang
     just
     zig
+    ghc
+    stack
   ];
 }

@@ -10,6 +10,26 @@
         "exportPdf": "onSave",
         "outputPath": "$root/$name"
       }
+    },
+    "hls": {
+      "initialization_options": {
+        "haskell": {
+          "formattingProvider": "fourmolu",
+          "cabalFormattingProvider": "cabal-fmt",
+          "plugin": {
+            "fourmolu": {
+              "config": {
+                "external": true
+              }
+            },
+            "rename": {
+              "config": {
+                "crossModule": true
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

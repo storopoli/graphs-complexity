@@ -1,0 +1,23 @@
+cabal-version:   3.0
+name:            graphs-complexity
+version:         0.1.0.0
+synopsis:        Graph Theory and Computational Complexity
+homepage:        https://github.com/storopoli/graphs-complexity
+license:         CC0-1.0
+license-file:    LICENSE
+author:          Jose Storopoli
+maintainer:      jose@storopoli.com
+category:        Math
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+common executable-settings
+    import:           warnings
+    build-depends:
+        , base    >=4.18 && <5
+    default-language: Haskell2010
+    hs-source-dirs:   src
+    ghc-options:      -threaded -rtsopts -with-rtsopts=-N

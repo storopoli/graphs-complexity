@@ -9,5 +9,9 @@
 .zig-cache/
 zig-out/
 
+# Haskell
+.stack-work/
+dist-newstyle/
+
 # Output
 output/
