@@ -4,7 +4,7 @@ const time = std.time;
 const Instant = time.Instant;
 const Allocator = std.mem.Allocator;
 const allocator = std.heap.page_allocator;
-const rand = std.rand;
+const Random = std.Random;
 
 /// Base of numeral system (decimal)
 const BASE: u32 = 10;
@@ -107,7 +107,7 @@ pub fn main() !void {
     const N_values = [_]usize{ 10_000, 20_000, 30_000, 40_000 };
 
     // Seed the random number generator
-    var rng = rand.DefaultPrng.init(123); // Xoshiro256 is good enough
+    var rng = Random.DefaultPrng.init(123); // Xoshiro256 is good enough
 
     for (N_values) |N| {
         // Allocate memory for the array
