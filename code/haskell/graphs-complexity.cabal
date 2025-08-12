@@ -18,6 +18,84 @@ common executable-settings
     import:           warnings
     build-depends:
         , base    >=4.18 && <5
+        , random  >=1.3
+
     default-language: Haskell2010
     hs-source-dirs:   src
     ghc-options:      -threaded -rtsopts -with-rtsopts=-N
+
+executable graphs-01-eulerian-path
+    import:  executable-settings
+    main-is: Graphs01EulerianPath.hs
+
+executable graphs-01-hamiltonian-cycle
+    import:  executable-settings
+    main-is: Graphs01HamiltonianCycle.hs
+
+executable graphs-02-tree-detection
+    import:  executable-settings
+    main-is: Graphs02TreeDetection.hs
+
+executable algorithms-03-subset-sum
+    import:  executable-settings
+    main-is: Algorithms03SubsetSum.hs
+
+executable algorithms-04-knapsack
+    import:  executable-settings
+    main-is: Algorithms04Knapsack.hs
+
+executable algorithms-05-linear-search
+    import:  executable-settings
+    main-is: Algorithms05LinearSearch.hs
+
+executable algorithms-06-binary-search
+    import:  executable-settings
+    main-is: Algorithms06BinarySearch.hs
+
+executable algorithms-07-bfs-search
+    import:  executable-settings
+    main-is: Algorithms07BfsSearch.hs
+
+executable algorithms-08-dfs-search
+    import:  executable-settings
+    main-is: Algorithms08DfsSearch.hs
+
+executable algorithms-09-bubble-sort
+    import:  executable-settings
+    main-is: Algorithms09BubbleSort.hs
+
+executable algorithms-10-selection-sort
+    import:  executable-settings
+    main-is: Algorithms10SelectionSort.hs
+
+executable algorithms-11-insertion-sort
+    import:  executable-settings
+    main-is: Algorithms11InsertionSort.hs
+
+executable algorithms-12-merge-sort
+    import:  executable-settings
+    main-is: Algorithms12MergeSort.hs
+
+executable algorithms-13-quick-sort
+    import:  executable-settings
+    main-is: Algorithms13QuickSort.hs
+
+executable algorithms-14-heap-sort
+    import:  executable-settings
+    main-is: Algorithms14HeapSort.hs
+
+executable algorithms-15-counting-sort
+    import:  executable-settings
+    main-is: Algorithms15CountingSort.hs
+
+executable algorithms-16-radix-sort
+    import:  executable-settings
+    main-is: Algorithms16RadixSort.hs
+
+executable algorithms-17-recursion-palindrome
+    import:  executable-settings
+    main-is: Algorithms17RecursionPalindrome.hs
+
+executable algorithms-18-divide-and-conquer-power
+    import:  executable-settings
+    main-is: Algorithms18DivideAndConquerPower.hs
