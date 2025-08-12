@@ -21,4 +21,4 @@ jobs:
       - name: Check Haskell code format
         uses: haskell-actions/run-fourmolu
         with:
-          working-directory: code/haskell
+          working-directory: ./code/haskell

@@ -21,4 +21,4 @@ jobs:
       - name: Check Haskell lints
         uses: haskell-actions/hlint-scan@v1
         with:
-          path: code/haskell
+          path: ./code/haskell
