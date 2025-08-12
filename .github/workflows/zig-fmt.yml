@@ -1,9 +1,14 @@
 name: zig-fmt
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
   pull_request:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
 
 jobs:
   clang-format:
@@ -12,7 +17,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup zig
-        uses: mlugg/setup-zig@v1
+        uses: mlugg/setup-zig@v2
+
       - name: Check zig code format
         run: zig fmt --check ./code/zig/*.zig

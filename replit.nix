@@ -1,6 +1,7 @@
 { pkgs }: {
-  deps = [
-    pkgs.clang
-    pkgs.just
+  deps = with pkgs; [
+    clang
+    just
+    zig
   ];
 }

@@ -3,7 +3,7 @@ const print = std.debug.print;
 const time = std.time;
 const Instant = time.Instant;
 const allocator = std.heap.page_allocator;
-const rand = std.rand;
+const Random = std.Random;
 const mem = std.mem;
 
 /// Function to perform Bubble Sort on an array.
@@ -43,7 +43,7 @@ pub fn main() !void {
     const N_values = [_]usize{ 10_000, 20_000, 30_000, 40_000 };
 
     // Seed the random number generator
-    var rng = rand.DefaultPrng.init(123); // Xoshiro256 is good enough
+    var rng = Random.DefaultPrng.init(123); // Xoshiro256 is good enough
 
     for (N_values) |N| {
         // Allocate memory for the array

@@ -1,5 +1,5 @@
-#import "@preview/slydst:0.1.2": *
-#import "@preview/diagraph:0.3.0": *
+#import "@preview/slydst:0.1.4": *
+#import "@preview/diagraph:0.3.5": *
 #import "@preview/lovelace:0.3.0": *
 
 #set text(lang: "pt")
@@ -44,9 +44,9 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ==
 
 #align(horizon + center)[#image(
-    "images/algorithm_analysis_meme.jpg",
-    width: 50%,
-  )]
+  "images/algorithm_analysis_meme.jpg",
+  width: 50%,
+)]
 
 == Teoria Computação
 
@@ -97,7 +97,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
 
   #align(center)[
     _Quase_ tudo que você faz em computação pode ser modelado como um *problema de
-    grafos*.
+      grafos*.
   ]
 ]
 
@@ -150,9 +150,9 @@ Blank space can be filled with vertical spaces like #v(1fr).
 ==
 
 #align(horizon + center)[#image(
-    "images/graph_isomorphism_meme.jpg",
-    width: 50%,
-  )]
+  "images/graph_isomorphism_meme.jpg",
+  width: 50%,
+)]
 
 == O que são Grafos?
 
@@ -256,7 +256,9 @@ arestas.
   - Estruturas moleculares
 ]
 
-== #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[As 7 pontes de Königsberg]
+== #link(
+  "https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg",
+)[As 7 pontes de Königsberg]
 
 Primeira aplicação prática da teoria dos grafos, resolvida por Euler em 1736.
 
@@ -271,7 +273,9 @@ Primeira aplicação prática da teoria dos grafos, resolvida por Euler em 1736.
   ) <konigsberg-brigdes>
 ]
 
-== #link("https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg")[As 7 pontes de Königsberg]
+== #link(
+  "https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg",
+)[As 7 pontes de Königsberg]
 
 #align(horizon + center)[
   #figure(
@@ -299,17 +303,19 @@ Primeira aplicação prática da teoria dos grafos, resolvida por Euler em 1736.
 
 #align(horizon)[
   A solução do problema de Königsberg foi dada por Euler. O grafo precisa de *duas
-  condições* para ser resolvido:
+    condições* para ser resolvido:
 
   - O grafo deve ser *totalmente conectado*
   - O grafo deve ter exatamente *0 ou 2 vértices de grau ímpar*
 ]
 
-== #link("https://en.wikipedia.org/wiki/Four_color_theorem")[O teorema das 4 cores]
+== #link(
+  "https://en.wikipedia.org/wiki/Four_color_theorem",
+)[O teorema das 4 cores]
 
 #align(horizon)[
   *Não mais do que quatro cores são necessárias para colorir as regiões de qualquer
-  mapa, de modo que duas regiões adjacentes não tenham a mesma cor.*
+    mapa, de modo que duas regiões adjacentes não tenham a mesma cor.*
 ]
 
 #pagebreak()
@@ -340,7 +346,7 @@ Primeira aplicação prática da teoria dos grafos, resolvida por Euler em 1736.
 == Subgrafos
 
 Um *subgrafo* de um grafo $G$ é outro grafo formado a partir de um *subconjunto
-dos vértices e arestas de $G$*. O subconjunto de vértices deve incluir todos os
+  dos vértices e arestas de $G$*. O subconjunto de vértices deve incluir todos os
 vértices das arestas, mas pode incluir vértices adicionais.
 
 #align(horizon + center)[
@@ -406,10 +412,10 @@ $ f: V(G) -> V(H) $
       columns: 2,
       gutter: 2mm,
       text[$
-          bold(A) = mat(
-        1, 1, 0, 0, 1, 0;1, 0, 1, 0, 1, 0;0, 1, 0, 1, 0, 0;0, 0, 1, 0, 1, 1;1, 1, 0, 1, 0, 0;0, 0, 0, 1, 0, 0;
-      )
-        $],
+        bold(A) = mat(
+          1, 1, 0, 0, 1, 0; 1, 0, 1, 0, 1, 0; 0, 1, 0, 1, 0, 0; 0, 0, 1, 0, 1, 1; 1, 1, 0, 1, 0, 0; 0, 0, 0, 1, 0, 0;
+        )
+      $],
       raw-render(
         ```dot
         graph G {
@@ -596,16 +602,14 @@ $ f: V(G) -> V(H) $
 
   Um *ciclo Hamiltoniano*#footnote[
     curiosidade: um dos primeiros esquemas de zero-knowledge proofs foi baseado em
-    achar um ciclo Hamiltoniano em um grafo gigante. Para mais detalhes, veja a #link(
-      "https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph",
-    )[Wikipedia]
-    e o #link(
-      "https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf",
-    )[paper original].
+    achar um ciclo Hamiltoniano em um grafo gigante. Para mais detalhes, veja a #link("https://en.wikipedia.org/wiki/Zero-knowledge_proof#Hamiltonian_cycle_for_a_large_graph")[Wikipedia]
+    e o #link("https://web.archive.org/web/20230103032937/http://euler.nmt.edu/~brian/students/pope.pdf")[paper original].
   ] é um ciclo que visita cada vértice uma só vez.
 ]
 
-== #link("https://en.wikipedia.org/wiki/Travelling_salesman_problem")[Problema do caixeiro-viajante]
+== #link(
+  "https://en.wikipedia.org/wiki/Travelling_salesman_problem",
+)[Problema do caixeiro-viajante]
 
 O *problema do caixeiro-viajante* (PCV) é um problema que tenta determinar a
 menor rota para percorrer uma série de cidades (visitando uma única vez cada uma
@@ -935,8 +939,8 @@ e direita é no máximo 1.
 
 #align(horizon)[
   Complexidadiade computacional de um algoritmo é o *número de operações
-  computacionais (tais como operaçõe aritméticas, comparações,
-  e acessos a memória) requerido para sua execução*.
+    computacionais (tais como operaçõe aritméticas, comparações,
+    e acessos a memória) requerido para sua execução*.
 
   #v(1em)
 
@@ -967,7 +971,7 @@ e direita é no máximo 1.
 
 #align(horizon)[
   Um problema de decisão pertence a classe $cal(N P)$ se existe um *algoritmo em
-  tempo polinomial que _verifique_ a solução de um problema*.
+    tempo polinomial que _verifique_ a solução de um problema*.
 
   #v(1em)
 
@@ -1020,7 +1024,7 @@ e direita é no máximo 1.
 
 #align(horizon)[
   Um problema $cal(N P)$-completo é um problema $cal(N P)$ que é *tão difícil
-  quanto qualquer outro problema em $cal(N P)$*. Se um problema $cal(N P)$-completo
+    quanto qualquer outro problema em $cal(N P)$*. Se um problema $cal(N P)$-completo
   puder ser resolvido em tempo polinomial, então todos os problemas em $cal(N P)$-completo
   também podem.
 ]
@@ -1029,7 +1033,7 @@ e direita é no máximo 1.
 
 #align(horizon)[
   O problema de satisfatibilidade booleana (SAT) busca determinar se uma *fórmula
-proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
+    proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
   ("solução") de valores de verdade para suas variáveis.
 
   $ (a and b and c) or (d and e and f) or (g and h and i) or (j and k and l) $
@@ -1047,7 +1051,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
   #v(1em)
 
-  #link("https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem")[Cook e Levin provaram]
+  #link(
+    "https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem",
+  )[Cook e Levin provaram]
   que todo problema de fácil verificação pode ser resolvido tão rapidamente quanto
   o SAT, que, por isso, é NP-completo.
 ]
@@ -1056,7 +1062,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #align(horizon)[
   Um problema $cal(N P)$-difícil é um problema para o qual *não se conhece um
-  algoritmo eficiente para resolvê-lo*. No entanto, se um algoritmo eficiente para
+    algoritmo eficiente para resolvê-lo*. No entanto, se um algoritmo eficiente para
   um problema $cal(N P)$-difícil for encontrado, então todos os problemas em $cal(N P)$ podem
   ser resolvidos eficientemente.
 ]
@@ -1081,7 +1087,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
 #text(size: 14pt)[
   #align(horizon)[
-    #link("https://en.wikipedia.org/wiki/Knapsack_problem")[*Problema da Mochila (_Knapsack Problem_)*]
+    #link(
+      "https://en.wikipedia.org/wiki/Knapsack_problem",
+    )[*Problema da Mochila (_Knapsack Problem_)*]
 
     Você é um aventureiro e encontrou uma caverna cheia de tesouros. No entanto, sua
     mochila tem uma capacidade limitada e você precisa decidir quais itens levar
@@ -1109,24 +1117,24 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ==
 
 #align(horizon + center)[#image(
-    "images/recursion_joker_debugging_meme.jpg",
-    width: 80%,
-  )]
+  "images/recursion_joker_debugging_meme.jpg",
+  width: 80%,
+)]
 
 == Introdução
 
 #align(horizon)[
   A análise de complexidade é fundamental para avaliar a *eficiência de
-  algoritmos*. Ela nos ajuda a prever o comportamento de um algoritmo à medida que
+    algoritmos*. Ela nos ajuda a prever o comportamento de um algoritmo à medida que
   a entrada aumenta, o que é crucial para a *otimização* e escolha do *algoritmo
-  certo* para uma aplicação específica.
+    certo* para uma aplicação específica.
 ]
 
 == Notação Big-O
 
 #align(horizon)[
   A notação Big-O ($O$) é usada para descrever o *pior caso do tempo de execução
-  de um algoritmo* em função do *tamanho de entrada $n$*.
+    de um algoritmo* em função do *tamanho de entrada $n$*.
 ]
 
 == Passos para Determinar a Complexidade
@@ -1154,9 +1162,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 #pagebreak()
 
 #align(horizon + center)[#image(
-    "images/recursion_world_burn_meme.jpeg",
-    width: 80%,
-  )]
+  "images/recursion_world_burn_meme.jpeg",
+  width: 80%,
+)]
 
 == Estruturas de Controle
 
@@ -1241,9 +1249,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 == Recursão
 
 #align(horizon + center)[#image(
-    "images/recursion_joker_stackoverflow_meme.jpeg",
-    width: 80%,
-  )]
+  "images/recursion_joker_stackoverflow_meme.jpeg",
+  width: 80%,
+)]
 
 #pagebreak()
 
@@ -1495,7 +1503,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #pagebreak()
 
     Encontrar o
-    #link("https://en.wikipedia.org/wiki/Greatest_common_divisor")[_greatest common divisor_]
+    #link(
+      "https://en.wikipedia.org/wiki/Greatest_common_divisor",
+    )[_greatest common divisor_]
     (minimo múltiplo comum) de dois números:
     // Complexidade total: O(log(min(a, b)))
     ```c
@@ -1530,9 +1540,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 
     Achando o elemento majoritário (um elemento que aparece mais de $n/2$ vezes)
     usando o algoritmo de votação de
-    #link(
-  "https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm",
-)[Boyer-Moore's].
+    #link("https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm")[Boyer-Moore's].
     // Complexidade total: O(n)
     #text(size: 6pt)[
       ```c
@@ -1568,7 +1576,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #pagebreak()
 
     Gerando o
-    #link("https://en.wikipedia.org/wiki/Pascal%27s_triangle")[Triângulo de Pascal]
+    #link(
+      "https://en.wikipedia.org/wiki/Pascal%27s_triangle",
+    )[Triângulo de Pascal]
     // Complexidade total: O(n^2)
     #text(size: 11pt)[
       ```c
@@ -1593,7 +1603,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #pagebreak()
 
     Algoritmo de
-    #link("https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm")[Kadane]
+    #link(
+      "https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm",
+    )[Kadane]
     para encontrar a soma do _subarray_ máximo:
     // Complexidade total: O(n)
     #text(size: 11pt)[
@@ -1620,9 +1632,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #pagebreak()
 
     Encontrar a maior subsequência comum
-    #link(
-  "https://en.wikipedia.org/wiki/Longest_common_subsequence",
-)[(_longest common subsequence_ -- LCS)]:
+    #link("https://en.wikipedia.org/wiki/Longest_common_subsequence")[(_longest common subsequence_ -- LCS)]:
     // Complexidade total: O(n * m)
     #text(size: 10pt)[
       ```c
@@ -1680,9 +1690,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #pagebreak()
 
     Esse algoritmo é uma
-    #link(
-  "https://en.wikipedia.org/wiki/Fast_inverse_square_root",
-)[maneira rápida de calcular a raiz quadrada inversa],
+    #link("https://en.wikipedia.org/wiki/Fast_inverse_square_root")[maneira rápida de calcular a raiz quadrada inversa],
     $1 / sqrt(x)$, que ficou famoso por seu uso no jogo Quake III Arena por
     #link("https://en.wikipedia.org/wiki/John_Carmack")[John Carmack]. O método usa
     uma aproximação inteligente e uma única iteração do of #link("https://en.wikipedia.org/wiki/Newton%27s_method")[método de Newton]
@@ -1716,9 +1724,9 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
 ==
 
 #align(horizon + center)[#image(
-    "images/search_algorithms_meme.png",
-    width: 100%,
-  )]
+  "images/search_algorithms_meme.png",
+  width: 100%,
+)]
 
 == O que é um Algoritmo de Busca?
 
@@ -2181,7 +2189,10 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     #table(
       columns: 2,
       align: left + horizon,
-      table.header([*Característica*], [*BFS*], [*DFS*]),
+      table.header(
+        [*Característica*], [*BFS*],
+        [*DFS*],
+      ),
       [*Estrutura de Dados*], [Fila (_Queue_)],
       [Pilha (_Stack_)], [*Uso de Memória*],
       [Maior (guarda todos os vizinhos)], [Menor (apenas caminho atual)],
@@ -3982,7 +3993,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
     - Se $w_n > W$ (peso do item $n$ é maior que a capacidade atual):
       $K(n, W) = K(n - 1, W)$
     - Senão:
-      $K(n, W) = max( K(n - 1, W), v_n + K(n - 1, W - w_n) )$
+      $K(n, W) = max(K(n - 1, W), v_n + K(n - 1, W - w_n))$
 ]
 
 #pagebreak()
@@ -4004,7 +4015,7 @@ proposicional pode ser tornada verdadeira* por meio de uma atribuição adequada
           + se $i == 0$ ou $w == 0$:
             + $K[i][w] = 0$
           + senão se $"pesos"[i - 1] \leq w$:
-            + $K[i][w] = max( "valores"[i - 1] + K[i - 1][w - "pesos"[i - 1]],\ K[i - 1][w] )$
+            + $K[i][w] = max("valores"[i - 1] + K[i - 1][w - "pesos"[i - 1]], \ K[i - 1][w])$
           + senão:
             + $K[i][w] = K[i - 1][w]$
         + retornar $K[n][W]$

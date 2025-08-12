@@ -1,9 +1,14 @@
 name: clang-format
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
   pull_request:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
 
 jobs:
   clang-format:
@@ -12,10 +17,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Check clang-format
-        uses: DoozyX/clang-format-lint-action@v0.18
+        uses: DoozyX/clang-format-lint-action@v0.18.2
         with:
-          source: '.'
-          extensions: 'c,h'
+          source: "."
+          extensions: "c,h"
           clangFormatVersion: 17
           style: Google

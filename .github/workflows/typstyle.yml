@@ -14,12 +14,15 @@ jobs:
     name: "Check typst formatting with typstyle"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup Bininstall
-        uses: cargo-bins/cargo-binstall@v1.10.16
+        uses: cargo-bins/cargo-binstall@v1.14.4
 
       - name: Binstall typstyle
         run: cargo binstall --no-confirm typstyle
 
-      - name: Check formtting
-        run: typstyle -p --check format-all
+      - name: Check formatting
+        working-directory: slides
+        run: typstyle -p --check .
