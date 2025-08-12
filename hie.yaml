@@ -75,7 +75,13 @@ cradle:
     - path: "./code/haskell/src/Algorithms15CountingSort.hs"
       component: "graphs-complexity:exe:algorithms-15-counting-sort"
 
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-15-counting-sort"
+
     - path: "./code/haskell/src/Algorithms16RadixSort.hs"
+      component: "graphs-complexity:exe:algorithms-16-radix-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
       component: "graphs-complexity:exe:algorithms-16-radix-sort"
 
     - path: "./code/haskell/src/Algorithms17RecursionPalindrome.hs"
