@@ -5,5 +5,9 @@
 *.out
 *.exe
 
+# Zig
+.zig-cache/
+zig-out/
+
 # Output
 output/
