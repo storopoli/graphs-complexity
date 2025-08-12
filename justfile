@@ -4,6 +4,9 @@ alias w := watch
 alias w-pt := watch-pt
 alias c := c-compile
 alias z := z-compile
+alias h := hs-build
+alias hr := hs-run
+alias hl := hs-list
 
 # List all the available commands
 default:
@@ -56,7 +59,7 @@ c-run: c-compile
     for FILE in $(ls ./output/); do
         "./output/$FILE"
     done
-    
+
 # Compile the Zig code in "code/zig/"
 z-compile:
     #!/usr/bin/env bash
@@ -86,3 +89,20 @@ z-fmt:
     #!/usr/bin/env bash
     set -e
     zig fmt ./code/zig/*.zig
+
+# Build all Haskell executables
+hs-build:
+    @echo "Building all Haskell executables"
+    stack build
+
+# Show Haskell algorithms help menu
+hs-list:
+    @echo "Showing Haskell algorithms menu"
+    stack run
+
+# Run Haskell algorithms (usage: just hs-run [all|number], e.g., just hr 01 or just hr all)
+hs-run algorithm="all": hs-build
+    #!/usr/bin/env bash
+    set -e
+    echo "Running Haskell algorithm: {{algorithm}}"
+    stack run -- {{algorithm}}

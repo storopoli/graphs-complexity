@@ -1,4 +1,5 @@
 {
-    "editor.formatOnSave": true,
-    "tinymist.formatterMode": "typstyle"
+  "editor.formatOnSave": true,
+  "haskell.formattingProvider": "fourmolu",
+  "tinymist.formatterMode": "typstyle"
 }

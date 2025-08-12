@@ -1,0 +1,94 @@
+cradle:
+  stack:
+    - path: "./code/haskell/app/Main.hs"
+      component: "graphs-complexity:exe:0-main"
+
+    - path: "./code/haskell/src/Algorithms01EulerianPath.hs"
+      component: "graphs-complexity:exe:algorithms-01-eulerian-path"
+
+    - path: "./code/haskell/src/Algorithms01HamiltonianCycle.hs"
+      component: "graphs-complexity:exe:algorithms-01-hamiltonian-cycle"
+
+    - path: "./code/haskell/src/Algorithms02TreeDetection.hs"
+      component: "graphs-complexity:exe:algorithms-02-tree-detection"
+
+    - path: "./code/haskell/src/Algorithms03SubsetSum.hs"
+      component: "graphs-complexity:exe:algorithms-03-subset-sum"
+
+    - path: "./code/haskell/src/Algorithms04Knapsack.hs"
+      component: "graphs-complexity:exe:algorithms-04-knapsack"
+
+    - path: "./code/haskell/src/Algorithms05LinearSearch.hs"
+      component: "graphs-complexity:exe:algorithms-05-linear-search"
+
+    - path: "./code/haskell/src/Algorithms06BinarySearch.hs"
+      component: "graphs-complexity:exe:algorithms-06-binary-search"
+
+    - path: "./code/haskell/src/Algorithms07BfsSearch.hs"
+      component: "graphs-complexity:exe:algorithms-07-bfs-search"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-07-bfs-search"
+
+    - path: "./code/haskell/src/Algorithms08DfsSearch.hs"
+      component: "graphs-complexity:exe:algorithms-08-dfs-search"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-08-dfs-search"
+
+    - path: "./code/haskell/src/Algorithms09BubbleSort.hs"
+      component: "graphs-complexity:exe:algorithms-09-bubble-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-09-bubble-sort"
+
+    - path: "./code/haskell/src/Algorithms10SelectionSort.hs"
+      component: "graphs-complexity:exe:algorithms-10-selection-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-10-selection-sort"
+
+    - path: "./code/haskell/src/Algorithms11InsertionSort.hs"
+      component: "graphs-complexity:exe:algorithms-11-insertion-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-11-insertion-sort"
+
+    - path: "./code/haskell/src/Algorithms12MergeSort.hs"
+      component: "graphs-complexity:exe:algorithms-12-merge-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-12-merge-sort"
+
+    - path: "./code/haskell/src/Algorithms13QuickSort.hs"
+      component: "graphs-complexity:exe:algorithms-13-quick-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-13-quick-sort"
+
+    - path: "./code/haskell/src/Algorithms14HeapSort.hs"
+      component: "graphs-complexity:exe:algorithms-14-heap-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-14-heap-sort"
+
+    - path: "./code/haskell/src/Algorithms15CountingSort.hs"
+      component: "graphs-complexity:exe:algorithms-15-counting-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-15-counting-sort"
+
+    - path: "./code/haskell/src/Algorithms16RadixSort.hs"
+      component: "graphs-complexity:exe:algorithms-16-radix-sort"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-16-radix-sort"
+
+    - path: "./code/haskell/src/Algorithms17RecursionPalindrome.hs"
+      component: "graphs-complexity:exe:algorithms-17-recursion-palindrome"
+
+    - path: "./code/haskell/src/Algorithms18DivideAndConquerPower.hs"
+      component: "graphs-complexity:exe:algorithms-18-divide-and-conquer-power"
+
+    - path: "./code/haskell/src/Utils.hs"
+      component: "graphs-complexity:exe:algorithms-18-divide-and-conquer-power"

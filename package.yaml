@@ -1,0 +1,128 @@
+name: graphs-complexity
+version: 2.0.0.0
+synopsis: Graph Theory and Computational Complexity
+homepage: https://github.com/storopoli/graphs-complexity
+license: CC0-1.0
+github: "storopoli/graphs-complexity"
+author: Jose Storopoli
+maintainer: jose@storopoli.com
+category: Math
+extra-doc-files:
+  - CHANGELOG.md
+  - LICENSE
+
+dependencies:
+  - base >= 4.18 && < 5
+  - random >= 1.3
+  - array >= 0.5
+  - containers >= 0.6
+  - process >= 1.6
+
+default-extensions: []
+
+ghc-options:
+  - -Wall
+  - -threaded
+  - -rtsopts
+  - -with-rtsopts=-N
+
+executables:
+  0-main:
+    main: Main.hs
+    source-dirs: code/haskell/app
+    other-modules: []
+
+  algorithms-01-eulerian-path:
+    main: Algorithms01EulerianPath.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-01-hamiltonian-cycle:
+    main: Algorithms01HamiltonianCycle.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-02-tree-detection:
+    main: Algorithms02TreeDetection.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-03-subset-sum:
+    main: Algorithms03SubsetSum.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-04-knapsack:
+    main: Algorithms04Knapsack.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-05-linear-search:
+    main: Algorithms05LinearSearch.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-06-binary-search:
+    main: Algorithms06BinarySearch.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-07-bfs-search:
+    main: Algorithms07BfsSearch.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-08-dfs-search:
+    main: Algorithms08DfsSearch.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-09-bubble-sort:
+    main: Algorithms09BubbleSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-10-selection-sort:
+    main: Algorithms10SelectionSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-11-insertion-sort:
+    main: Algorithms11InsertionSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-12-merge-sort:
+    main: Algorithms12MergeSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-13-quick-sort:
+    main: Algorithms13QuickSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-14-heap-sort:
+    main: Algorithms14HeapSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-15-counting-sort:
+    main: Algorithms15CountingSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-16-radix-sort:
+    main: Algorithms16RadixSort.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]
+
+  algorithms-17-recursion-palindrome:
+    main: Algorithms17RecursionPalindrome.hs
+    source-dirs: code/haskell/src
+    other-modules: []
+
+  algorithms-18-divide-and-conquer-power:
+    main: Algorithms18DivideAndConquerPower.hs
+    source-dirs: code/haskell/src
+    other-modules: [Utils]

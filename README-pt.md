@@ -2,6 +2,7 @@
 
 [![CC0](https://img.shields.io/badge/License-CC0-lightgrey.svg)](https://creativecommons.org/publicdomain/zero/1.0/)
 [![C code](https://img.shields.io/badge/code-C-blue)](./code/c)
+[![Haskell code](https://img.shields.io/badge/code-Haskell-purple)](./code/haskell)
 [![Zig code](https://img.shields.io/badge/code-Zig-orange)](./code/zig)
 [![Rodar no Repl.it](https://repl.it/badge/github/storopoli/grafos-complexidade)](https://repl.it/github/storopoli/grafos-complexidade)
 [![Abrir no Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/storopoli/grafos-complexidade)
@@ -36,13 +37,15 @@
 ## Exemplos de Código
 
 A principal linguagem de programação usada para os exemplos é C.
-Também há exemplos em Zig.
-Confira-os nos diretórios `code/c/` e `code/zig/`, respectivamente.
+Também há exemplos em [Haskell](https://www.haskell.org)
+e em [Zig](https://ziglang.org).
+Confira-os nos diretórios `code/c/`, `code/haskell`, e `code/zig/`, respectivamente.
 
 ## Dependências
 
 - Compilador C/C++;
-- (Opcional) compilador [Zig](https://ziglang.org); e
+- (Opcional) [compilador GHC para Haskell](https://www.haskell.org/ghc/);
+- (Opcional) [compilador Zig](https://ziglang.org); e
 - [`typst`](https://typst.app) para os slides.
 
 Os slides são gerados usando [Typst](https://typst.app) com GitHub Actions

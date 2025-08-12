@@ -1,4 +1,4 @@
-name: zig-fmt
+name: haskell-fmt
 
 on:
   push:
@@ -11,15 +11,14 @@ on:
       - "master"
 
 jobs:
-  zig-format:
-    name: Check if zig code is formatted
+  hlint-check:
+    name: Check Haskell lints
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup zig
-        uses: mlugg/setup-zig@v2
-
-      - name: Check zig code format
-        run: zig fmt --check ./code/zig/*.zig
+      - name: Check Haskell lints
+        uses: haskell-actions/hlint-scan@v1
+        with:
+          path: ./code/haskell
