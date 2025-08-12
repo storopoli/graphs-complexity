@@ -72,12 +72,12 @@ executables:
   algorithms-09-bubble-sort:
     main: Algorithms09BubbleSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-10-selection-sort:
     main: Algorithms10SelectionSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-11-insertion-sort:
     main: Algorithms11InsertionSort.hs
@@ -87,12 +87,12 @@ executables:
   algorithms-12-merge-sort:
     main: Algorithms12MergeSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-13-quick-sort:
     main: Algorithms13QuickSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-14-heap-sort:
     main: Algorithms14HeapSort.hs

@@ -2,21 +2,19 @@
 
 module Main where
 
-import System.CPUTime
-import System.Random
-import Text.Printf
+import Utils
 
 {- | Merge two sorted lists.
 Time complexity: O(n)
 Space complexity: O(n)
 -}
-merge ::
+merge :: (Ord a) =>
     -- | First sorted list
-    [Int] ->
+    [a] ->
     -- | Second sorted list
-    [Int] ->
+    [a] ->
     -- | Merged sorted list
-    [Int]
+    [a]
 merge [] ys = ys
 merge xs [] = xs
 merge (x : xs) (y : ys)
@@ -27,11 +25,11 @@ merge (x : xs) (y : ys)
 Time complexity: O(n log n)
 Space complexity: O(n)
 -}
-mergeSort ::
+mergeSort :: (Ord a) =>
     -- | List to sort
-    [Int] ->
+    [a] ->
     -- | Sorted list
-    [Int]
+    [a]
 mergeSort [] = []
 mergeSort [x] = [x]
 mergeSort xs = merge (mergeSort left) (mergeSort right)
@@ -39,35 +37,5 @@ mergeSort xs = merge (mergeSort left) (mergeSort right)
     mid = length xs `div` 2
     (left, right) = splitAt mid xs
 
--- | Check if a list is sorted in ascending order.
-isSorted :: [Int] -> Bool
-isSorted [] = True
-isSorted [_] = True
-isSorted (x : y : xs) = x <= y && isSorted (y : xs)
-
--- | Measure execution time of an action in seconds.
-timeAction :: IO a -> IO (a, Double)
-timeAction action = do
-    start <- getCPUTime
-    result <- action
-    end <- getCPUTime
-    let time = fromIntegral (end - start) / 1e12
-    return (result, time)
-
 main :: IO ()
-main = do
-    let nValues = [100_000, 200_000, 400_000, 800_000]
-
-    mapM_ testMergeSort nValues
-  where
-    testMergeSort n = do
-        let gen = mkStdGen 123 -- Fixed seed for reproducibility
-        let arr = take n $ randoms gen
-
-        (sortedArr, timeSpent) <- timeAction $ return (mergeSort arr)
-
-        printf "Merge Sort with N = %d\n" n
-        if isSorted sortedArr
-            then putStrLn "Array is sorted."
-            else putStrLn "Array is NOT sorted."
-        printf "Time taken: %f seconds\n\n" timeSpent
+main = testSortingAlgorithm "Merge Sort" mergeSort [100_000, 200_000, 400_000, 800_000]
