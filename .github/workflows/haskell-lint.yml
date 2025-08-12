@@ -14,6 +14,8 @@ jobs:
   hlint-check:
     name: Check Haskell lints
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
