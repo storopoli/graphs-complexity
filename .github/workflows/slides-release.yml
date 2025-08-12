@@ -1,4 +1,5 @@
 name: Release Slides (PDF)
+
 on:
   push:
     tags:
@@ -11,11 +12,19 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: typst-community/setup-typst@v3
-      - run: typst compile slides/slides.typ slides/slides.pdf
-      - run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
-      - name: "Release"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Compile slides EN
+        run: typst compile slides/slides.typ slides/slides.pdf
+
+      - name: Compile slides PT
+        run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
+
+      - name: Release slides
         uses: ncipollo/release-action@v1
         id: release
         with:

@@ -1,9 +1,14 @@
 name: zig-code
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
   pull_request:
-    branches: [ main ]
+    branches:
+      - "main"
+      - "master"
 
 jobs:
   clang-format:
@@ -12,9 +17,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup zig
-        uses: mlugg/setup-zig@v1
+        uses: mlugg/setup-zig@v2
+
       - name: Setup just
-        uses: extractions/setup-just@v2
+        uses: extractions/setup-just@v3
+
       - name: Compile and run zig code
         run: just z-run

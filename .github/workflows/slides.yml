@@ -1,4 +1,5 @@
 name: Render Slides (PDF)
+
 on:
   push:
     branches:
@@ -14,15 +15,26 @@ jobs:
     name: "Test Slides"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: typst-community/setup-typst@v3
-      - run: typst compile slides/slides.typ slides/slides.pdf
-      - run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
-      - uses: actions/upload-artifact@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v4
+
+      - name: Compile slides EN
+        run: typst compile slides/slides.typ slides/slides.pdf
+
+      - name: Compile slides PT
+        run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
+
+      - name: Upload slides EN
+        uses: actions/upload-artifact@v4
         with:
           name: slides
           path: slides/slides.pdf
-      - uses: actions/upload-artifact@v4
+
+      - name: Upload slides PT
+        uses: actions/upload-artifact@v4
         with:
           name: slides-pt
           path: slides/slides-pt.pdf
