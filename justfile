@@ -4,6 +4,9 @@ alias w := watch
 alias w-pt := watch-pt
 alias c := c-compile
 alias z := z-compile
+alias h := hs-build
+alias hr := hs-run
+alias hl := hs-list
 
 # List all the available commands
 default:
@@ -56,7 +59,7 @@ c-run: c-compile
     for FILE in $(ls ./output/); do
         "./output/$FILE"
     done
-    
+
 # Compile the Zig code in "code/zig/"
 z-compile:
     #!/usr/bin/env bash
@@ -86,3 +89,25 @@ z-fmt:
     #!/usr/bin/env bash
     set -e
     zig fmt ./code/zig/*.zig
+
+# Build all Haskell executables
+hs-build:
+    @echo "Building all Haskell executables"
+    cabal build --project-dir=code/haskell all
+
+# List all available Haskell executables
+hs-list:
+    #!/usr/bin/env bash
+    set -e
+    echo "Available Haskell executables:"
+    echo ""
+    echo "Graph Algorithms:"
+    grep "^executable graphs-" code/haskell/graphs-complexity.cabal | sed 's/executable /  /' | sort
+    echo ""
+    echo "General Algorithms:"
+    grep "^executable algorithms-" code/haskell/graphs-complexity.cabal | sed 's/executable /  /' | sort
+
+# Run specific Haskell executable (usage: just hs-run graphs-01-eulerian-path)
+hs-run executable:
+    @echo "Running Haskell executable: {{executable}}"
+    cabal run --project-dir=code/haskell {{executable}}
