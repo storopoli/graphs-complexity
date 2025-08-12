@@ -1,4 +1,4 @@
-name: haskell-fmt
+name: haskell-lint
 
 on:
   push:
