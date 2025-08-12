@@ -82,7 +82,7 @@ executables:
   algorithms-11-insertion-sort:
     main: Algorithms11InsertionSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-12-merge-sort:
     main: Algorithms12MergeSort.hs
