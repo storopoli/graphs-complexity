@@ -93,7 +93,7 @@ z-fmt:
 # Build all Haskell executables
 hs-build:
     @echo "Building all Haskell executables"
-    cabal build --project-dir=code/haskell all
+    stack build
 
 # List all available Haskell executables
 hs-list:
@@ -102,12 +102,12 @@ hs-list:
     echo "Available Haskell executables:"
     echo ""
     echo "Graph Algorithms:"
-    grep "^executable graphs-" code/haskell/graphs-complexity.cabal | sed 's/executable /  /' | sort
+    grep "graphs-" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | grep "graphs-" | sort
     echo ""
     echo "General Algorithms:"
-    grep "^executable algorithms-" code/haskell/graphs-complexity.cabal | sed 's/executable /  /' | sort
+    grep "algorithms-" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | grep "algorithms-" | sort
 
 # Run specific Haskell executable (usage: just hs-run graphs-01-eulerian-path)
 hs-run executable:
     @echo "Running Haskell executable: {{executable}}"
-    cabal run --project-dir=code/haskell {{executable}}
+    stack run {{executable}}
