@@ -95,30 +95,14 @@ hs-build:
     @echo "Building all Haskell executables"
     stack build
 
-# List all available Haskell executables
+# Show Haskell algorithms help menu
 hs-list:
-    #!/usr/bin/env bash
-    set -e
-    echo "Available Haskell executables:"
-    echo ""
-    echo "Graph Algorithms:"
-    grep "graphs-" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | grep "graphs-" | sort
-    echo ""
-    echo "General Algorithms:"
-    grep "algorithms-" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | grep "algorithms-" | sort
+    @echo "Showing Haskell algorithms menu"
+    stack run
 
-# Run specific Haskell executable, or all if no argument (usage: just hs-run [executable])
-hs-run executable="":
+# Run Haskell algorithms (usage: just hs-run [all|number], e.g., just hr 01 or just hr all)
+hs-run algorithm="all": hs-build
     #!/usr/bin/env bash
     set -e
-    if [ "{{executable}}" = "" ]; then
-        echo "Running all Haskell executables"
-        for exec in $(grep "^  [a-z]" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | sort); do
-            echo "Running: $exec"
-            stack run "$exec"
-            echo ""
-        done
-    else
-        echo "Running Haskell executable: {{executable}}"
-        stack run {{executable}}
-    fi
+    echo "Running Haskell algorithm: {{algorithm}}"
+    stack run -- {{algorithm}}
