@@ -21,5 +21,6 @@ jobs:
       - name: Binstall typstyle
         run: cargo binstall --no-confirm typstyle
 
-      - name: Check formtting
-        run: typstyle -p --check format-all
+      - name: Check formatting
+        working-directory: slides
+        run: typstyle -p --check .
