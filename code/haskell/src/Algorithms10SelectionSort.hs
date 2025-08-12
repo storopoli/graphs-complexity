@@ -8,7 +8,8 @@ import Utils
 Time complexity: O(n²)
 Space complexity: O(1)
 -}
-selectionSort :: (Ord a) =>
+selectionSort ::
+    (Ord a) =>
     -- | List to sort
     [a] ->
     -- | Sorted list
@@ -22,7 +23,7 @@ selectionSort xs = minElem : selectionSort remaining
     -- Remove the first occurrence of an element from a list
     removeFirst :: (Eq a) => a -> [a] -> [a]
     removeFirst _ [] = []
-    removeFirst y (x:xs')
+    removeFirst y (x : xs')
         | x == y = xs'
         | otherwise = x : removeFirst y xs'
 

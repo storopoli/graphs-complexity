@@ -9,8 +9,9 @@ type AdjMatrix = Array (Int, Int) Int
 createAdjMatrix :: [[Int]] -> AdjMatrix
 createAdjMatrix matrix =
     let n = length matrix
-    in array ((0, 0), (n-1, n-1))
-             [((i, j), (matrix !! i) !! j) | i <- [0..n-1], j <- [0..n-1]]
+     in array
+            ((0, 0), (n - 1, n - 1))
+            [((i, j), (matrix !! i) !! j) | i <- [0 .. n - 1], j <- [0 .. n - 1]]
 
 -- | Get number of vertices in the graph
 graphSize :: AdjMatrix -> Int
@@ -24,9 +25,9 @@ findHamiltonianCycle :: AdjMatrix -> Maybe [Int]
 findHamiltonianCycle graph =
     let n = graphSize graph
         path = replicate n (-1)
-    in case path of
-        [] -> Nothing  -- Empty graph
-        (_:rest) -> hamiltonianUtil graph (0 : rest) 1 n
+     in case path of
+            [] -> Nothing -- Empty graph
+            (_ : rest) -> hamiltonianUtil graph (0 : rest) 1 n
 
 -- | Utility function for backtracking
 hamiltonianUtil :: AdjMatrix -> [Int] -> Int -> Int -> Maybe [Int]
@@ -34,17 +35,17 @@ hamiltonianUtil graph path pos n
     | pos == n =
         -- Check if last vertex connects to first vertex
         case path of
-            [] -> Nothing  -- Should not happen
-            (firstVertex:_) ->
-                if graph ! (path !! (n-1), firstVertex) == 1
-                then Just path
-                else Nothing
+            [] -> Nothing -- Should not happen
+            (firstVertex : _) ->
+                if graph ! (path !! (n - 1), firstVertex) == 1
+                    then Just path
+                    else Nothing
     | otherwise =
         -- Try each vertex as next candidate
-        tryVertices [1..n-1] path pos
+        tryVertices [1 .. n - 1] path pos
   where
     tryVertices [] _ _ = Nothing
-    tryVertices (v:vs) currentPath currentPos
+    tryVertices (v : vs) currentPath currentPos
         | isSafe v currentPath currentPos =
             case hamiltonianUtil graph newPath (currentPos + 1) n of
                 Just result -> Just result
@@ -55,25 +56,34 @@ hamiltonianUtil graph path pos n
 
         isSafe vertex pathSoFar position =
             -- Check if vertex is adjacent to previous vertex
-            graph ! (pathSoFar !! (position - 1), vertex) == 1 &&
-            -- Check if vertex is not already in path
-            vertex `notElem` take position pathSoFar
+            graph ! (pathSoFar !! (position - 1), vertex) == 1
+                &&
+                -- Check if vertex is not already in path
+                vertex `notElem` take position pathSoFar
 
 -- | Test cases from C implementation
 testCases :: [([[Int]], String)]
 testCases =
-    [ ( [[0,1,0,1,0],
-         [1,0,1,1,1],
-         [0,1,0,0,1],
-         [1,1,0,0,1],
-         [0,1,1,1,0]]
-      , "Test Case 1" )
-    , ( [[0,1,0,1,0],
-         [1,0,1,1,1],
-         [0,1,0,0,1],
-         [1,1,0,0,0],
-         [0,1,1,0,0]]
-      , "Test Case 2" )
+    [
+        (
+            [ [0, 1, 0, 1, 0]
+            , [1, 0, 1, 1, 1]
+            , [0, 1, 0, 0, 1]
+            , [1, 1, 0, 0, 1]
+            , [0, 1, 1, 1, 0]
+            ]
+        , "Test Case 1"
+        )
+    ,
+        (
+            [ [0, 1, 0, 1, 0]
+            , [1, 0, 1, 1, 1]
+            , [0, 1, 0, 0, 1]
+            , [1, 1, 0, 0, 0]
+            , [0, 1, 1, 0, 0]
+            ]
+        , "Test Case 2"
+        )
     ]
 
 -- | Test a single case
@@ -87,8 +97,8 @@ testCase (matrix, name) = do
             putStr "Solution Exists: "
             mapM_ (\v -> putStr $ show v ++ " ") hamiltonianPath
             case hamiltonianPath of
-                [] -> return ()  -- Should not happen
-                (firstVertex:_) -> putStr $ show firstVertex ++ " "  -- Complete the cycle
+                [] -> return () -- Should not happen
+                (firstVertex : _) -> putStr $ show firstVertex ++ " " -- Complete the cycle
             putStrLn ""
     putStrLn ""
 

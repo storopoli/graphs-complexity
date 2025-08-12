@@ -1,7 +1,7 @@
 module Main where
 
-import Utils
 import Text.Printf
+import Utils
 
 {- | Calculate x raised to the power n using divide and conquer.
 Time complexity: O(log n)

@@ -2,11 +2,11 @@
 
 module Utils where
 
+import qualified Data.Map as Map
+import qualified Data.Set as Set
 import System.CPUTime
 import System.Random
 import Text.Printf
-import qualified Data.Map as Map
-import qualified Data.Set as Set
 
 -- | Graph represented as adjacency list
 type Graph = Map.Map Int [Int]
@@ -16,19 +16,22 @@ createGraph :: Int -> [(Int, Int)] -> Graph
 createGraph numVertices =
     foldr addEdge initialGraph
   where
-    initialGraph = Map.fromList [(i, []) | i <- [0..numVertices-1]]
+    initialGraph = Map.fromList [(i, []) | i <- [0 .. numVertices - 1]]
     addEdge (u, v) graph =
-        Map.adjust (v:) u $ Map.adjust (u:) v graph
+        Map.adjust (v :) u $ Map.adjust (u :) v graph
 
 -- | Create a chain graph (0-1-2-...-N-1)
 createChainGraph :: Int -> Graph
-createChainGraph n = createGraph n [(i, i+1) | i <- [0..n-2]]
+createChainGraph n = createGraph n [(i, i + 1) | i <- [0 .. n - 2]]
 
 -- | Generic test function for graph algorithms
 testGraphAlgorithm ::
-    String ->                           -- ^ Algorithm name
-    (Graph -> Int -> Set.Set Int) ->    -- ^ Graph algorithm function
-    [Int] ->                            -- ^ List of sizes to test
+    -- | Algorithm name
+    String ->
+    -- | Graph algorithm function
+    (Graph -> Int -> Set.Set Int) ->
+    -- | List of sizes to test
+    [Int] ->
     IO ()
 testGraphAlgorithm algName graphFn nValues = do
     mapM_ testGraph nValues
@@ -46,7 +49,7 @@ testGraphAlgorithm algName graphFn nValues = do
 isSorted :: (Ord a) => [a] -> Bool
 isSorted [] = True
 isSorted [_] = True
-isSorted (x:y:xs) = x <= y && isSorted (y:xs)
+isSorted (x : y : xs) = x <= y && isSorted (y : xs)
 
 -- | Measure execution time of an action in seconds
 timeAction :: IO a -> IO (a, Double)
@@ -59,16 +62,19 @@ timeAction action = do
 
 -- | Generic test function for sorting algorithms
 testSortingAlgorithm ::
-    String ->                    -- ^ Algorithm name
-    (forall a. (Ord a, Enum a) => [a] -> [a]) -> -- ^ Polymorphic sorting function
-    [Int] ->                     -- ^ List of sizes to test
+    -- | Algorithm name
+    String ->
+    -- | Polymorphic sorting function
+    (forall a. (Ord a, Enum a) => [a] -> [a]) ->
+    -- | List of sizes to test
+    [Int] ->
     IO ()
 testSortingAlgorithm algName sortFn nValues = do
     mapM_ testSort nValues
   where
     testSort n = do
-        let gen = mkStdGen 123  -- Fixed seed for reproducibility
-        let arr = take n $ randomRs (0, n-1) gen :: [Int]
+        let gen = mkStdGen 123 -- Fixed seed for reproducibility
+        let arr = take n $ randomRs (0, n - 1) gen :: [Int]
 
         (sortedArr, timeSpent) <- timeAction $ return (sortFn arr)
 

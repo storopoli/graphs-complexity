@@ -8,7 +8,8 @@ import Utils
 Time complexity: O(n)
 Space complexity: O(n)
 -}
-merge :: (Ord a) =>
+merge ::
+    (Ord a) =>
     -- | First sorted list
     [a] ->
     -- | Second sorted list
@@ -25,7 +26,8 @@ merge (x : xs) (y : ys)
 Time complexity: O(n log n)
 Space complexity: O(n)
 -}
-mergeSort :: (Ord a) =>
+mergeSort ::
+    (Ord a) =>
     -- | List to sort
     [a] ->
     -- | Sorted list

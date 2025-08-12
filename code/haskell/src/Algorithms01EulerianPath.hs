@@ -8,10 +8,10 @@ type EdgeGraph = Map.Map Int (Map.Map Int Int)
 -- | Create graph from adjacency matrix
 createEdgeGraph :: [[Int]] -> EdgeGraph
 createEdgeGraph matrix =
-    Map.fromList $ zipWith createVertex [0..] matrix
+    Map.fromList $ zipWith createVertex [0 ..] matrix
   where
     createVertex i row =
-        (i, Map.fromList [(j, count) | (j, count) <- zip [0..] row, count > 0])
+        (i, Map.fromList [(j, count) | (j, count) <- zip [0 ..] row, count > 0])
 
 -- | Get degree of a vertex (sum of all edge multiplicities)
 degree :: EdgeGraph -> Int -> Int
@@ -25,9 +25,9 @@ removeEdge :: EdgeGraph -> Int -> Int -> EdgeGraph
 removeEdge graph u v =
     let graph' = updateVertex u v graph
         graph'' = updateVertex v u graph'
-    in graph''
+     in graph''
   where
-    updateVertex from to  =
+    updateVertex from to =
         Map.adjust (Map.update (\count -> if count > 1 then Just (count - 1) else Nothing) to) from
 
 -- | Find any neighbor of a vertex
@@ -38,7 +38,7 @@ findNeighbor graph vertex =
         Just neighbors ->
             case Map.toList neighbors of
                 [] -> Nothing
-                (neighbor, _):_ -> Just neighbor
+                (neighbor, _) : _ -> Just neighbor
 
 {- | Find Eulerian path in a graph.
 Time complexity: O(E) where E is number of edges
@@ -53,16 +53,16 @@ findEulerianPath graph
     oddDegreeVertices = filter (\v -> degree graph v `mod` 2 == 1) vertices
     startVertex = case oddDegreeVertices of
         [] -> case vertices of
-                [] -> 0  -- Empty graph
-                (v:_) -> v  -- Eulerian cycle - start anywhere
-        (v:_) -> v          -- Eulerian path - start at odd degree vertex
+            [] -> 0 -- Empty graph
+            (v : _) -> v -- Eulerian cycle - start anywhere
+        (v : _) -> v -- Eulerian path - start at odd degree vertex
 
 -- | Check if graph has Eulerian path (0 or 2 vertices with odd degree)
 hasEulerianPath :: EdgeGraph -> Bool
 hasEulerianPath graph =
     let vertices = Map.keys graph
         oddDegreeCount = length $ filter (\v -> degree graph v `mod` 2 == 1) vertices
-    in oddDegreeCount == 0 || oddDegreeCount == 2
+     in oddDegreeCount == 0 || oddDegreeCount == 2
 
 -- | Hierholzer's algorithm for finding Eulerian path
 hierholzersAlgorithm :: EdgeGraph -> Int -> [Int]
@@ -72,34 +72,46 @@ hierholzersAlgorithm graph start = reverse $ findPath graph [start] []
         | null stack = path
         | otherwise =
             case stack of
-                [] -> path  -- Should not happen due to null check
-                (current:rest) -> case findNeighbor g current of
+                [] -> path -- Should not happen due to null check
+                (current : rest) -> case findNeighbor g current of
                     Nothing -> findPath g rest (current : path)
                     Just neighbor ->
                         let g' = removeEdge g current neighbor
-                        in findPath g' (neighbor : stack) path
+                         in findPath g' (neighbor : stack) path
 
 -- | Test cases from the C implementation
 testCases :: [([[Int]], String)]
 testCases =
-    [ ( [[0,1,0,0,1],
-         [1,0,1,1,0],
-         [0,1,0,1,0],
-         [0,1,1,0,0],
-         [1,0,0,0,0]]
-      , "Test Case 1" )
-    , ( [[0,1,0,1,1],
-         [1,0,1,0,1],
-         [0,1,0,1,1],
-         [1,1,1,0,0],
-         [1,0,1,0,0]]
-      , "Test Case 2" )
-    , ( [[0,1,0,0,1],
-         [1,0,1,1,1],
-         [0,1,0,1,0],
-         [0,1,1,0,1],
-         [1,1,0,1,0]]
-      , "Test Case 3" )
+    [
+        (
+            [ [0, 1, 0, 0, 1]
+            , [1, 0, 1, 1, 0]
+            , [0, 1, 0, 1, 0]
+            , [0, 1, 1, 0, 0]
+            , [1, 0, 0, 0, 0]
+            ]
+        , "Test Case 1"
+        )
+    ,
+        (
+            [ [0, 1, 0, 1, 1]
+            , [1, 0, 1, 0, 1]
+            , [0, 1, 0, 1, 1]
+            , [1, 1, 1, 0, 0]
+            , [1, 0, 1, 0, 0]
+            ]
+        , "Test Case 2"
+        )
+    ,
+        (
+            [ [0, 1, 0, 0, 1]
+            , [1, 0, 1, 1, 1]
+            , [0, 1, 0, 1, 0]
+            , [0, 1, 1, 0, 1]
+            , [1, 1, 0, 1, 0]
+            ]
+        , "Test Case 3"
+        )
     ]
 
 -- | Test a single case

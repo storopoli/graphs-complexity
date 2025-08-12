@@ -9,7 +9,8 @@ Average time complexity: O(n log n)
 Worst case time complexity: O(n²)
 Space complexity: O(log n) due to recursion
 -}
-quickSort :: (Ord a) =>
+quickSort ::
+    (Ord a) =>
     -- | The list to sort
     [a] ->
     -- | The sorted list

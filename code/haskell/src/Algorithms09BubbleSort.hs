@@ -8,7 +8,8 @@ import Utils
 Time complexity: O(n²)
 Space complexity: O(1)
 -}
-bubbleSort :: (Ord a) =>
+bubbleSort ::
+    (Ord a) =>
     -- | List to sort
     [a] ->
     -- | Sorted list
