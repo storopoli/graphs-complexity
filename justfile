@@ -107,7 +107,18 @@ hs-list:
     echo "General Algorithms:"
     grep "algorithms-" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | grep "algorithms-" | sort
 
-# Run specific Haskell executable (usage: just hs-run graphs-01-eulerian-path)
-hs-run executable:
-    @echo "Running Haskell executable: {{executable}}"
-    stack run {{executable}}
+# Run specific Haskell executable, or all if no argument (usage: just hs-run [executable])
+hs-run executable="":
+    #!/usr/bin/env bash
+    set -e
+    if [ "{{executable}}" = "" ]; then
+        echo "Running all Haskell executables"
+        for exec in $(grep "^  [a-z]" package.yaml | grep ":" | sed 's/  //' | sed 's/:$//' | sort); do
+            echo "Running: $exec"
+            stack run "$exec"
+            echo ""
+        done
+    else
+        echo "Running Haskell executable: {{executable}}"
+        stack run {{executable}}
+    fi
