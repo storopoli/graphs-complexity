@@ -119,4 +119,4 @@ executables:
   algorithms-18-divide-and-conquer-power:
     main: Algorithms18DivideAndConquerPower.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
