@@ -60,7 +60,7 @@ timeAction action = do
 -- | Generic test function for sorting algorithms
 testSortingAlgorithm ::
     String ->                    -- ^ Algorithm name
-    (forall a. Ord a => [a] -> [a]) -> -- ^ Polymorphic sorting function
+    (forall a. (Ord a, Enum a) => [a] -> [a]) -> -- ^ Polymorphic sorting function
     [Int] ->                     -- ^ List of sizes to test
     IO ()
 testSortingAlgorithm algName sortFn nValues = do

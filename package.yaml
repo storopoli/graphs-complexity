@@ -110,7 +110,7 @@ executables:
   algorithms-15-counting-sort:
     main: Algorithms15CountingSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-16-radix-sort:
     main: Algorithms16RadixSort.hs

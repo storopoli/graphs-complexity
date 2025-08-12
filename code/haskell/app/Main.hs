@@ -2,40 +2,44 @@
 
 module Main (main) where
 
-import System.Environment (getArgs)
-import System.Process (callProcess)
-import Control.Exception (try, IOException)
-import Text.Printf
+import Control.Exception (IOException, try)
 import Data.List (sortBy)
 import Data.Ord (comparing)
+import System.Environment (getArgs)
+import System.Process (callProcess)
+import Text.Printf
 
 -- | Algorithm registry with number, name, and executable
 data Algorithm = Algorithm
     { algNumber :: Int
     , algName :: String
     , algExecutable :: String
-    } deriving (Show, Eq)
+    }
+    deriving (Show, Eq)
 
 -- | Complete list of implemented algorithms
 algorithms :: [Algorithm]
-algorithms = sortBy (comparing algNumber)
-    [ Algorithm 1  "Eulerian Path/Hamiltonian Cycle" "algorithms-01-eulerian-path/algorithms-01-hamiltonian-cycle"
-    , Algorithm 2  "Tree Detection" "algorithms-02-tree-detection"
-    , Algorithm 3  "Subset Sum" "algorithms-03-subset-sum"
-    , Algorithm 4  "Knapsack" "algorithms-04-knapsack"
-    , Algorithm 5  "Linear Search" "algorithms-05-linear-search"
-    , Algorithm 6  "Binary Search" "algorithms-06-binary-search"
-    , Algorithm 7  "BFS Search" "algorithms-07-bfs-search"
-    , Algorithm 8  "DFS Search" "algorithms-08-dfs-search"
-    , Algorithm 9  "Bubble Sort" "algorithms-09-bubble-sort"
-    , Algorithm 10 "Selection Sort" "algorithms-10-selection-sort"
-    , Algorithm 11 "Insertion Sort" "algorithms-11-insertion-sort"
-    , Algorithm 12 "Merge Sort" "algorithms-12-merge-sort"
-    , Algorithm 13 "Quick Sort" "algorithms-13-quick-sort"
-    , Algorithm 14 "Heap Sort" "algorithms-14-heap-sort"
-    , Algorithm 17 "Recursion Palindrome" "algorithms-17-recursion-palindrome"
-    , Algorithm 18 "Divide & Conquer Power" "algorithms-18-divide-and-conquer-power"
-    ]
+algorithms =
+    sortBy
+        (comparing algNumber)
+        [ Algorithm 1 "Eulerian Path/Hamiltonian Cycle" "algorithms-01-eulerian-path/algorithms-01-hamiltonian-cycle"
+        , Algorithm 2 "Tree Detection" "algorithms-02-tree-detection"
+        , Algorithm 3 "Subset Sum" "algorithms-03-subset-sum"
+        , Algorithm 4 "Knapsack" "algorithms-04-knapsack"
+        , Algorithm 5 "Linear Search" "algorithms-05-linear-search"
+        , Algorithm 6 "Binary Search" "algorithms-06-binary-search"
+        , Algorithm 7 "BFS Search" "algorithms-07-bfs-search"
+        , Algorithm 8 "DFS Search" "algorithms-08-dfs-search"
+        , Algorithm 9 "Bubble Sort" "algorithms-09-bubble-sort"
+        , Algorithm 10 "Selection Sort" "algorithms-10-selection-sort"
+        , Algorithm 11 "Insertion Sort" "algorithms-11-insertion-sort"
+        , Algorithm 12 "Merge Sort" "algorithms-12-merge-sort"
+        , Algorithm 13 "Quick Sort" "algorithms-13-quick-sort"
+        , Algorithm 14 "Heap Sort" "algorithms-14-heap-sort"
+        , Algorithm 15 "Counting Sort" "algorithms-15-counting-sort"
+        , Algorithm 17 "Recursion Palindrome" "algorithms-17-recursion-palindrome"
+        , Algorithm 18 "Divide & Conquer Power" "algorithms-18-divide-and-conquer-power"
+        ]
 
 -- | Run a single algorithm
 runAlgorithm :: Algorithm -> IO ()
@@ -58,7 +62,8 @@ runAllAlgorithms = do
 -- | Find algorithms by number (can return multiple for special cases)
 findAlgorithms :: Int -> [Algorithm]
 findAlgorithms n
-    | n == 1 = -- Special case: run both graph algorithms
+    | n == 1 -- Special case: run both graph algorithms
+        =
         [ Algorithm 1 "Eulerian Path" "algorithms-01-eulerian-path"
         , Algorithm 1 "Hamiltonian Cycle" "algorithms-01-hamiltonian-cycle"
         ]
