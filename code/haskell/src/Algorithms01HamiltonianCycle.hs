@@ -24,16 +24,21 @@ findHamiltonianCycle :: AdjMatrix -> Maybe [Int]
 findHamiltonianCycle graph =
     let n = graphSize graph
         path = replicate n (-1)
-    in hamiltonianUtil graph (0 : tail path) 1 n
+    in case path of
+        [] -> Nothing  -- Empty graph
+        (_:rest) -> hamiltonianUtil graph (0 : rest) 1 n
 
 -- | Utility function for backtracking
 hamiltonianUtil :: AdjMatrix -> [Int] -> Int -> Int -> Maybe [Int]
 hamiltonianUtil graph path pos n
     | pos == n =
         -- Check if last vertex connects to first vertex
-        if graph ! (path !! (n-1), head path) == 1
-        then Just path
-        else Nothing
+        case path of
+            [] -> Nothing  -- Should not happen
+            (firstVertex:_) ->
+                if graph ! (path !! (n-1), firstVertex) == 1
+                then Just path
+                else Nothing
     | otherwise =
         -- Try each vertex as next candidate
         tryVertices [1..n-1] path pos
@@ -78,10 +83,12 @@ testCase (matrix, name) = do
     let graph = createAdjMatrix matrix
     case findHamiltonianCycle graph of
         Nothing -> putStrLn "Solution does not exist"
-        Just cycle -> do
+        Just hamiltonianPath -> do
             putStr "Solution Exists: "
-            mapM_ (\v -> putStr $ show v ++ " ") cycle
-            putStr $ show (head cycle) ++ " "  -- Complete the cycle
+            mapM_ (\v -> putStr $ show v ++ " ") hamiltonianPath
+            case hamiltonianPath of
+                [] -> return ()  -- Should not happen
+                (firstVertex:_) -> putStr $ show firstVertex ++ " "  -- Complete the cycle
             putStrLn ""
     putStrLn ""
 

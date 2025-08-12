@@ -16,6 +16,7 @@ dependencies:
   - random >= 1.3
   - array >= 0.5
   - containers >= 0.6
+  - process >= 1.6
 
 default-extensions: []
 
@@ -26,18 +27,23 @@ ghc-options:
   - -with-rtsopts=-N
 
 executables:
-  graphs-01-eulerian-path:
-    main: Graphs01EulerianPath.hs
+  0-main:
+    main: Main.hs
+    source-dirs: code/haskell/app
+    other-modules: []
+
+  algorithms-01-eulerian-path:
+    main: Algorithms01EulerianPath.hs
     source-dirs: code/haskell/src
     other-modules: []
 
-  graphs-01-hamiltonian-cycle:
-    main: Graphs01HamiltonianCycle.hs
+  algorithms-01-hamiltonian-cycle:
+    main: Algorithms01HamiltonianCycle.hs
     source-dirs: code/haskell/src
     other-modules: []
 
-  graphs-02-tree-detection:
-    main: Graphs02TreeDetection.hs
+  algorithms-02-tree-detection:
+    main: Algorithms02TreeDetection.hs
     source-dirs: code/haskell/src
     other-modules: []
 

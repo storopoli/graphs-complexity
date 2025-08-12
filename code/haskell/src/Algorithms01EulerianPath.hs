@@ -1,8 +1,6 @@
 module Main where
 
 import qualified Data.Map as Map
-import qualified Data.Set as Set
-import Data.List (find)
 
 -- | Graph represented as adjacency map with edge multiplicity
 type EdgeGraph = Map.Map Int (Map.Map Int Int)
@@ -54,7 +52,9 @@ findEulerianPath graph
     vertices = Map.keys graph
     oddDegreeVertices = filter (\v -> degree graph v `mod` 2 == 1) vertices
     startVertex = case oddDegreeVertices of
-        [] -> head vertices  -- Eulerian cycle - start anywhere
+        [] -> case vertices of
+                [] -> 0  -- Empty graph
+                (v:_) -> v  -- Eulerian cycle - start anywhere
         (v:_) -> v          -- Eulerian path - start at odd degree vertex
 
 -- | Check if graph has Eulerian path (0 or 2 vertices with odd degree)
@@ -71,13 +71,13 @@ hierholzersAlgorithm graph start = reverse $ findPath graph [start] []
     findPath g stack path
         | null stack = path
         | otherwise =
-            let current = head stack
-                rest = tail stack
-            in case findNeighbor g current of
-                Nothing -> findPath g rest (current : path)
-                Just neighbor ->
-                    let g' = removeEdge g current neighbor
-                    in findPath g' (neighbor : stack) path
+            case stack of
+                [] -> path  -- Should not happen due to null check
+                (current:rest) -> case findNeighbor g current of
+                    Nothing -> findPath g rest (current : path)
+                    Just neighbor ->
+                        let g' = removeEdge g current neighbor
+                        in findPath g' (neighbor : stack) path
 
 -- | Test cases from the C implementation
 testCases :: [([[Int]], String)]
