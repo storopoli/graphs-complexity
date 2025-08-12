@@ -115,7 +115,7 @@ executables:
   algorithms-16-radix-sort:
     main: Algorithms16RadixSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-17-recursion-palindrome:
     main: Algorithms17RecursionPalindrome.hs

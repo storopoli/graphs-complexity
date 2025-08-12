@@ -37,6 +37,7 @@ algorithms =
         , Algorithm 13 "Quick Sort" "algorithms-13-quick-sort"
         , Algorithm 14 "Heap Sort" "algorithms-14-heap-sort"
         , Algorithm 15 "Counting Sort" "algorithms-15-counting-sort"
+        , Algorithm 16 "Radix Sort" "algorithms-16-radix-sort"
         , Algorithm 17 "Recursion Palindrome" "algorithms-17-recursion-palindrome"
         , Algorithm 18 "Divide & Conquer Power" "algorithms-18-divide-and-conquer-power"
         ]
