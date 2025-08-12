@@ -23,8 +23,6 @@ jobs:
         with:
           enable-stack: true
           stack-version: "latest"
-          stack-no-global: true
-          stack-setup-ghc: true
 
       - name: Setup just
         uses: extractions/setup-just@v3

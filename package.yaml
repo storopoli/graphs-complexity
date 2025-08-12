@@ -9,6 +9,7 @@ maintainer: jose@storopoli.com
 category: Math
 extra-doc-files:
   - CHANGELOG.md
+  - LICENSE
 
 dependencies:
   - base >= 4.18 && < 5
@@ -26,75 +27,94 @@ executables:
   graphs-01-eulerian-path:
     main: Graphs01EulerianPath.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   graphs-01-hamiltonian-cycle:
     main: Graphs01HamiltonianCycle.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   graphs-02-tree-detection:
     main: Graphs02TreeDetection.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-03-subset-sum:
     main: Algorithms03SubsetSum.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-04-knapsack:
     main: Algorithms04Knapsack.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-05-linear-search:
     main: Algorithms05LinearSearch.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-06-binary-search:
     main: Algorithms06BinarySearch.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-07-bfs-search:
     main: Algorithms07BfsSearch.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-08-dfs-search:
     main: Algorithms08DfsSearch.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-09-bubble-sort:
     main: Algorithms09BubbleSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-10-selection-sort:
     main: Algorithms10SelectionSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-11-insertion-sort:
     main: Algorithms11InsertionSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-12-merge-sort:
     main: Algorithms12MergeSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-13-quick-sort:
     main: Algorithms13QuickSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-14-heap-sort:
     main: Algorithms14HeapSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-15-counting-sort:
     main: Algorithms15CountingSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-16-radix-sort:
     main: Algorithms16RadixSort.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-17-recursion-palindrome:
     main: Algorithms17RecursionPalindrome.hs
     source-dirs: code/haskell/src
+    other-modules: []
 
   algorithms-18-divide-and-conquer-power:
     main: Algorithms18DivideAndConquerPower.hs
     source-dirs: code/haskell/src
+    other-modules: []
