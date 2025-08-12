@@ -97,7 +97,7 @@ executables:
   algorithms-14-heap-sort:
     main: Algorithms14HeapSort.hs
     source-dirs: code/haskell/src
-    other-modules: []
+    other-modules: [Utils]
 
   algorithms-15-counting-sort:
     main: Algorithms15CountingSort.hs
