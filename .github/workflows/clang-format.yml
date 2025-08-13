@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Check clang-format
-        uses: DoozyX/clang-format-lint-action@v0.18.2
+        uses: DoozyX/clang-format-lint-action@v0.20
         with:
           source: "."
           extensions: "c,h"
