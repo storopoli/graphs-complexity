@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup Bininstall
-        uses: cargo-bins/cargo-binstall@v1.15.3
+        uses: cargo-bins/cargo-binstall@v1.15.4
 
       - name: Binstall typstyle
         run: cargo binstall --no-confirm typstyle
