@@ -3278,14 +3278,18 @@ e direita é no máximo 1.
       digraph Fatorial {
         n4 [label="f(4)"];
         n3 [label="f(3)"];
-        n2 [label="f(2)"];
-        n1 [label="f(1)"];
-        n0 [label="f(0)"];
+        n2_1 [label="f(2)"];
+        n2_2 [label="f(2)"];
+        n1_1 [label="f(1)"];
+        n1_2 [label="f(1)"];
+        n1_3 [label="f(1)"];
+        n0_1 [label="f(0)"];
+        n0_2 [label="f(0)"];
 
-        n4 -> n3;
-        n3 -> n2;
-        n2 -> n1;
-        n1 -> n0;
+        n4 -> {n3, n2_1};
+        n3 -> {n2_2, n1_3};
+        n2_1 -> {n1_1, n0_1};
+        n2_2 -> {n1_2, n0_2};
       }
       ```,
       width: 70%,
