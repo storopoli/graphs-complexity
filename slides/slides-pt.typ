@@ -120,7 +120,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Inserção e remoção em uma fila
   - $O(log n)$ (complexidade *logarítmica*):
     - Busca binária
-    - Inserção e remoção em uma árvore binária de busca
+    - Inserção e remoção em uma árvore binária de busca balanceada
 
   #pagebreak()
 
@@ -129,7 +129,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Percorrer uma lista encadeada
     - Comparar duas _strings_
   - $O(n log n)$ (complexidade *log-linear*):
-    - Algoritmo de ordenação _Quick Sort_
+    - Algoritmo de ordenação _Quick Sort_ (caso médio)
     - Algoritmo de ordenação _Merge Sort_
 
   #pagebreak()
@@ -138,6 +138,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Percorrer uma matriz
     - Algoritmo de ordenação _Bubble Sort_
     - Algoritmo de ordenação _Insertion Sort_
+    - Algoritmo de ordenação _Quick Sort_ (pior caso)
   - $O(n^3)$ (complexidade *cúbica*):
     - Multiplicação de matrizes (abordagem ingênua)
   - $O(n!)$ (complexidade *fatorial*):
@@ -221,7 +222,7 @@ Grafos podem ser *direcionados* ou *_não_-direcionados*.
 
 == Grafos Ponderados
 
-Grande parte dos grafos são *ponderados*, isto é, possuem valores associados às
+Grafos podem ser *ponderados*, isto é, possuem valores associados às
 arestas.
 
 #align(horizon + center)[
@@ -499,7 +500,7 @@ $ f: V(G) -> V(H) $
 
   - Custo de espaço $O(n + m)$#footnote[para grafos não-direcionados.]<adjacency-list-cost>
   - Custo de construção $O(m)$#footnote(<adjacency-list-cost>)
-  - Custo de busca de arestas $O(n)$
+  - Custo de busca de arestas $O("deg"(v))$ (pior caso $O(n)$)
 ]
 
 == Parte Prática (C ou pseudocódigo)
@@ -521,7 +522,7 @@ $ f: V(G) -> V(H) $
     *comprimento* do caminho é o número de arestas que o caminho usa, contando-se
     arestas múltiplas vezes.
 
-    O *custo* de um caminho num grafo balanceado é a soma dos custos das arestas
+    O *custo* de um caminho num grafo ponderado é a soma dos custos das arestas
     atravessadas.
 
     Dois caminhos são *independentes* se não tiverem nenhum vértice em comum, exceto
@@ -666,7 +667,8 @@ delas), retornando à cidade de origem.
 
 == O que são Árvores?
 
-Árvores são grafos *acíclicos* e *conectados*.
+Árvores são grafos não direcionados *conectados* e *acíclicos*.
+Uma *árvore enraizada* é obtida ao escolher um vértice como raiz.
 
 #align(horizon + center)[
   #figure(
@@ -687,15 +689,16 @@ delas), retornando à cidade de origem.
 #pagebreak()
 
 #align(horizon)[
-  - *Raiz*: o vértice sem arestas entrantes. Todas as árvores têm (apenas) um
-    vértice raiz.
-  - *Folha*: vértice sem arestas saindo.
+  - *Raiz* (árvore enraizada): vértice inicial escolhido. Uma árvore enraizada
+    possui exatamente uma raiz.
+  - *Folha* (árvore enraizada): vértice sem filhos (sem arestas saindo na
+    representação direcionada).
   - *Nível*: distância da raiz.
   - *Altura*: nível máximo.
-  - *Pai*: vértice(s) com menor nível (mais próximo da raiz).
-  - *Filho*: vértice(s) maior nível (mais distante da raiz).
-  - *Ancestral*: vértice(s) com menor nível.
-  - *Descendente*: vértice(s) com maior nível.
+  - *Pai*: vértice adjacente com nível imediatamente menor (exceto para a raiz).
+  - *Filho*: vértice adjacente com nível imediatamente maior.
+  - *Ancestral*: vértice no caminho da raiz até um vértice.
+  - *Descendente*: vértice na subárvore de um vértice.
 ]
 
 == Subárvores
@@ -909,14 +912,14 @@ e direita é no máximo 1.
 == Funções Exponenciais
 
 #align(horizon)[
-  Uma função é exponencial se ela pode ser reduzida usando notação $O$ para
+  Uma função tem crescimento exponencial quando pode ser limitada por
 
-  $ O(n^m) $
+  $ O(c^n) $
 
-  onde $m$ *_não_* é uma constante positiva.
+  onde $c > 1$ é uma constante.
 
   Por exemplo, $O(2^n)$ é uma complexidade exponencial#footnote[
-    note que $n$ não é constante.
+    o expoente depende de $n$.
   ].
 ]
 
@@ -1012,7 +1015,7 @@ e direita é no máximo 1.
 
     [*Relação Conhecida*],
     [$cal(P)$ é um subconjunto de $cal(N P)$.],
-    [Não se sabe se $cal(N P)$ é um subconjunto próprio de $cal(P)$ ou se são iguais.],
+    [Não se sabe se $cal(P) = cal(N P)$ (ou $cal(P) subset cal(N P)$).],
   )
 ]
 
@@ -1061,10 +1064,14 @@ e direita é no máximo 1.
 == $cal(N P)$-difíceis
 
 #align(horizon)[
-  Um problema $cal(N P)$-difícil é um problema para o qual *não se conhece um
-    algoritmo eficiente para resolvê-lo*. No entanto, se um algoritmo eficiente para
-  um problema $cal(N P)$-difícil for encontrado, então todos os problemas em $cal(N P)$ podem
-  ser resolvidos eficientemente.
+  Um problema $cal(N P)$-difícil é um problema para o qual todo problema em
+  $cal(N P)$ pode ser reduzido em tempo polinomial.
+
+  #v(1em)
+
+  Problemas $cal(N P)$-difíceis não precisam ser problemas de decisão (nem estar
+  em $cal(N P)$). Se um problema $cal(N P)$-difícil que também esteja em $cal(N P)$
+  for resolvido em tempo polinomial, então $cal(P) = cal(N P)$.
 ]
 
 == $cal(P)$ vs $cal(N P)$-completo e $cal(N P)$-difícil
@@ -1174,7 +1181,7 @@ e direita é no máximo 1.
 - *_Loop_ Aninhado*: complexidade quadrática $O(n^2)$
 - *Recursão*:
   - *Linear*: complexidade linear $O(n)$
-  - *Divisória*: complexidade logarítmica $O(log n)$
+  - *Divisão e conquista*: tipicamente entre $O(log n)$ e $O(n log n)$ (depende do trabalho por nível)
   - *Binária*: complexidade $O(n log n)$
   - *Exponencial*: complexidade exponencial $O(2^n)$
 
@@ -1995,11 +2002,11 @@ e direita é no máximo 1.
           + $v := Q$.dequeue()
           + *if* $v = T$
             + *return* $v$
-        + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
-          + *if* $!w$.explored:
-            + $w$.explored $:= "true"$
-            + $w$.parent $:= v$
-            + $Q$.enqueue($w$)
+          + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
+            + *if* $!w$.explored:
+              + $w$.explored $:= "true"$
+              + $w$.parent $:= v$
+              + $Q$.enqueue($w$)
         + *return* _null_
       ]
     ],
@@ -2013,9 +2020,7 @@ e direita é no máximo 1.
 #align(horizon)[
   #text(size: 7pt)[
     ```c
-    int bfs(int grafo[][MAX], int inicio, int n) {
-        if (inicio->value == T)
-          return inicio->id;
+    int bfs(int grafo[][MAX], int inicio, int n, int alvo) {
         int visitado[MAX] = {0};
         int fila[MAX], frente = 0, traseira = 0;
 
@@ -2024,10 +2029,10 @@ e direita é no máximo 1.
 
         while (frente < traseira) {
             int atual = fila[frente++];
+            if (atual == alvo)
+                return atual;
 
             for (int i = 0; i < n; i++) {
-                if (atual->value == T)
-                  return atual->id;
                 if (grafo[atual][i] && !visitado[i]) {
                     visitado[i] = 1;
                     fila[traseira++] = i;
@@ -2117,7 +2122,9 @@ e direita é no máximo 1.
           + *return* $v$
         + *for* todas as arestas de $v$ para $w$ *in* $G$.adjacentEdges(v):
           + *if* $!w$.discovered:
-            + DFS($G$, $w$)
+            + $r := "DFS"(G, w)$
+            + *if* $r \neq "null"$:
+              + *return* $r$
         + *return* _null_
       ]
     ],
@@ -2131,14 +2138,16 @@ e direita é no máximo 1.
 #align(horizon)[
   #text(size: 13pt)[
     ```c
-    int dfs(int grafo[][MAX], int atual, int visitado[], int n) {
-        if (atual->value == T)
-          return atual->id;
+    int dfs(int grafo[][MAX], int atual, int visitado[], int n, int alvo) {
+        if (atual == alvo)
+            return atual;
         visitado[atual] = 1;
 
         for (int i = 0; i < n; i++) {
             if (grafo[atual][i] && !visitado[i]) {
-                dfs(grafo, i, visitado, n);
+                int encontrado = dfs(grafo, i, visitado, n, alvo);
+                if (encontrado != -1)
+                    return encontrado;
             }
         }
         return -1;
@@ -2705,7 +2714,7 @@ e direita é no máximo 1.
     ```c
     int partition(int arr[], int low, int high) {
         int pivot = arr[high]; // pivô
-        int i = low;           // Índice do menor elemento
+        int i = low - 1;       // Índice do menor elemento
 
         for (int j = low; j <= high - 1; j++) {
             // Se o elemento atual é menor ou igual ao pivô
@@ -2716,12 +2725,12 @@ e direita é no máximo 1.
                 arr[j] = temp;
             }
         }
-        // Troca arr[i] e arr[high] (ou pivô)
-        int temp = arr[i];
-        arr[i] = arr[high];
+        // Troca arr[i + 1] e arr[high] (ou pivô)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
         arr[high] = temp;
 
-        return i;
+        return i + 1;
     }
     ```
   ]
@@ -3269,18 +3278,14 @@ e direita é no máximo 1.
       digraph Fatorial {
         n4 [label="f(4)"];
         n3 [label="f(3)"];
-        n2_1 [label="f(2)"];
-        n2_2 [label="f(2)"];
-        n1_1 [label="f(1)"];
-        n1_2 [label="f(1)"];
-        n1_3 [label="f(1)"];
-        n0_1 [label="f(0)"];
-        n0_2 [label="f(0)"];
+        n2 [label="f(2)"];
+        n1 [label="f(1)"];
+        n0 [label="f(0)"];
 
-        n4 -> {n3, n2_1};
-        n3 -> {n2_2, n1_3};
-        n2_1 -> {n1_1, n0_1};
-        n2_2 -> {n1_2, n0_2};
+        n4 -> n3;
+        n3 -> n2;
+        n2 -> n1;
+        n1 -> n0;
       }
       ```,
       width: 70%,
@@ -3804,7 +3809,7 @@ e direita é no máximo 1.
   #text(size: 13pt)[
     - *Programação Dinâmica:*
       - Resolve subproblemas menores e armazena seus resultados para evitar recomputação.
-      - Garante a solução ótima global.
+      - Pode garantir a solução ótima global quando a recorrência modela corretamente as restrições.
       - Pode ser mais complexo e consumir mais tempo e espaço.
     - *Algoritmos Gulosos:*
       - Fazem a melhor escolha local sem considerar subproblemas.
@@ -4094,7 +4099,7 @@ e direita é no máximo 1.
     - *Programação Dinâmica:*
       - Considera todas as possibilidades e escolhe a melhor.
       - Armazena resultados de subproblemas para evitar recomputação.
-      - Garante a solução ótima global.
+      - Pode garantir a solução ótima global quando a recorrência está correta.
   ]
 ]
 
@@ -4117,7 +4122,7 @@ e direita é no máximo 1.
 #align(horizon)[
   #text(size: 14pt)[
     - *Vantagens:*
-      - Garante a solução ótima global.
+      - Pode garantir a solução ótima global quando o modelo de PD é válido.
       - Evita computações redundantes.
     - *Desafios:*
       - Pode consumir muito tempo e espaço para problemas com grandes entradas.

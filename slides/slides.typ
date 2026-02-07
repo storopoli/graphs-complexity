@@ -118,7 +118,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Insertion and removal in a queue
   - $O(log n)$ (*logarithmic* complexity):
     - Binary search
-    - Insertion and removal in a binary search tree
+    - Insertion and removal in a balanced binary search tree
 
   #pagebreak()
 
@@ -127,7 +127,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Traversing a linked list
     - Comparing two strings
   - $O(n log n)$ (*log-linear* complexity):
-    - _Quick Sort_ algorithm
+    - _Quick Sort_ algorithm (average case)
     - _Merge Sort_ algorithm
 
   #pagebreak()
@@ -136,6 +136,7 @@ Blank space can be filled with vertical spaces like #v(1fr).
     - Traversing a matrix
     - _Bubble Sort_ algorithm
     - _Insertion Sort_ algorithm
+    - _Quick Sort_ algorithm (worst case)
   - $O(n^3)$ (*cubic* complexity):
     - Matrix multiplication (naive approach)
   - $O(n!)$ (*factorial* complexity):
@@ -219,7 +220,7 @@ Graphs can be *directed* or *_non_-directed*.
 
 == Weighted Graphs
 
-Most graphs are *weighted*, meaning they have values associated with the edges.
+Graphs can be *weighted*, meaning they have values associated with the edges.
 
 #align(horizon + center)[
   #figure(
@@ -494,7 +495,7 @@ $ f: V(G) -> V(H) $
 
   - Space cost $O(n + m)$#footnote[for undirected graphs.]<adjacency-list-cost>
   - Construction cost $O(m)$#footnote(<adjacency-list-cost>)
-  - Edge search cost $O(n)$
+  - Edge search cost $O("deg"(v))$ (worst case $O(n)$)
 ]
 
 == Practical Section (C or pseudocode)
@@ -516,7 +517,7 @@ $ f: V(G) -> V(H) $
     *length* of the path is the number of edges the path uses, counting multiple
     edges more than once.
 
-    The *cost* of a path in a balanced graph is the sum of the costs of the edges
+    The *cost* of a path in a weighted graph is the sum of the costs of the edges
     traversed.
 
     Two paths are *independent* if they share no vertices, except the first and
@@ -661,7 +662,8 @@ returning to the starting city.
 
 == What are Trees?
 
-Trees are *acyclic* and *connected* graphs.
+Trees are *connected* and *acyclic* undirected graphs.
+A *rooted tree* is obtained by selecting one vertex as the root.
 
 #align(horizon + center)[
   #figure(
@@ -682,15 +684,17 @@ Trees are *acyclic* and *connected* graphs.
 #pagebreak()
 
 #align(horizon)[
-  - *Root*: the vertex with no incoming edges. All trees have (only) one root
-    vertex.
-  - *Leaf*: vertex with no outgoing edges.
+  - *Root* (rooted tree): designated starting vertex. A rooted tree has exactly
+    one root.
+  - *Leaf* (rooted tree): vertex with no children (no outgoing edges in the
+    directed representation).
   - *Level*: distance from the root.
   - *Height*: maximum level.
-  - *Parent*: vertex/vertices with a lower level (closer to the root).
-  - *Child*: vertex/vertices with a higher level (further from the root).
-  - *Ancestor*: vertex/vertices with a lower level.
-  - *Descendant*: vertex/vertices with a higher level.
+  - *Parent*: unique adjacent vertex one level closer to the root (except for
+    the root).
+  - *Child*: adjacent vertex one level farther from the root.
+  - *Ancestor*: any vertex on the path from the root to a given vertex.
+  - *Descendant*: any vertex in the subtree of a given vertex.
 ]
 
 == Subtrees
@@ -905,14 +909,14 @@ subtrees is at most 1.
 == Exponential Functions
 
 #align(horizon)[
-  A function is exponential if it can be reduced using Big-O notation to
+  A function has exponential growth when it can be bounded by
 
-  $ O(n^m) $
+  $ O(c^n) $
 
-  where $m$ *_is not_* a positive constant.
+  where $c > 1$ is a constant.
 
   For example, $O(2^n)$ is an exponential complexity#footnote[
-    note that $n$ is not constant.
+    the exponent depends on $n$.
   ].
 ]
 
@@ -1008,8 +1012,7 @@ subtrees is at most 1.
 
     [*Known Relationship*],
     [$cal(P)$ is a subset of $cal(N P)$.],
-    [It is unknown whether $cal(N P)$ is a proper subset of $cal(P)$ or if they are
-      equal.],
+    [It is unknown whether $cal(P) = cal(N P)$ (or $cal(P) subset cal(N P)$).],
   )
 ]
 
@@ -1058,9 +1061,14 @@ subtrees is at most 1.
 == $cal(N P)$-hard
 
 #align(horizon)[
-  An $cal(N P)$-hard problem is one for which *no efficient algorithm is known to
-    solve it*. However, if an efficient algorithm for an $cal(N P)$-hard problem is
-  found, then all problems in $cal(N P)$ can be solved efficiently.
+  An $cal(N P)$-hard problem is one to which every problem in $cal(N P)$ can be
+  reduced in polynomial time.
+
+  #v(1em)
+
+  $cal(N P)$-hard problems do not need to be decision problems (or belong to
+  $cal(N P)$). If an $cal(N P)$-hard problem that is also in $cal(N P)$ is solved
+  in polynomial time, then $cal(P) = cal(N P)$.
 ]
 
 == $cal(P)$ vs $cal(N P)$-complete and $cal(N P)$-hard
@@ -1168,7 +1176,7 @@ subtrees is at most 1.
 - *Nested Loop*: quadratic complexity $O(n^2)$
 - *Recursion*:
   - *Linear*: linear complexity $O(n)$
-  - *Divide-and-Conquer*: logarithmic complexity $O(log n)$
+  - *Divide-and-Conquer*: often $O(log n)$ to $O(n log n)$ (depends on per-level work)
   - *Binary*: complexity $O(n log n)$
   - *Exponential*: exponential complexity $O(2^n)$
 
@@ -1968,11 +1976,11 @@ subtrees is at most 1.
           + $v := Q$.dequeue()
           + *if* $v = T$
             + *return* $v$
-        + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
-          + *if* $!w$.explored:
-            + $w$.explored $:= "true"$
-            + $w$.parent $:= v$
-            + $Q$.enqueue($w$)
+          + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
+            + *if* $!w$.explored:
+              + $w$.explored $:= "true"$
+              + $w$.parent $:= v$
+              + $Q$.enqueue($w$)
         + *return* _null_
       ]
     ],
@@ -1987,8 +1995,6 @@ subtrees is at most 1.
   #text(size: 7pt)[
     ```c
     int bfs(int graph[][MAX], int start, int n, int target) {
-        if (start->value == T)
-          return start->id;
         int visited[MAX] = {0};
         int queue[MAX], front = 0, rear = 0;
 
@@ -1997,10 +2003,10 @@ subtrees is at most 1.
 
         while (front < rear) {
             int current = queue[front++];
+            if (current == target)
+                return current;
 
             for (int i = 0; i < n; i++) {
-                if (current->value == T)
-                  return current->id;
                 if (graph[current][i] && !visited[i]) {
                     visited[i] = 1;
                     queue[rear++] = i;
@@ -2087,7 +2093,9 @@ subtrees is at most 1.
           + *return* $v$
         + *for* all edges from $v$ to $w$ *in* $G$.adjacentEdges(v):
           + *if* $!w$.discovered:
-            + DFS($G$, $w$)
+            + $r := "DFS"(G, w)$
+            + *if* $r \neq "null"$:
+              + *return* $r$
         + *return* _null_
       ]
     ],
@@ -2101,14 +2109,16 @@ subtrees is at most 1.
 #align(horizon)[
   #text(size: 14pt)[
     ```c
-    int dfs(int graph[][MAX], int current, int visited[], int n) {
-        if (current->value == T)
-          return current->id;
+    int dfs(int graph[][MAX], int current, int visited[], int n, int target) {
+        if (current == target)
+            return current;
         visited[current] = 1;
 
         for (int i = 0; i < n; i++) {
             if (graph[current][i] && !visited[i]) {
-                dfs(graph, i, visited, n);
+                int found = dfs(graph, i, visited, n, target);
+                if (found != -1)
+                    return found;
             }
         }
         return -1;
@@ -2676,23 +2686,23 @@ subtrees is at most 1.
     ```c
     int partition(int arr[], int low, int high) {
         int pivot = arr[high]; // pivot
-        int i = low;          // Index of smaller element
+        int i = low - 1;      // Index of smaller element
 
         for (int j = low; j <= high - 1; j++) {
             // If current element is smaller than or equal to pivot
             if (arr[j] <= pivot) {
-                i++;    // increment index of smaller element
+                i++; // increment index of smaller element
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
-        // Swap arr[i] and arr[high] (or pivot)
-        int temp = arr[i];
-        arr[i[high];
+        // Swap arr[i + 1] and arr[high] (or pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
         arr[high] = temp;
 
-        return i;
+        return i + 1;
     }
     ```
   ]
@@ -3240,18 +3250,14 @@ subtrees is at most 1.
       digraph Factorial {
         n4 [label="f(4)"];
         n3 [label="f(3)"];
-        n2_1 [label="f(2)"];
-        n2_2 [label="f(2)"];
-        n1_1 [label="f(1)"];
-        n1_2 [label="f(1)"];
-        n1_3 [label="f(1)"];
-        n0_1 [label="f(0)"];
-        n0_2 [label="f(0)"];
+        n2 [label="f(2)"];
+        n1 [label="f(1)"];
+        n0 [label="f(0)"];
 
-        n4 -> {n3, n2_1};
-        n3 -> {n2_2, n1_3};
-        n2_1 -> {n1_1, n0_1};
-        n2_2 -> {n1_2, n0_2};
+        n4 -> n3;
+        n3 -> n2;
+        n2 -> n1;
+        n1 -> n0;
       }
       ```,
       width: 70%,
@@ -3772,7 +3778,7 @@ subtrees is at most 1.
   #text(size: 13pt)[
     - *Dynamic Programming:*
       - Solves smaller subproblems and stores their results to avoid recomputation.
-      - Guarantees the globally optimal solution.
+      - Can guarantee the globally optimal solution when the recurrence correctly models the problem constraints.
       - Can be more complex and consume more time and space.
     - *Greedy Algorithms:*
       - Make the best local choice without considering subproblems.
@@ -4062,7 +4068,7 @@ subtrees is at most 1.
     - *Dynamic Programming:*
       - Considers all possibilities and chooses the best.
       - Stores results of subproblems to avoid recomputation.
-      - Guarantees the globally optimal solution.
+      - Can guarantee the globally optimal solution when the recurrence is correct.
   ]
 ]
 
@@ -4086,7 +4092,7 @@ subtrees is at most 1.
 #align(horizon)[
   #text(size: 14pt)[
     - *Advantages:*
-      - Guarantees the globally optimal solution.
+      - Can guarantee the globally optimal solution when the DP model is valid.
       - Avoids redundant computations.
     - *Challenges:*
       - May consume a lot of time and space for problems with large inputs.

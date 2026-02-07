@@ -12,7 +12,7 @@
  */
 int partition(int arr[], int low, int high) {
   int pivot = arr[high];  // Choose the last element as pivot
-  int i = low;            // Index of smaller element
+  int i = low - 1;        // Index of smaller element
 
   for (int j = low; j <= high - 1; j++) {
     // If current element is smaller than or equal to pivot
@@ -24,11 +24,11 @@ int partition(int arr[], int low, int high) {
       arr[j] = temp;
     }
   }
-  // Swap arr[i] and arr[high] (or pivot)
-  int temp = arr[i];
-  arr[i] = arr[high];
+  // Swap arr[i + 1] and arr[high] (or pivot)
+  int temp = arr[i + 1];
+  arr[i + 1] = arr[high];
   arr[high] = temp;
-  return i;
+  return i + 1;
 }
 
 /**
