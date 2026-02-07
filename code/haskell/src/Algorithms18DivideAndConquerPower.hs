@@ -8,21 +8,25 @@ Time complexity: O(log n)
 Space complexity: O(log n) due to recursion stack
 -}
 power :: Double -> Int -> Double
-power x n
-    | n == 0 = 1.0
-    | n < 0 = 1.0 / power x (-n)
-    | even n = let half = power x (n `div` 2) in half * half
-    | otherwise = x * power x (n - 1)
+power x n = powerInteger x (toInteger n)
+  where
+    powerInteger _ 0 = 1.0
+    powerInteger base expN
+        | expN < 0 = 1.0 / powerInteger base (-expN)
+        | even expN = let half = powerInteger base (expN `div` 2) in half * half
+        | otherwise = base * powerInteger base (expN - 1)
 
 {- | Naive iterative power calculation for comparison.
 Time complexity: O(n)
 Space complexity: O(1)
 -}
 powerNaive :: Double -> Int -> Double
-powerNaive x n
-    | n == 0 = 1.0
-    | n < 0 = 1.0 / powerNaive x (-n)
-    | otherwise = x * powerNaive x (n - 1)
+powerNaive x n = powerNaiveInteger x (toInteger n)
+  where
+    powerNaiveInteger _ 0 = 1.0
+    powerNaiveInteger base expN
+        | expN < 0 = 1.0 / powerNaiveInteger base (-expN)
+        | otherwise = base * powerNaiveInteger base (expN - 1)
 
 -- | Test power calculation with timing
 testPower :: Double -> Int -> IO ()

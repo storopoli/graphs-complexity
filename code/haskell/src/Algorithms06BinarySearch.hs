@@ -2,26 +2,29 @@
 
 module Main where
 
+import Data.Array (Array, bounds, listArray, (!))
 import System.CPUTime
 import Text.Printf
 
-{- | Perform binary search on a sorted list.
+{- | Perform binary search on a sorted array.
 Time complexity: O(log n)
 Space complexity: O(1)
 -}
 binarySearch ::
-    -- | Sorted list to search in
-    [Int] ->
+    -- | Sorted array to search in
+    Array Int Int ->
     -- | Target value to search for
     Int ->
     -- | If found, Just index; otherwise, Nothing
     Maybe Int
-binarySearch xs target = binarySearchHelper 0 (length xs - 1)
+binarySearch arr target = binarySearchHelper left right
   where
+    (left, right) = bounds arr
+
     binarySearchHelper l r
         | l > r = Nothing
-        | xs !! mid == target = Just mid
-        | xs !! mid < target = binarySearchHelper (mid + 1) r
+        | arr ! mid == target = Just mid
+        | arr ! mid < target = binarySearchHelper (mid + 1) r
         | otherwise = binarySearchHelper l (mid - 1)
       where
         mid = l + (r - l) `div` 2
@@ -42,7 +45,7 @@ main = do
     mapM_ testBinarySearch nValues
   where
     testBinarySearch n = do
-        let arr = [0 .. n - 1] -- Sequential elements
+        let arr = listArray (0, n - 1) [0 .. n - 1] :: Array Int Int
         let target = n - 1 -- Target at the end
         (result, timeSpent) <- timeAction $ return (binarySearch arr target)
 

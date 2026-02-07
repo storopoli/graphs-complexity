@@ -1,6 +1,7 @@
 module Main where
 
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 
 -- | Graph represented as adjacency map with edge multiplicity
 type EdgeGraph = Map.Map Int (Map.Map Int Int)
@@ -62,7 +63,28 @@ hasEulerianPath :: EdgeGraph -> Bool
 hasEulerianPath graph =
     let vertices = Map.keys graph
         oddDegreeCount = length $ filter (\v -> degree graph v `mod` 2 == 1) vertices
-     in oddDegreeCount == 0 || oddDegreeCount == 2
+     in (oddDegreeCount == 0 || oddDegreeCount == 2) && isConnectedForEuler graph
+
+-- | Check if all non-zero-degree vertices belong to a single connected component
+isConnectedForEuler :: EdgeGraph -> Bool
+isConnectedForEuler graph =
+    case nonZeroVertices of
+        [] -> True
+        (start : _) ->
+            let visited = dfs Set.empty [start]
+             in visited == Set.fromList nonZeroVertices
+  where
+    vertices = Map.keys graph
+    nonZeroVertices = filter (\v -> degree graph v > 0) vertices
+
+    dfs visited [] = visited
+    dfs visited (current : stack)
+        | current `Set.member` visited = dfs visited stack
+        | otherwise =
+            let visited' = Set.insert current visited
+                neighbors = maybe [] Map.keys (Map.lookup current graph)
+                next = filter (\v -> degree graph v > 0) neighbors
+             in dfs visited' (next ++ stack)
 
 -- | Hierholzer's algorithm for finding Eulerian path
 hierholzersAlgorithm :: EdgeGraph -> Int -> [Int]

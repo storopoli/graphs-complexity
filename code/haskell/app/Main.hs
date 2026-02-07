@@ -22,7 +22,8 @@ algorithms :: [Algorithm]
 algorithms =
     sortBy
         (comparing algNumber)
-        [ Algorithm 1 "Eulerian Path/Hamiltonian Cycle" "algorithms-01-eulerian-path/algorithms-01-hamiltonian-cycle"
+        [ Algorithm 1 "Eulerian Path" "algorithms-01-eulerian-path"
+        , Algorithm 1 "Hamiltonian Cycle" "algorithms-01-hamiltonian-cycle"
         , Algorithm 2 "Tree Detection" "algorithms-02-tree-detection"
         , Algorithm 3 "Subset Sum" "algorithms-03-subset-sum"
         , Algorithm 4 "Knapsack" "algorithms-04-knapsack"
@@ -62,13 +63,7 @@ runAllAlgorithms = do
 
 -- | Find algorithms by number (can return multiple for special cases)
 findAlgorithms :: Int -> [Algorithm]
-findAlgorithms n
-    | n == 1 -- Special case: run both graph algorithms
-        =
-        [ Algorithm 1 "Eulerian Path" "algorithms-01-eulerian-path"
-        , Algorithm 1 "Hamiltonian Cycle" "algorithms-01-hamiltonian-cycle"
-        ]
-    | otherwise = filter (\alg -> algNumber alg == n) algorithms
+findAlgorithms n = filter (\alg -> algNumber alg == n) algorithms
 
 -- | Show help message
 showHelp :: IO ()

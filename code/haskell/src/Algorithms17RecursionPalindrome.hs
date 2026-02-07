@@ -1,25 +1,30 @@
 module Main where
 
+import Data.Array (Array, listArray, (!))
+
 {- | Check if a string is a palindrome recursively.
 Time complexity: O(n)
 Space complexity: O(n) due to recursion stack
 -}
 isPalindromeRecursive :: String -> Bool
-isPalindromeRecursive str = isPalindromeHelper str 0 (length str - 1)
+isPalindromeRecursive str
+    | n <= 1 = True
+    | otherwise = isPalindromeHelper 0 (n - 1)
   where
-    isPalindromeHelper :: String -> Int -> Int -> Bool
-    isPalindromeHelper s left right
-        | left >= right = True -- Base case: all characters checked
-        | s !! left /= s !! right = False -- Characters don't match
-        | otherwise = isPalindromeHelper s (left + 1) (right - 1) -- Move inward
+    n = length str
+    arr = listArray (0, n - 1) str :: Array Int Char
 
-{- | Alternative implementation using list pattern matching.
-More idiomatic Haskell approach.
+    isPalindromeHelper :: Int -> Int -> Bool
+    isPalindromeHelper left right
+        | left >= right = True -- Base case: all characters checked
+        | arr ! left /= arr ! right = False -- Characters don't match
+        | otherwise = isPalindromeHelper (left + 1) (right - 1) -- Move inward
+
+{- | Alternative implementation using reverse.
+Simple and linear-time for lists.
 -}
 isPalindrome :: String -> Bool
-isPalindrome [] = True
-isPalindrome [_] = True
-isPalindrome (x : xs) = x == last xs && isPalindrome (init xs)
+isPalindrome s = s == reverse s
 
 -- | Test strings for palindrome checking
 testStrings :: [String]
