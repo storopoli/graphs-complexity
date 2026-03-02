@@ -28,13 +28,13 @@ jobs:
         run: typst compile slides/slides-pt.typ slides/slides-pt.pdf
 
       - name: Upload slides EN
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: slides
           path: slides/slides.pdf
 
       - name: Upload slides PT
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: slides-pt
           path: slides/slides-pt.pdf
