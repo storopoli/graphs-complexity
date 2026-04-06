@@ -22,7 +22,7 @@ jobs:
         uses: mlugg/setup-zig@v2
 
       - name: Setup just
-        uses: extractions/setup-just@v3
+        uses: extractions/setup-just@v4
 
       - name: Compile and run zig code
         run: just z-run
