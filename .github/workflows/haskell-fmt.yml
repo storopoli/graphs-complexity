@@ -19,6 +19,6 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Check Haskell code format
-        uses: haskell-actions/run-fourmolu@v12
+        uses: haskell-actions/run-fourmolu@v13
         with:
           working-directory: ./code/haskell
