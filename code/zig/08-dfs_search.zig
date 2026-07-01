@@ -1,7 +1,7 @@
 const std = @import("std");
 const print = std.debug.print;
 const time = std.time;
-const Instant = time.Instant;
+const Timestamp = std.Io.Timestamp;
 const allocator = std.heap.page_allocator;
 const Allocator = std.mem.Allocator;
 
@@ -90,7 +90,8 @@ fn dfs(graph: *Graph, vertex: usize) void {
 }
 
 /// Main function to demonstrate DFS and measure execution time.
-pub fn main() !void {
+pub fn main(init: std.process.Init) !void {
+    const io = init.io;
     const N_values = [_]usize{ 1_000, 5_000, 10_000, 20_000, 50_000 };
 
     for (N_values) |N| {
@@ -109,16 +110,16 @@ pub fn main() !void {
         }
 
         // Measure start time
-        const start = try Instant.now();
+        const start = Timestamp.now(io, .awake);
 
         // Perform DFS starting from vertex 0
         dfs(graph, 0);
 
         // Measure end time
-        const end = try Instant.now();
+        const end = Timestamp.now(io, .awake);
 
         // Calculate the elapsed time in seconds
-        const elapsed: f64 = @floatFromInt(end.since(start));
+        const elapsed: f64 = @floatFromInt(end.nanoseconds - start.nanoseconds);
         const time_spent = elapsed / time.ns_per_s;
 
         // Print the result

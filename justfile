@@ -79,9 +79,8 @@ z-run: z-compile
     #!/usr/bin/env bash
     set -e
     echo "Running all compiled Zig code in \"output\""
-    for FILE in $(ls ./output/*.o); do
-        BASENAME="${FILE%.o}"
-        "$BASENAME"
+    for FILE in ./output/*; do
+        [ -f "$FILE" ] && [ -x "$FILE" ] && "$FILE"
     done
 
 # Format Zig code in "code/zig/"

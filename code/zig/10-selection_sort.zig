@@ -1,7 +1,7 @@
 const std = @import("std");
 const print = std.debug.print;
 const time = std.time;
-const Instant = time.Instant;
+const Timestamp = std.Io.Timestamp;
 const allocator = std.heap.page_allocator;
 const Random = std.Random;
 const mem = std.mem;
@@ -44,7 +44,8 @@ fn isSorted(arr: []usize) bool {
 }
 
 /// Main function to demonstrate Selection Sort and measure execution time.
-pub fn main() !void {
+pub fn main(init: std.process.Init) !void {
+    const io = init.io;
     const N_values = [_]usize{ 10_000, 20_000, 30_000, 40_000 };
 
     // Seed the random number generator
@@ -62,16 +63,16 @@ pub fn main() !void {
         }
 
         // Measure the start time
-        const start = try Instant.now();
+        const start = Timestamp.now(io, .awake);
 
         // Perform Selection Sort
         selectionSort(arr);
 
         // Measure the end time
-        const end = try Instant.now();
+        const end = Timestamp.now(io, .awake);
 
         // Calculate the elapsed time in seconds
-        const elapsed: f64 = @floatFromInt(end.since(start));
+        const elapsed: f64 = @floatFromInt(end.nanoseconds - start.nanoseconds);
         const time_spent = elapsed / time.ns_per_s;
 
         // Verify that the array is sorted
