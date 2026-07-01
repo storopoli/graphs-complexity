@@ -1,7 +1,7 @@
 const std = @import("std");
 const print = std.debug.print;
 const time = std.time;
-const Instant = time.Instant;
+const Timestamp = std.Io.Timestamp;
 const allocator = std.heap.page_allocator;
 
 /// Function to perform linear search on an array.
@@ -22,7 +22,8 @@ fn linearSearch(arr: []const usize, x: usize) ?usize {
 }
 
 /// Main function to demonstrate linear search and measure execution time.
-pub fn main() !void {
+pub fn main(init: std.process.Init) !void {
+    const io = init.io;
     const N_values = [_]usize{ 1_000_000, 2_000_000, 4_000_000, 8_000_000, 16_000_000 };
 
     for (N_values) |N| {
@@ -40,16 +41,16 @@ pub fn main() !void {
         const target: usize = N - 1;
 
         // Measure the start time
-        const start = try Instant.now();
+        const start = Timestamp.now(io, .awake);
 
         // Perform linear search
         const result = linearSearch(arr[0..], target);
 
         // Measure the end time
-        const end = try Instant.now();
+        const end = Timestamp.now(io, .awake);
 
         // Calculate the elapsed time in seconds
-        const elapsed: f64 = @floatFromInt(end.since(start));
+        const elapsed: f64 = @floatFromInt(end.nanoseconds - start.nanoseconds);
         const time_spent = elapsed / time.ns_per_s;
 
         // Print the result and time
